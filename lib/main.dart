@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:denguego/screens/homePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,6 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Dengue Go',
+      initialRoute: homePage.id,
+      routes: {
+        homePage.id: (context) => homePage(),
+      },
     );
   }
 }
