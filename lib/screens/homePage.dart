@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:denguego/screens/homeScreen.dart';
 import 'package:denguego/screens/surveyScreen.dart';
 import 'package:denguego/screens/savedScreen.dart';
@@ -30,9 +31,10 @@ class _homePageState extends State<homePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
+        appBar: GradientAppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Color.fromARGB(200, 91, 146, 200),
+          backgroundColorStart: Color.fromARGB(200, 91, 146, 200),
+          backgroundColorEnd: Color.fromARGB(200, 188, 250, 157),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -63,7 +65,7 @@ class _homePageState extends State<homePage> {
               label: 'Info',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.format_align_justify),
+              icon: Icon(Icons.poll),
               label: 'Survey',
             ),
             BottomNavigationBarItem(
@@ -71,7 +73,7 @@ class _homePageState extends State<homePage> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.save),
+              icon: Icon(Icons.bookmark),
               label: 'Saved',
             ),
             BottomNavigationBarItem(
