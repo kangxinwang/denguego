@@ -8,6 +8,6 @@ Application created using Flutter to check Dengue cases within given location as
 * Kang Xin Wang
 * Shyam Sundar
 * Xue Yao
-* Ze Min
+* Ze Ming
 
 
