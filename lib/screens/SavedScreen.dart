@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class savedScreen extends StatefulWidget {
+class SavedScreen extends StatefulWidget {
   @override
-  _savedScreenState createState() => _savedScreenState();
+  _SavedScreenState createState() => _SavedScreenState();
 }
 
-class _savedScreenState extends State<savedScreen> {
+class _SavedScreenState extends State<SavedScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(

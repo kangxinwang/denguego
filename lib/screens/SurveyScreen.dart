@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class surveyScreen extends StatefulWidget {
+class SurveyScreen extends StatefulWidget {
   @override
-  _surveyScreenState createState() => _surveyScreenState();
+  _SurveyScreenState createState() => _SurveyScreenState();
 }
 
-class _surveyScreenState extends State<surveyScreen> {
+class _SurveyScreenState extends State<SurveyScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(

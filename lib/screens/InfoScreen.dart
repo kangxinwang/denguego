@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class infoScreen extends StatefulWidget {
+class InfoScreen extends StatefulWidget {
   @override
-  _infoScreenState createState() => _infoScreenState();
+  _InfoScreenState createState() => _InfoScreenState();
 }
 
-class _infoScreenState extends State<infoScreen> {
+class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class accountScreen extends StatefulWidget {
+class AccountScreen extends StatefulWidget {
   @override
-  _accountScreenState createState() => _accountScreenState();
+  _AccountScreenState createState() => _AccountScreenState();
 }
 
-class _accountScreenState extends State<accountScreen> {
+class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(

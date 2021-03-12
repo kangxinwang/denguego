@@ -1,5 +1,9 @@
+import 'package:denguego/screens/ForgotPasswordScreen.dart';
+import 'package:denguego/screens/LoginScreen.dart';
+import 'package:denguego/screens/SignupScreen.dart';
+import 'package:denguego/screens/StartingScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/screens/homePage.dart';
+import 'package:denguego/screens/MainScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,9 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Dengue Go',
-      initialRoute: homePage.id,
+      initialRoute: StartingScreen.id,
       routes: {
-        homePage.id: (context) => homePage(),
+        MainScreen.id: (context) => MainScreen(),
+        ForgotPasswordScreen.id: (context) => ForgotPasswordScreen(),
+        StartingScreen.id: (context) => StartingScreen(),
+        SignupScreen.id: (context) => SignupScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
       },
     );
   }

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:denguego/screens/homeScreen.dart';
-import 'package:denguego/screens/surveyScreen.dart';
-import 'package:denguego/screens/savedScreen.dart';
-import 'package:denguego/screens/accountScreen.dart';
-import 'package:denguego/screens/infoScreen.dart';
+import 'package:denguego/screens/HomeScreen.dart';
+import 'package:denguego/screens/SurveyScreen.dart';
+import 'package:denguego/screens/SavedScreen.dart';
+import 'package:denguego/screens/AccountScreen.dart';
+import 'package:denguego/screens/InfoScreen.dart';
 
-class homePage extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   static String id = 'homePage';
   @override
-  _homePageState createState() => _homePageState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _homePageState extends State<homePage> {
+class _MainScreenState extends State<MainScreen> {
   int _selectedPageIndex = 2;
   List<Widget> _navPages = <Widget>[
-    infoScreen(),
-    surveyScreen(),
-    homeScreen(),
-    savedScreen(),
-    accountScreen(),
+    InfoScreen(),
+    SurveyScreen(),
+    HomeScreen(),
+    SavedScreen(),
+    AccountScreen(),
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -33,8 +33,8 @@ class _homePageState extends State<homePage> {
       child: Scaffold(
         appBar: GradientAppBar(
           automaticallyImplyLeading: false,
-          backgroundColorStart: Color.fromARGB(200, 91, 146, 200),
-          backgroundColorEnd: Color.fromARGB(200, 188, 250, 157),
+          backgroundColorStart: Color(0xff5B92C8),
+          backgroundColorEnd: Color(0xffBCD49D),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -58,7 +58,7 @@ class _homePageState extends State<homePage> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromARGB(200, 91, 146, 200),
+          backgroundColor: Color(0xff5B92C8),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.info),
