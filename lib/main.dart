@@ -1,5 +1,6 @@
 import 'package:denguego/screens/ForgotPasswordScreen.dart';
 import 'package:denguego/screens/LoginScreen.dart';
+import 'package:denguego/screens/NotificationScreen.dart';
 import 'package:denguego/screens/SignupScreen.dart';
 import 'package:denguego/screens/StartingScreen.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         StartingScreen.id: (context) => StartingScreen(),
         SignupScreen.id: (context) => SignupScreen(),
         LoginScreen.id: (context) => LoginScreen(),
+        NotificationScreen.id: (context) => NotificationScreen(),
       },
     );
   }

@@ -1,6 +1,6 @@
 import 'package:denguego/constants.dart';
 import 'package:denguego/screens/MainScreen.dart';
-
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'ForgotPasswordScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +15,32 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("DengueGo"),
+      appBar: GradientAppBar(
+        automaticallyImplyLeading: false,
+        backgroundColorStart: Color(0xff5B92C8),
+        backgroundColorEnd: Color(0xffBCD49D),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            Text(
+              'DengueGo!',
+              style: TextStyle(
+                fontSize: 25.0,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              width: 45,
+            ),
+          ],
+        ),
         centerTitle: true,
       ),
       body: SafeArea(

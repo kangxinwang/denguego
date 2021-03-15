@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'LoginScreen.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class SignupScreen extends StatefulWidget {
   static String id = 'SignUpScreen';
@@ -26,8 +27,32 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        title: Text("DengueGo"),
+      appBar: GradientAppBar(
+        automaticallyImplyLeading: false,
+        backgroundColorStart: Color(0xff5B92C8),
+        backgroundColorEnd: Color(0xffBCD49D),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            Text(
+              'DengueGo!',
+              style: TextStyle(
+                fontSize: 25.0,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              width: 45,
+            ),
+          ],
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -38,7 +63,7 @@ class _SignupScreenState extends State<SignupScreen> {
               Center(
                 child: Image.asset('images/signUp.png'),
               ),
-              Flexible(
+              SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.all(20.0),
                   child: TextField(
@@ -63,7 +88,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              Flexible(
+              SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.all(20.0),
                   child: TextField(
@@ -88,7 +113,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              Flexible(
+              SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.all(20.0),
                   child: TextField(
@@ -113,7 +138,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              Flexible(
+              SingleChildScrollView(
                 child: TextButton(
                   onPressed: () {
                     Navigator.pushNamed(

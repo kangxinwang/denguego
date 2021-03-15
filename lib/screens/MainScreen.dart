@@ -1,3 +1,4 @@
+import 'package:denguego/screens/NotificationScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:denguego/screens/HomeScreen.dart';
@@ -46,12 +47,16 @@ class _MainScreenState extends State<MainScreen> {
                 style: TextStyle(
                   fontSize: 25.0,
                   fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Icon(
-                Icons.notifications,
-                size: 35,
-              )
+              IconButton(
+                icon: Icon(Icons.notifications),
+                iconSize: 35,
+                onPressed: () {
+                  Navigator.pushNamed(context, NotificationScreen.id);
+                },
+              ),
             ],
           ),
           centerTitle: true,
@@ -61,24 +66,37 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: Color(0xff5B92C8),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.info),
+              icon: Icon(
+                Icons.info,
+                size: 35,
+              ),
               label: 'Info',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.poll),
+              icon: Icon(
+                Icons.poll,
+                size: 35,
+              ),
               label: 'Survey',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(
+                Icons.home,
+                size: 35,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark),
+              icon: Icon(
+                Icons.bookmark,
+                size: 35,
+              ),
               label: 'Saved',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_circle,
+                size: 35,
               ),
               label: 'Profile',
             ),
@@ -86,6 +104,8 @@ class _MainScreenState extends State<MainScreen> {
           currentIndex: _selectedPageIndex,
           selectedItemColor: Colors.grey[800],
           unselectedItemColor: Colors.white,
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
           onTap: _onItemTapped,
         ),
         body: _navPages[_selectedPageIndex],
