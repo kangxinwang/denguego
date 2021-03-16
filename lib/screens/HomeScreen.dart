@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'GoogleMapsScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,7 +10,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
+      color: Colors.white,
+      child: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, GoogleMapScreen.id),
+        tooltip: 'Increment',
+        child: Icon(Icons.pin_drop),
+      ),
     );
   }
 }

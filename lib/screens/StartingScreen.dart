@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'SignupScreen.dart';
 import 'LoginScreen.dart';
 import 'package:denguego/constants.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class StartingScreen extends StatefulWidget {
   static String id = 'StartingScreen';
@@ -14,10 +13,20 @@ class _StartingScreenState extends State<StartingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GradientAppBar(
+      appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColorStart: Color(0xff5B92C8),
-        backgroundColorEnd: Color(0xffBCD49D),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+              colors: [
+                Color(0xff5B92C8),
+                Color(0xffBCD49D),
+              ],
+            ),
+          ),
+        ),
         title: Text(
           'DengueGo!',
           style: TextStyle(

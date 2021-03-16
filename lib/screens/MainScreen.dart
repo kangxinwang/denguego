@@ -1,6 +1,5 @@
 import 'package:denguego/screens/NotificationScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:denguego/screens/HomeScreen.dart';
 import 'package:denguego/screens/SurveyScreen.dart';
 import 'package:denguego/screens/SavedScreen.dart';
@@ -32,10 +31,20 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: GradientAppBar(
+        appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColorStart: Color(0xff5B92C8),
-          backgroundColorEnd: Color(0xffBCD49D),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.topRight,
+                colors: [
+                  Color(0xff5B92C8),
+                  Color(0xffBCD49D),
+                ],
+              ),
+            ),
+          ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

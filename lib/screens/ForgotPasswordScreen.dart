@@ -1,6 +1,5 @@
 import 'LoginScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static String id = 'ForgotPasswordScreen';
@@ -12,10 +11,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GradientAppBar(
+      appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColorStart: Color(0xff5B92C8),
-        backgroundColorEnd: Color(0xffBCD49D),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+              colors: [
+                Color(0xff5B92C8),
+                Color(0xffBCD49D),
+              ],
+            ),
+          ),
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
