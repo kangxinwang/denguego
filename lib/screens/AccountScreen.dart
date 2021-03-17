@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:denguego/constants.dart';
 
 class AccountScreen extends StatefulWidget {
   @override

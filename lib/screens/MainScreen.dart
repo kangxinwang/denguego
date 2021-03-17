@@ -1,4 +1,5 @@
 import 'package:denguego/screens/NotificationScreen.dart';
+import 'package:denguego/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/screens/HomeScreen.dart';
 import 'package:denguego/screens/SurveyScreen.dart';
@@ -14,6 +15,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedPageIndex = 2;
+  final AuthService _auth = AuthService();
   List<Widget> _navPages = <Widget>[
     InfoScreen(),
     SurveyScreen(),
@@ -32,6 +34,15 @@ class _MainScreenState extends State<MainScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          actions: <Widget>[
+            TextButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('logout'),
+              onPressed: () async {
+                await _auth.signOut();
+              },
+            )
+          ],
           automaticallyImplyLeading: false,
           flexibleSpace: Container(
             decoration: BoxDecoration(

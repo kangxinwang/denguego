@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'SignupScreen.dart';
 import 'LoginScreen.dart';
-import 'package:denguego/constants.dart';
+import 'package:denguego/shared/constants.dart';
 
 class StartingScreen extends StatefulWidget {
   static String id = 'StartingScreen';

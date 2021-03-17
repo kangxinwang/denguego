@@ -8,12 +8,18 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  firebase_auth:
+  cloud_firestore:
+  firebase_core:
+  provider:
+  flutter_spinkit:
   google_maps_flutter: ^2.0.1
   http: ^0.12.0+1
   json_serializable: ^3.3.0
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:
