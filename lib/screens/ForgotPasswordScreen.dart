@@ -1,6 +1,9 @@
+import 'package:denguego/shared/constants.dart';
+import 'package:flutter/cupertino.dart';
+
 import 'LoginScreen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:denguego/services/auth.dart';
 class ForgotPasswordScreen extends StatefulWidget {
   static String id = 'ForgotPasswordScreen';
   @override
@@ -8,6 +11,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final AuthService _auth = AuthService();
+  String email= ' ';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,29 +66,24 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             Flexible(
               child: Container(
                 padding: EdgeInsets.all(20.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                      borderSide: BorderSide.none,
-                    ),
-                    icon: Icon(Icons.person, color: Colors.black),
-                    hintText: 'Enter email address',
-                    hintStyle: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                child: Column(
+                    children: <Widget>[
+                    SizedBox(height: 20.0),
+                TextFormField(
+                    decoration: textInputDecoration.copyWith(
+                        hintText: 'Email'),
+                    validator: (val) =>
+                    val.isEmpty ? 'Enter email' : null,
+                    onChanged: (val) {
+                      setState(() => email = val);
+                    }),
+                ],
                 ),
               ),
             ),
             TextButton(
               onPressed: () {
+                _auth.resetPassword(email);
                 Navigator.pushNamed(
                   context,
                   LoginScreen.id,

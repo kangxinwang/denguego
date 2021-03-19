@@ -126,6 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     setState(() => loading = true);
                                     dynamic result = await _auth
                                         .signInWithEandP(email, password);
+
                                     if (result == null) {
                                       setState(() {
                                         error =
@@ -141,10 +142,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               style:
                                   TextStyle(color: Colors.red, fontSize: 14.0),
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                              TextButton(child: Text('Forgot password?'), onPressed: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPasswordScreen())),),
+                            ],
+
+                            ),
                           ],
                         ),
                       )),
                 ],
+
               ),
             ),
           );
