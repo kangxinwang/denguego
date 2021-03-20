@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '/quiz.dart';
-import '/result.dart';
+import 'package:denguego/quiz.dart';
+import 'package:denguego/result.dart';
 
 class SurveyScreen extends StatefulWidget {
   @override
@@ -45,7 +45,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
     },
     {
       'questionText':
-      'Q5. How often do you clear the drains in or around your house?',
+          'Q5. How often do you clear the drains in or around your house?',
       'answers': [
         {'text': 'Daily', 'score': 0},
         {'text': 'Once a week', 'score': 2},
@@ -55,8 +55,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       ],
     },
     {
-      'questionText':
-      'Q6. How often do you change the water for your plants?',
+      'questionText': 'Q6. How often do you change the water for your plants?',
       'answers': [
         {'text': 'Daily', 'score': 0},
         {'text': 'Once a week', 'score': 2},
@@ -66,16 +65,14 @@ class _SurveyScreenState extends State<SurveyScreen> {
       ],
     },
     {
-      'questionText':
-      'Q7. Do you cover your pole holders?',
+      'questionText': 'Q7. Do you cover your pole holders?',
       'answers': [
         {'text': 'No', 'score': 10},
         {'text': 'Yes', 'score': 0},
       ],
     },
     {
-      'questionText':
-      'Q8. How often do you clear water from dish rack trays?',
+      'questionText': 'Q8. How often do you clear water from dish rack trays?',
       'answers': [
         {'text': 'Daily', 'score': 0},
         {'text': 'Once a week', 'score': 2},
@@ -86,15 +83,14 @@ class _SurveyScreenState extends State<SurveyScreen> {
     },
     {
       'questionText':
-      'Q9. Do you keep your water storage containers(e.g. pails) dry?',
+          'Q9. Do you keep your water storage containers(e.g. pails) dry?',
       'answers': [
         {'text': 'Yes', 'score': 0},
         {'text': 'No', 'score': 10},
       ],
     },
     {
-      'questionText':
-      'Q10. How often do you use insecticide in your house?',
+      'questionText': 'Q10. How often do you use insecticide in your house?',
       'answers': [
         {'text': 'Daily', 'score': 0},
         {'text': 'Once a week', 'score': 2},
@@ -141,10 +137,10 @@ class _SurveyScreenState extends State<SurveyScreen> {
           padding: const EdgeInsets.all(30.0),
           child: _questionIndex < _questions.length
               ? Quiz(
-            answerQuestion: _answerQuestion,
-            questionIndex: _questionIndex,
-            questions: _questions,
-          ) //Quiz
+                  answerQuestion: _answerQuestion,
+                  questionIndex: _questionIndex,
+                  questions: _questions,
+                ) //Quiz
               : Result(_totalScore, _resetQuiz),
         ), //Padding
       ), //Scaffold

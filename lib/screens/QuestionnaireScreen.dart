@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/quiz.dart';
-import '/result.dart';
+import 'package:denguego/quiz.dart';
+import 'package:denguego/result.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
         {'text': 'Web Development Kit', 'score': -2},
         {
           'text':
-          'SDK to build beautiful IOS, Android, Web & Desktop Native Apps',
+              'SDK to build beautiful IOS, Android, Web & Desktop Native Apps',
           'score': 10
         },
       ],
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
     },
     {
       'questionText':
-      'Q5. Is Flutter for Web and Desktop available in stable version?',
+          'Q5. Is Flutter for Web and Desktop available in stable version?',
       'answers': [
         {
           'text': 'Yes',
@@ -103,10 +103,10 @@ class _MyAppState extends State<MyApp> {
           padding: const EdgeInsets.all(30.0),
           child: _questionIndex < _questions.length
               ? Quiz(
-            answerQuestion: _answerQuestion,
-            questionIndex: _questionIndex,
-            questions: _questions,
-          ) //Quiz
+                  answerQuestion: _answerQuestion,
+                  questionIndex: _questionIndex,
+                  questions: _questions,
+                ) //Quiz
               : Result(_totalScore, _resetQuiz),
         ), //Padding
       ), //Scaffold
