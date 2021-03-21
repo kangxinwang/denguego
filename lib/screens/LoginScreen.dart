@@ -72,9 +72,16 @@ class _LoginScreenState extends State<LoginScreen> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Center(
-                    child:
-                        Image.asset('images/boy.png', height: 204, width: 194),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: SizedBox(
+                        height: 200,
+                        child: Image.asset(
+                          'images/boy.png',
+                        ),
+                      ),
+                    ),
                   ),
                   spacing,
                   Text(
@@ -84,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Montserrat',
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -145,15 +152,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                              TextButton(child: Text('Forgot password?'), onPressed: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPasswordScreen())),),
-                            ],
-
+                                TextButton(
+                                  child: Text('Forgot password?'),
+                                  onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgotPasswordScreen())),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       )),
                 ],
-
               ),
             ),
           );

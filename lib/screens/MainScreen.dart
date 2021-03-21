@@ -15,7 +15,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedPageIndex = 2;
-  final AuthService _auth = AuthService();
   List<Widget> _navPages = <Widget>[
     InfoScreen(),
     SurveyScreen(),
@@ -34,15 +33,6 @@ class _MainScreenState extends State<MainScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          actions: <Widget>[
-            TextButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('logout'),
-              onPressed: () async {
-                await _auth.signOut();
-              },
-            )
-          ],
           automaticallyImplyLeading: false,
           flexibleSpace: Container(
             decoration: BoxDecoration(
