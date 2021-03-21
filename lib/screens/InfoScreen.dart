@@ -8,8 +8,6 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-    );
+    return Column();
   }
 }
