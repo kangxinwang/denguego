@@ -19,8 +19,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
     {
       'questionText': 'Q2. Have any of your family members contracted dengue?',
       'answers': [
-        {'text': 'No', 'score': 0},
         {'text': 'Yes', 'score': 10},
+        {'text': 'No', 'score': 0},
       ],
     },
     {
@@ -67,8 +67,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
     {
       'questionText': 'Q7. Do you cover your pole holders?',
       'answers': [
-        {'text': 'No', 'score': 10},
         {'text': 'Yes', 'score': 0},
+        {'text': 'No', 'score': 10},
       ],
     },
     {

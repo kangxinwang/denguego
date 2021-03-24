@@ -1,7 +1,7 @@
+import 'package:denguego/screens/LoginScreen.dart';
 import 'package:denguego/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/services/auth.dart';
-import 'package:denguego/screens/SignupScreen.dart';
 
 class AccountScreen extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _AccountScreenState extends State<AccountScreen> {
   final _formKeyPassword = GlobalKey<FormState>();
   String address =
       '50 Nanyang Ave, Nanyang Technological University, Singapore 639798';
-  String password = '';
+  String email = '';
   String newAddress = '';
   void changeAddress(String addy) {
     setState(() {
@@ -47,15 +47,24 @@ class _AccountScreenState extends State<AccountScreen> {
                         child: Column(
                           children: [
                             Center(
-                              child: Text(
-                                'Hi, Username',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                ),
-                              ),
+                              child: FutureBuilder(
+                                  future: _auth.getCurrentUser(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return Text(
+                                        'Hi, ${snapshot.data.displayName}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                        ),
+                                      );
+                                    } else {
+                                      return CircularProgressIndicator();
+                                    }
+                                  }),
                             ),
                             /*Icon(
                                 Icons.account_box,
@@ -72,14 +81,23 @@ class _AccountScreenState extends State<AccountScreen> {
                                         Icons.email,
                                       ),
                                     ),
-                                    Text(
-                                      'xxxxxxxxxxxx@gmail.com',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                      ),
-                                    ),
+                                    FutureBuilder(
+                                        future: _auth.getCurrentUser(),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.done) {
+                                            return Text(
+                                              "${snapshot.data.email}",
+                                              style: TextStyle(
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                              ),
+                                            );
+                                          } else {
+                                            return CircularProgressIndicator();
+                                          }
+                                        }),
                                   ],
                                 ),
                                 Row(
@@ -131,13 +149,11 @@ class _AccountScreenState extends State<AccountScreen> {
                         child: Card(
                           child: TextFormField(
                             decoration: textInputDecoration.copyWith(
-                                hintText: 'Enter new password'),
-                            validator: (val) => val.length < 6
-                                ? 'Enter a password with 6+ characters'
-                                : null,
-                            obscureText: true,
+                                hintText: 'Confirm Email ID'),
+                            validator: (val) =>
+                                val.isEmpty ? 'Enter valid Email' : null,
                             onChanged: (val) {
-                              setState(() => password = val);
+                              email = val;
                             },
                           ),
                         ),
@@ -157,7 +173,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             ),
                             onPressed: () async {
                               if (_formKeyPassword.currentState.validate()) {
-                                print(password);
+                                _auth.resetPassword(email);
                               }
                             },
                           ),
@@ -192,7 +208,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   ? 'Enter a valid home address'
                                   : null,
                               onChanged: (val) {
-                                setState(() => newAddress = val);
+                                newAddress = val;
                               }),
                         ),
                       ),
@@ -244,6 +260,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                       onPressed: () async {
                         await _auth.signOut();
+                        Navigator.pushNamed(context, LoginScreen.id);
                       }),
                 )
               ],

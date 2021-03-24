@@ -11,8 +11,6 @@ class SignupScreen extends StatefulWidget {
   _SignupScreenState createState() => _SignupScreenState();
 }
 
-String name = ' ';
-
 class _SignupScreenState extends State<SignupScreen> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -20,6 +18,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String email = ' ';
   String password = ' ';
   String error = ' ';
+  String name = ' ';
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +112,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         dynamic result =
-                            await _auth.registerWithEandP(email, password);
+                            await _auth.registerNewUser(email, password, name);
                         if (result == null) {
                           setState(() => error = 'Please enter a valid email!');
                         }

@@ -48,7 +48,7 @@ class AuthService {
   }
 
   // register with email and password
-  Future registerWithEandP(String email, String password) async {
+  Future registerNewUser(String email, String password, String name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email,
@@ -57,8 +57,7 @@ class AuthService {
 
       //String name = getName(); // name is not accessible directly so calling this function i made in SignUpScreen.dart to get the name
       // create a new document for the user with uid
-      await DatabaseService(uid: user.uid).updateUserData(name,
-          email); // apparently can directly use the name attribute from SignUpScreen.dart file cause global
+      await updateUserName(name, result.user);
 
       return _userFromFirebaseUser(user);
     } catch (e) {
@@ -67,9 +66,15 @@ class AuthService {
     }
   }
 
-  Future <void> resetPassword ( String email) async {
+  Future updateUserName(String name, User currentUser) async {
+    await currentUser.updateProfile(displayName: name);
+    await currentUser.reload();
+  }
+
+  Future<void> resetPassword(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
   }
+
   //sign out
   Future signOut() async {
     try {
@@ -79,5 +84,10 @@ class AuthService {
       print(e.toString());
       return null;
     }
+  }
+
+  Future getCurrentUser() async {
+    // ignore: await_only_futures
+    return await _auth.currentUser;
   }
 }
