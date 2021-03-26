@@ -26,8 +26,9 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         title: 'Dengue Go',
-        home: Wrapper(),
+        initialRoute: Wrapper.id,
         routes: {
+          Wrapper.id: (context) => Wrapper(),
           MainScreen.id: (context) => MainScreen(),
           ForgotPasswordScreen.id: (context) => ForgotPasswordScreen(),
           SignupScreen.id: (context) => SignupScreen(),

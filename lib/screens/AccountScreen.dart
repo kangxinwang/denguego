@@ -260,7 +260,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                       onPressed: () async {
                         await _auth.signOut();
-                        Navigator.pushNamed(context, LoginScreen.id);
+                        Navigator.pop(context);
                       }),
                 )
               ],

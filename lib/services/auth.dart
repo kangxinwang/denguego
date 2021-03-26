@@ -1,7 +1,6 @@
 import 'package:denguego/models/AppUser.dart';
-import 'package:denguego/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:denguego/screens/SignupScreen.dart';
+
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;

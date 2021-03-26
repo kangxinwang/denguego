@@ -1,7 +1,6 @@
 import 'package:denguego/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/shared/constants.dart';
-import 'LoginScreen.dart';
 
 class SignupScreen extends StatefulWidget {
   final Function toggleView;
