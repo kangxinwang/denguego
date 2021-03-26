@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
@@ -25,10 +26,20 @@ class _ChewieListItemState extends State<ChewieListItem> {
     super.initState();
     // Wrapper on top of the videoPlayerController
     _chewieController = ChewieController(
+      allowedScreenSleep: false,
+      allowFullScreen: true,
+      deviceOrientationsAfterFullScreen: [
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ],
       videoPlayerController: widget.videoPlayerController,
       aspectRatio: 16 / 9,
       // Prepare the video to be played and display the first frame
       autoInitialize: true,
+      autoPlay: true,
+      showControls: true,
       looping: widget.looping,
       // Errors can occur for example when trying to play a video
       // from a non-existent URL
@@ -41,6 +52,19 @@ class _ChewieListItemState extends State<ChewieListItem> {
         );
       },
     );
+    _chewieController.addListener(() {
+      if (_chewieController.isFullScreen) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+        ]);
+      } else {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+      }
+    });
   }
 
   @override
@@ -59,6 +83,13 @@ class _ChewieListItemState extends State<ChewieListItem> {
     // IMPORTANT to dispose of all the used resources
     widget.videoPlayerController.dispose();
     _chewieController.dispose();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 }
 
