@@ -1,124 +1,73 @@
+import 'package:denguego/models/Location.dart';
+import 'package:denguego/shared/constants.dart';
+import 'package:denguego/widgets/Savedwidget.dart';
 import 'package:flutter/material.dart';
 
-class SavedScreen extends StatelessWidget {
+class SavedScreen extends StatefulWidget {
+  @override
+  _SavedScreenState createState() => _SavedScreenState();
+}
+
+class _SavedScreenState extends State<SavedScreen> {
+  bool isBookmarked = false;
+  List<Widget> BuildSavedCards() {
+    List<Savedwidget> savedCards = [];
+    if (locationList.isEmpty) {
+      return [
+        SizedBox(
+          height: 24,
+        ),
+        Text(
+          'No Saved locations',
+          style: TextStyle(
+              color: Colors.grey, fontSize: 20, fontFamily: 'Montserrat'),
+        ),
+      ];
+    }
+    for (Location loc in locationList) {
+      savedCards.add(Savedwidget(
+        location: loc.location,
+        cases: loc.cases,
+        zone: loc.zone,
+        isBookmarked: true,
+        savedFunc: () {
+          setState(() {
+            if (locationList.contains(loc)) {
+              locationList.remove(loc);
+            } else {
+              locationList.add(loc);
+            }
+          });
+        },
+      ));
+    }
+    return savedCards;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    locationList = [
+      Location(location: "Kallang", cases: 12, zone: "Safe"),
+      Location(location: "Yishun", cases: 30, zone: "Medium Risk"),
+      Location(location: "Pasir Ris", cases: 50, zone: "High Risk"),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Center(
-          child: Image.asset(
-            'images/location.png',
-          ),
-        ),
-        Card(
-          elevation: 3,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: 2.0),
-                child: FloatingActionButton(
-                  child: Icon(Icons.bookmark_outlined),
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+              Center(
+                child: Image.asset(
+                  'images/location.png',
                 ),
               ),
-              Text(
-                'Kallang',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Text(
-                '12 cases',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Text(
-                'Safe Zone',
-                style: TextStyle(
-                  color: Color(0xffBCD49D),
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              )
-            ],
-          ),
-        ),
-        Card(
-          elevation: 3,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: 10.0, top: 10.0),
-                child: FloatingActionButton(
-                  child: Icon(Icons.bookmark_outlined),
-                ),
-              ),
-              Text(
-                'Woodlands',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Text(
-                '180 cases',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Text(
-                'Danger Zone',
-                style: TextStyle(
-                  color: Color(0xffFA847E),
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              )
-            ],
-          ),
-        ),
-        Card(
-          elevation: 3,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: 6.0, top: 10.0),
-                child: FloatingActionButton(
-                  child: Icon(Icons.bookmark_outlined),
-                ),
-              ),
-              Text(
-                'Jurong East',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Text(
-                '50 cases',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Text(
-                'Risk Zone',
-                style: TextStyle(
-                  color: Color(0xffFED065),
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
+            ] +
+            BuildSavedCards(),
+      ),
     );
   }
 }

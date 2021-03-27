@@ -1,3 +1,4 @@
+import 'package:denguego/models/Location.dart';
 import 'package:flutter/material.dart';
 
 const fontTextStyle = TextStyle(
@@ -19,3 +20,8 @@ const textInputDecoration = InputDecoration(
   focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0)),
 );
+List<Location> locationList = [
+  Location(location: "Kallang", cases: 12, zone: "Safe"),
+  Location(location: "Yishun", cases: 30, zone: "Medium Risk"),
+  Location(location: "Pasir Ris", cases: 50, zone: "High Risk"),
+];
