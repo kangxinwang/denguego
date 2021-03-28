@@ -127,24 +127,22 @@ class _SurveyScreenState extends State<SurveyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Geeks for Geeks'),
-        //   backgroundColor: Color(0xFF00E676),
-        // ),
-        body: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: _questionIndex < _questions.length
-              ? Quiz(
-                  answerQuestion: _answerQuestion,
-                  questionIndex: _questionIndex,
-                  questions: _questions,
-                ) //Quiz
-              : Result(_totalScore, _resetQuiz),
-        ), //Padding
-      ), //Scaffold
-      debugShowCheckedModeBanner: false,
-    ); //MaterialApp
+    return Scaffold(
+      // appBar: AppBar(
+      //   title: Text('Geeks for Geeks'),
+      //   backgroundColor: Color(0xFF00E676),
+      // ),
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              ) //Quiz
+            : Result(_totalScore, _resetQuiz),
+      ), //Padding
+      //debugShowCheckedModeBanner: false,
+    );
   }
 }

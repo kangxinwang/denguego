@@ -1,7 +1,6 @@
 import 'package:denguego/models/AppUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -54,7 +53,6 @@ class AuthService {
           password: password); // authresult changed to usercredential
       User user = result.user;
 
-      //String name = getName(); // name is not accessible directly so calling this function i made in SignUpScreen.dart to get the name
       // create a new document for the user with uid
       await updateUserName(name, result.user);
 

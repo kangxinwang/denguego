@@ -62,34 +62,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               Center(
                 child: Image.asset(
                   'images/forgot_password.png',
+                  height: 220,
+                  width: 271,
                 ),
               ),
               //spacing,
-              Flexible(
-                child: Container(
-                  padding: EdgeInsets.all(20.0),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 20.0),
-                      TextFormField(
-                          decoration:
-                              textInputDecoration.copyWith(hintText: 'Email'),
-                          validator: (val) =>
-                              val.isEmpty ? 'Enter email' : null,
-                          onChanged: (val) {
-                            setState(() => email = val);
-                          }),
-                    ],
-                  ),
+              Container(
+                padding: EdgeInsets.all(20.0),
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 20.0),
+                    TextFormField(
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Email'),
+                        validator: (val) => val.isEmpty ? 'Enter email' : null,
+                        onChanged: (val) {
+                          setState(() => email = val);
+                        }),
+                  ],
                 ),
               ),
               TextButton(
                 onPressed: () {
                   _auth.resetPassword(email);
-                  Navigator.pushNamed(
-                    context,
-                    LoginScreen.id,
-                  );
+                  Navigator.pushNamed(context, LoginScreen.id);
                 },
                 child: Text(
                   'Submit',

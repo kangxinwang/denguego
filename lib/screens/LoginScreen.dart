@@ -1,4 +1,3 @@
-import 'package:denguego/screens/MainScreen.dart';
 import 'package:denguego/services/auth.dart';
 import 'package:denguego/shared/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -133,9 +132,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() => showSpinner = true);
                                 final result = await _auth.signInWithEandP(
                                     email, password);
-                                if (result != null) {
-                                  Navigator.pushNamed(context, MainScreen.id);
-                                }
                                 if (result == null) {
                                   setState(() {
                                     error =
