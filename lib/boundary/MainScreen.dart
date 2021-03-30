@@ -1,10 +1,10 @@
-import 'package:denguego/screens/NotificationScreen.dart';
+import 'package:denguego/boundary/NotificationScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/screens/HomeScreen.dart';
-import 'package:denguego/screens/SurveyScreen.dart';
-import 'package:denguego/screens/SavedScreen.dart';
-import 'package:denguego/screens/AccountScreen.dart';
-import 'package:denguego/screens/InfoScreen.dart';
+import 'package:denguego/boundary/HomeScreen.dart';
+import 'package:denguego/boundary/SurveyScreen.dart';
+import 'package:denguego/boundary/SavedScreen.dart';
+import 'package:denguego/boundary/AccountScreen.dart';
+import 'package:denguego/boundary/InfoScreen.dart';
 
 class MainScreen extends StatefulWidget {
   static String id = 'homePage';

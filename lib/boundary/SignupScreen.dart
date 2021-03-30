@@ -1,4 +1,4 @@
-import 'package:denguego/services/auth.dart';
+import 'package:denguego/controller/UserManager.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/shared/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';

@@ -1,16 +1,16 @@
-import 'package:denguego/models/AppUser.dart';
+import 'package:denguego/entity/UserAccount.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create user object based on firebase user
-  AppUser _userFromFirebaseUser(User user) {
-    return user != null ? AppUser(uid: user.uid) : null;
+  UserAccount _userFromFirebaseUser(User user) {
+    return user != null ? UserAccount(uid: user.uid) : null;
   }
 
 // auth change user stream
-  Stream<AppUser> get user {
+  Stream<UserAccount> get user {
     return _auth.authStateChanges().map((User user) => _userFromFirebaseUser(
         user)); // mapping the firebase user to the actual user
   }

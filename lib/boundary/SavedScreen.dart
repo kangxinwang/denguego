@@ -1,4 +1,4 @@
-import 'package:denguego/models/Location.dart';
+import 'package:denguego/entity/Location.dart';
 import 'package:denguego/shared/constants.dart';
 import 'package:denguego/widgets/Savedwidget.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
-import 'package:denguego/screens/SignupScreen.dart';
-import 'package:denguego/screens/LoginScreen.dart';
+import 'package:denguego/boundary/SignupScreen.dart';
+import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {

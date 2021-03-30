@@ -1,4 +1,4 @@
-import 'package:denguego/models/Location.dart';
+import 'package:denguego/entity/Location.dart';
 import 'package:flutter/material.dart';
 
 const fontTextStyle = TextStyle(
