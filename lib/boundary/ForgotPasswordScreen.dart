@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'LoginScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/controller/UserManager.dart';
+import 'package:denguego/controller/AuthenticateManager.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static String id = 'ForgotPasswordScreen';

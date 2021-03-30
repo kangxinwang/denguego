@@ -3,7 +3,7 @@ import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
 import 'package:denguego/boundary/SignupScreen.dart';
 import 'package:denguego/boundary/GoogleMapsScreen.dart';
-import 'package:denguego/controller/UserManager.dart';
+import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:denguego/controller/ScreenManager.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/boundary/MainScreen.dart';
