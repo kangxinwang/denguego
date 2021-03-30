@@ -1,5 +1,5 @@
 import 'package:denguego/boundary/MainScreen.dart';
-import 'package:denguego/controller/UserManager.dart';
+import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:denguego/shared/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'ForgotPasswordScreen.dart';

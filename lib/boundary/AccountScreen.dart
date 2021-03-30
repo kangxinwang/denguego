@@ -1,6 +1,6 @@
 import 'package:denguego/shared/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/controller/UserManager.dart';
+import 'package:denguego/controller/AuthenticateManager.dart';
 
 class AccountScreen extends StatefulWidget {
   @override
