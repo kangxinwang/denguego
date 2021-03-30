@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/denguego/lib/entity/Quiz.dart';
-import 'file:///C:/denguego/lib/entity/Result.dart';
+import 'package:denguego/entity/Quiz.dart';
+import 'package:denguego/entity/Result.dart';
 
 class SurveyScreen extends StatefulWidget {
   @override

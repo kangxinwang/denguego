@@ -20,13 +20,18 @@ class Savedwidget extends StatelessWidget {
       padding: const EdgeInsets.all(9.0),
       child: Card(
         elevation: 3,
+        color: zone == "Safe"
+            ? Color(0xffBCD49D)
+            : zone == "Medium Risk"
+                ? Color(0xffdec649)
+                : Color(0xffd26666),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
                     Text(
@@ -48,13 +53,9 @@ class Savedwidget extends StatelessWidget {
                 ),
               ),
               Text(
-                "${zone}",
+                "${zone} Zone",
                 style: TextStyle(
-                  color: zone == "Safe"
-                      ? Color(0xffBCD49D)
-                      : zone == "Medium Risk"
-                          ? Color(0xffdec649)
-                          : Color(0xffd26666),
+                  color: Colors.grey[800],
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Montserrat',
                   fontSize: 15,

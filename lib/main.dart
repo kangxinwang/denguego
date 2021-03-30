@@ -2,7 +2,6 @@ import 'package:denguego/boundary/ForgotPasswordScreen.dart';
 import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
 import 'package:denguego/boundary/SignupScreen.dart';
-import 'package:denguego/boundary/GoogleMapsScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:denguego/controller/ScreenManager.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,6 @@ class MyApp extends StatelessWidget {
           SignupScreen.id: (context) => SignupScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           NotificationScreen.id: (context) => NotificationScreen(),
-          GoogleMapScreen.id: (context) => GoogleMapScreen(),
         },
       ),
     );

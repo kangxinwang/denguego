@@ -47,23 +47,24 @@ class _AccountScreenState extends State<AccountScreen> {
                           children: [
                             Center(
                               child: FutureBuilder(
-                                  future: _auth.getCurrentUser(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      return Text(
-                                        'Hi, ${snapshot.data.displayName}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                        ),
-                                      );
-                                    } else {
-                                      return CircularProgressIndicator();
-                                    }
-                                  }),
+                                future: _auth.getCurrentUser(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    return Text(
+                                      'Hi, ${snapshot.data.displayName}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                      ),
+                                    );
+                                  } else {
+                                    return CircularProgressIndicator();
+                                  }
+                                },
+                              ),
                             ),
                             /*Icon(
                                 Icons.account_box,
