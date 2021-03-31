@@ -1,6 +1,6 @@
+import 'package:denguego/entity/Result.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/entity/Quiz.dart';
-import 'package:denguego/entity/Result.dart';
 
 class SurveyScreen extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class SurveyScreen extends StatefulWidget {
 class _SurveyScreenState extends State<SurveyScreen> {
   final _questions = const [
     {
-      'questionText': 'Are you living in a landed property?',
+      'questionText': 'Q1. Are you living in a landed property?',
       'answers': [
         {'text': 'Yes', 'score': 10},
         {'text': 'No', 'score': 0},
@@ -27,20 +27,20 @@ class _SurveyScreenState extends State<SurveyScreen> {
       'questionText': ' Q3. How often do you wash your toilet',
       'answers': [
         {'text': 'Daily', 'score': 0},
-        {'text': 'Once a week', 'score': 2},
-        {'text': 'Once in 2 weeks', 'score': 4},
-        {'text': 'Once a month', 'score': 6},
-        {'text': 'Never', 'score': 10},
+        {'text': 'Once a week', 'score': 3},
+        {'text': 'Once in 2 weeks', 'score': 6},
+        {'text': 'Once a month', 'score': 10},
+        {'text': 'Not applicable', 'score': 0},
       ],
     },
     {
       'questionText': 'Q4. How often do you take out the trash?',
       'answers': [
         {'text': 'Daily', 'score': 0},
-        {'text': 'Once a week', 'score': 2},
-        {'text': 'Once in 2 weeks', 'score': 4},
-        {'text': 'Once a month', 'score': 6},
-        {'text': 'Never', 'score': 10},
+        {'text': 'Once a week', 'score': 3},
+        {'text': 'Once in 2 weeks', 'score': 6},
+        {'text': 'Once a month', 'score': 10},
+        {'text': 'Not applicable', 'score': 0},
       ],
     },
     {
@@ -48,20 +48,20 @@ class _SurveyScreenState extends State<SurveyScreen> {
           'Q5. How often do you clear the drains in or around your house?',
       'answers': [
         {'text': 'Daily', 'score': 0},
-        {'text': 'Once a week', 'score': 2},
-        {'text': 'Once in 2 weeks', 'score': 4},
-        {'text': 'Once a month', 'score': 6},
-        {'text': 'Never', 'score': 10},
+        {'text': 'Once a week', 'score': 3},
+        {'text': 'Once in 2 weeks', 'score': 6},
+        {'text': 'Once a month', 'score': 10},
+        {'text': 'Not applicable', 'score': 0},
       ],
     },
     {
       'questionText': 'Q6. How often do you change the water for your plants?',
       'answers': [
         {'text': 'Daily', 'score': 0},
-        {'text': 'Once a week', 'score': 2},
-        {'text': 'Once in 2 weeks', 'score': 4},
-        {'text': 'Once a month', 'score': 6},
-        {'text': 'Never', 'score': 10},
+        {'text': 'Once a week', 'score': 3},
+        {'text': 'Once in 2 weeks', 'score': 6},
+        {'text': 'Once a month', 'score': 10},
+        {'text': 'Not applicable', 'score': 0},
       ],
     },
     {
@@ -69,16 +69,17 @@ class _SurveyScreenState extends State<SurveyScreen> {
       'answers': [
         {'text': 'Yes', 'score': 0},
         {'text': 'No', 'score': 10},
+        {'text': 'Not applicable', 'score': 0},
       ],
     },
     {
       'questionText': 'Q8. How often do you clear water from dish rack trays?',
       'answers': [
         {'text': 'Daily', 'score': 0},
-        {'text': 'Once a week', 'score': 2},
-        {'text': 'Once in 2 weeks', 'score': 4},
-        {'text': 'Once a month', 'score': 6},
-        {'text': 'Never', 'score': 10},
+        {'text': 'Once a week', 'score': 3},
+        {'text': 'Once in 2 weeks', 'score': 6},
+        {'text': 'Once a month', 'score': 10},
+        {'text': 'Not applicable', 'score': 0},
       ],
     },
     {
@@ -87,16 +88,17 @@ class _SurveyScreenState extends State<SurveyScreen> {
       'answers': [
         {'text': 'Yes', 'score': 0},
         {'text': 'No', 'score': 10},
+        {'text': 'Not applicable', 'score': 0},
       ],
     },
     {
       'questionText': 'Q10. How often do you use insecticide in your house?',
       'answers': [
         {'text': 'Daily', 'score': 0},
-        {'text': 'Once a week', 'score': 2},
-        {'text': 'Once in 2 weeks', 'score': 4},
-        {'text': 'Once a month', 'score': 6},
-        {'text': 'Never', 'score': 10},
+        {'text': 'Once a week', 'score': 3},
+        {'text': 'Once in 2 weeks', 'score': 6},
+        {'text': 'Once a month', 'score': 10},
+        {'text': 'Not applicable', 'score': 0},
       ],
     },
   ];
