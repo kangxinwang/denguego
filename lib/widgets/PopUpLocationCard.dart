@@ -25,7 +25,13 @@ class PopUpLocationCard extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: Colors.white),
+          borderRadius: BorderRadius.circular(10),
+          color: zone == "Safe"
+              ? Color(0xffBCD49D)
+              : zone == "Medium Risk"
+                  ? Color(0xffdec649)
+                  : Color(0xffd26666),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -35,7 +41,12 @@ class PopUpLocationCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      location + "\nCases: " + cases.toString(),
+                      location.toUpperCase() +
+                          "\nCases: " +
+                          cases.toString() +
+                          '\n' +
+                          zone +
+                          " Zone",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',

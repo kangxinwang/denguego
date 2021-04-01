@@ -18,10 +18,9 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-bool locationSelected = false;
-String place = "";
-
 class _HomeScreenState extends State<HomeScreen> {
+  bool locationSelected = false;
+  String place = "";
   StreamSubscription _locationSubscription;
   Location _locationTracker = Location();
   List<Marker> allMarkers = [];
