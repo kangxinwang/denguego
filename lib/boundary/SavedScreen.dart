@@ -1,4 +1,5 @@
-import 'package:denguego/entity/Location.dart';
+import 'package:denguego/controller/SavedManager.dart';
+import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:denguego/shared/constants.dart';
 import 'package:denguego/widgets/Savedwidget.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,10 @@ class SavedScreen extends StatefulWidget {
 
 class _SavedScreenState extends State<SavedScreen> {
   bool isBookmarked = false;
+
   List<Widget> BuildSavedCards() {
     List<Savedwidget> savedCards = [];
-    if (locationList.isEmpty) {
+    if (savedList.isEmpty) {
       return [
         SizedBox(
           height: 24,
@@ -24,7 +26,7 @@ class _SavedScreenState extends State<SavedScreen> {
         ),
       ];
     }
-    for (Location loc in locationList) {
+    for (ClusterLocation loc in savedList) {
       savedCards.add(Savedwidget(
         location: loc.location,
         cases: loc.cases,
@@ -32,11 +34,7 @@ class _SavedScreenState extends State<SavedScreen> {
         isBookmarked: true,
         savedFunc: () {
           setState(() {
-            if (locationList.contains(loc)) {
-              locationList.remove(loc);
-            } else {
-              locationList.add(loc);
-            }
+            SavedManager.editSaved(loc);
           });
         },
       ));
@@ -48,11 +46,11 @@ class _SavedScreenState extends State<SavedScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    locationList = [
-      Location(location: "Kallang", cases: 12, zone: "Safe"),
-      Location(location: "Yishun", cases: 30, zone: "Medium Risk"),
-      Location(location: "Pasir Ris", cases: 50, zone: "High Risk"),
-    ];
+    /*locationList = [
+      ClusterLocation(location: "Kallang", cases: 12, zone: "Safe"),
+      ClusterLocation(location: "Yishun", cases: 30, zone: "Medium Risk"),
+      ClusterLocation(location: "Pasir Ris", cases: 50, zone: "High Risk"),
+    ];*/
   }
 
   @override

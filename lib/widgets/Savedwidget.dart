@@ -30,35 +30,22 @@ class Savedwidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    Text(
-                      location,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat',
-                        fontSize: 18,
-                      ),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    location.toUpperCase() +
+                        '\n' +
+                        "${cases.toString()} cases" +
+                        '\n' +
+                        "${zone} Zone",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
+                      fontSize: 15,
+                      height: 1.5,
                     ),
-                    Text(
-                      "${cases.toString()} cases",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                "${zone} Zone",
-                style: TextStyle(
-                  color: Colors.grey[800],
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                  fontSize: 15,
+                  ),
                 ),
               ),
               IconButton(

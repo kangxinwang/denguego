@@ -92,7 +92,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Email'),
                         validator: (val) =>
-                            val.isEmpty ? 'Enter an email' : null,
+                            val.isEmpty ? 'Enter a valid email' : null,
                         onChanged: (val) {
                           setState(() => email = val);
                         }),

@@ -12,15 +12,11 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     // return either home or authenticate widget
     final user = Provider.of<UserAccount>(context);
-    populate();
+    // populate();
     if (user == null) {
       return Authenticate();
     } else {
       return MainScreen();
     }
-  }
-
-  Future populate() async {
-    await ClusterManager.getData();
   }
 }
