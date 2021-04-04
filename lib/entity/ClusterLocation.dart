@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:geocode/geocode.dart';
 import 'package:geocoding/geocoding.dart';
 
 class ClusterLocation {

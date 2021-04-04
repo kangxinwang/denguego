@@ -1,6 +1,7 @@
 import 'package:denguego/boundary/HomeScreen.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:web_scraper/web_scraper.dart';
 import 'dart:async';
@@ -11,10 +12,13 @@ class ClusterManager {
   static WebScraper webScraper;
   static List<String> keys = [];
   static Map<String, ClusterLocation> LocationList = {};
+  static List<String> nearByClusters = [];
 
   static Future<List<String>> getAllLocations() async {
     List<String> updates;
     List<String> individualCluster = [];
+
+    var currentLocation = await HomeScreen.locationTracker.getLocation();
 
     webScraper = WebScraper('https://www.nea.gov.sg');
     if (await webScraper.loadWebPage('/dengue-zika/dengue/dengue-clusters')) {
@@ -47,8 +51,20 @@ class ClusterManager {
 
           await getLatLong(ClusterManager.LocationList[locName]);
 
+          var _distanceInMeters = await Geolocator.distanceBetween(
+            ClusterManager.LocationList[locName].coordinates[0].latitude,
+            ClusterManager.LocationList[locName].coordinates[0].longitude,
+            currentLocation.latitude,
+            currentLocation.longitude,
+          );
+          if (_distanceInMeters / 1000 < 2) {
+            if (!nearByClusters
+                .contains(ClusterManager.LocationList[locName].cluster))
+              nearByClusters.add(ClusterManager.LocationList[locName].cluster);
+          }
           updates.add(locName);
         }
+
         for (String loc in updates) {
           ClusterManager.LocationList[loc].clusterCases = clusterCases;
           ClusterManager.LocationList[loc].zone =

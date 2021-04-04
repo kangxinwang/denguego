@@ -1,3 +1,4 @@
+import 'package:denguego/boundary/LoadingScreen.dart';
 import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/controller/ClusterManager.dart';
 import 'package:denguego/controller/ToggleViewManager.dart';
@@ -16,7 +17,15 @@ class Wrapper extends StatelessWidget {
       return Authenticate();
     } else {
       // List<String> ClusterList= await ClusterManager.getAllLocations();
-      return MainScreen();
+      return FutureBuilder(
+          future: ClusterManager.getAllLocations(),
+          builder:
+              (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+            if (snapshot.hasData)
+              return MainScreen();
+            else
+              return LoadingScreen();
+          });
     }
   }
 }

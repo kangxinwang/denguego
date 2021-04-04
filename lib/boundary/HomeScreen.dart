@@ -10,8 +10,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:custom_searchable_dropdown/custom_searchable_dropdown.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomeScreen extends StatefulWidget {
+  static Location locationTracker = Location();
   static List<Marker> allMarkers = [];
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,9 +21,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool locationSelected = false;
+  bool currentSelected = false;
   String place = "";
-  StreamSubscription _locationSubscription;
-  Location _locationTracker = Location();
   Circle circle;
   GoogleMapController _controller;
   static final CameraPosition initialLocation =
@@ -63,12 +64,28 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.fromLTRB(8.0, 90, 8, 8),
               child: RawMaterialButton(
                 elevation: 10,
-                onPressed: () => getCurrentLocation(),
-                child: Icon(
-                  Icons.gps_fixed,
-                  size: 27,
-                  color: Colors.white,
-                ),
+                onPressed: () {
+                  if (!currentSelected) {
+                    getCurrentLocation();
+                  } else {
+                    _controller.animateCamera(
+                        CameraUpdate.newCameraPosition(initialLocation));
+                  }
+                  setState(() {
+                    currentSelected = !currentSelected;
+                  });
+                },
+                child: currentSelected
+                    ? Icon(
+                        Icons.gps_not_fixed,
+                        size: 27,
+                        color: Colors.white,
+                      )
+                    : Icon(
+                        Icons.gps_fixed,
+                        size: 27,
+                        color: Colors.white,
+                      ),
                 shape: CircleBorder(),
                 fillColor: Color(0xff5B92C8),
                 padding: EdgeInsets.all(15.0),
@@ -179,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void getCurrentLocation() async {
     try {
       Uint8List imageData = await getMarker();
-      var location = await _locationTracker.getLocation();
+      var location = await HomeScreen.locationTracker.getLocation();
 
       updateMarkerAndCircle(location, imageData);
 
@@ -190,22 +207,14 @@ class _HomeScreenState extends State<HomeScreen> {
         bearing: 0.0,
       )));
 
-      /*if (_locationSubscription != null) {
-        _locationSubscription.cancel();
-      }
+      // var _distanceInMeters = await Geolocator.distanceBetween(
+      //   1.2847,
+      //   103.8610,
+      //   location.latitude,
+      //   location.longitude,
+      // );
+      // print(_distanceInMeters / 1000);
 
-      _locationSubscription =
-          _locationTracker.onLocationChanged().listen((newLocalData) {
-        if (_controller != null) {
-          _controller.animateCamera(CameraUpdate.newCameraPosition(
-              new CameraPosition(
-                  bearing: 0,
-                  target: LatLng(newLocalData.latitude, newLocalData.longitude),
-                  tilt: 0,
-                  zoom: 16)));
-          updateMarkerAndCircle(newLocalData, imageData);
-        }
-      });*/
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION DENIED') {
         debugPrint("Permission Denied");

@@ -25,9 +25,8 @@ dependencies:
   dropdownfield: ^1.0.3
   custom_searchable_dropdown: ^1.0.5
   location: ^2.3.5
-  geocode: ^1.0.1
-  geocoder: ^0.2.1
   geocoding: ^2.0.0
+  geolocator: ^7.0.1
 
   flutter:
     sdk: flutter
