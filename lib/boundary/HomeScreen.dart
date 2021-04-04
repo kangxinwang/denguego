@@ -60,13 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
           Align(
             alignment: Alignment.topRight,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 100, 12, 8),
+              padding: const EdgeInsets.fromLTRB(8.0, 90, 8, 8),
               child: RawMaterialButton(
                 elevation: 10,
                 onPressed: () => getCurrentLocation(),
                 child: Icon(
                   Icons.gps_fixed,
-                  size: 35,
+                  size: 27,
                   color: Colors.white,
                 ),
                 shape: CircleBorder(),
