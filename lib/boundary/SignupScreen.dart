@@ -1,6 +1,6 @@
 import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/shared/constants.dart';
+import 'package:denguego/shared/Constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -12,7 +12,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final AuthService _auth = AuthService();
+  final AuthenticateManager _auth = AuthenticateManager();
   final _formKey = GlobalKey<FormState>();
   bool showSpinner = false;
   String email = ' ';

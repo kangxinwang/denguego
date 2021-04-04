@@ -1,8 +1,8 @@
 import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
-import 'package:denguego/shared/constants.dart';
+import 'package:denguego/shared/Constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'ForgotPasswordScreen.dart';
+import 'package:denguego/boundary/ForgotPasswordScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final AuthService _auth = AuthService();
+  final AuthenticateManager _auth = AuthenticateManager();
   final _formKey = GlobalKey<FormState>();
   bool showSpinner = false;
   //text field state

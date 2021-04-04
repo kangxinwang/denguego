@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 import 'package:denguego/controller/SavedManager.dart';
 import 'package:denguego/widgets/PopUpLocationCard.dart';
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:custom_searchable_dropdown/custom_searchable_dropdown.dart';
-import 'package:denguego/shared/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

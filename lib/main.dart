@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:denguego/boundary/MainScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-
 import 'package:denguego/entity/UserAccount.dart';
 
 Future<void> main() async {
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<UserAccount>.value(
-      value: AuthService().user,
+      value: AuthenticateManager().user,
       child: MaterialApp(
         title: 'Dengue Go',
         initialRoute: Wrapper.id,

@@ -1,7 +1,6 @@
+import 'package:denguego/widgets/Question.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/answer.dart';
-import '../widgets/question.dart';
+import 'package:denguego/widgets/Answer.dart';
 
 class Quiz extends StatelessWidget {
   final List<Map<String, Object>> questions;

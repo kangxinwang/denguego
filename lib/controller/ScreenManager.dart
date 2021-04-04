@@ -4,8 +4,6 @@ import 'package:denguego/entity/UserAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'ClusterManager.dart';
-
 class Wrapper extends StatelessWidget {
   static String id = 'wrapper';
   @override

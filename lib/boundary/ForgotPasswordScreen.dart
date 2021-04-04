@@ -1,6 +1,5 @@
-import 'package:denguego/shared/constants.dart';
+import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
@@ -12,7 +11,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final AuthService _auth = AuthService();
+  final AuthenticateManager _auth = AuthenticateManager();
   String email = ' ';
   @override
   Widget build(BuildContext context) {

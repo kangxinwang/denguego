@@ -1,5 +1,4 @@
 import 'package:denguego/entity/ClusterLocation.dart';
-import 'package:flutter/material.dart';
 import 'package:web_scraper/web_scraper.dart';
 import 'dart:async';
 

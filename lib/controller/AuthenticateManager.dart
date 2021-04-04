@@ -1,7 +1,7 @@
 import 'package:denguego/entity/UserAccount.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthService {
+class AuthenticateManager {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create user object based on firebase user

@@ -8,7 +8,7 @@ class SurveyScreen extends StatefulWidget {
 }
 
 class _SurveyScreenState extends State<SurveyScreen> {
-  final _questions = const [
+  List<Map<String, Object>> _questions = const [
     {
       'questionText': 'Q1. Are you living in a landed property?',
       'answers': [
@@ -103,8 +103,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
     },
   ];
 
-  var _questionIndex = 0;
-  var _totalScore = 0;
+  int _questionIndex = 0;
+  int _totalScore = 0;
 
   void _resetQuiz() {
     setState(() {

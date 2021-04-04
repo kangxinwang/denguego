@@ -1,4 +1,4 @@
-import 'package:denguego/shared/constants.dart';
+import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 
@@ -8,7 +8,7 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  final AuthService _auth = AuthService();
+  final AuthenticateManager _auth = AuthenticateManager();
   final _formKeyHome = GlobalKey<FormState>();
   final _formKeyPassword = GlobalKey<FormState>();
   String address =

@@ -1,6 +1,5 @@
-import 'package:denguego/widgets/question.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/boundary/QuestionnaireScreen.dart';
+import 'package:denguego/entity/Reminder.dart';
 
 class Result extends StatelessWidget {
   final int resultScore;
@@ -63,43 +62,5 @@ class Result extends StatelessWidget {
         ], //<Widget>[]
       ), //Column
     ); //Center
-  }
-}
-
-class Reminder extends StatefulWidget {
-  @override
-  DemoState createState() => new DemoState();
-}
-
-class DemoState extends State<Reminder> {
-  Map<String, bool> values = {
-    'Wash your toilet': false,
-    'Take out the trash': false,
-    'Clear the drains': false,
-    'Change the water for your plants': false,
-    'Cover your pole holders': false,
-    'Clear your water from trays': false,
-    'Keep your water containers dry': false,
-    'Use insecticide': false,
-  };
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(title: new Text('Reminders')),
-      body: new ListView(
-        children: values.keys.map((String key) {
-          return new CheckboxListTile(
-            title: new Text(key),
-            value: values[key],
-            onChanged: (bool value) {
-              setState(() {
-                values[key] = value;
-              });
-            },
-          );
-        }).toList(),
-      ),
-    );
   }
 }

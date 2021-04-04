@@ -1,5 +1,5 @@
 import 'package:denguego/entity/ClusterLocation.dart';
-import 'package:denguego/shared/constants.dart';
+import 'package:denguego/shared/Constants.dart';
 
 class SavedManager {
   static bool isSaved(ClusterLocation loc) {
@@ -9,7 +9,7 @@ class SavedManager {
     return false;
   }
 
-  static void removeSaved(loc) {
+  static void removeSaved(ClusterLocation loc) {
     for (ClusterLocation savedLoc in savedList) {
       if (savedLoc.location == loc.location) {
         savedList.remove(savedLoc);
