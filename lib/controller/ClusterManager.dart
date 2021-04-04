@@ -1,10 +1,15 @@
+import 'package:denguego/boundary/HomeScreen.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:web_scraper/web_scraper.dart';
 import 'dart:async';
+import 'package:geocoding/geocoding.dart';
 
 class ClusterManager {
+  static bool loaded = false;
   static WebScraper webScraper;
-
+  static List<String> keys = [];
   static Map<String, ClusterLocation> LocationList = {};
 
   static Future<List<String>> getAllLocations() async {
@@ -39,6 +44,9 @@ class ClusterManager {
             cases: int.parse(individualCluster[j + 11]),
             cluster: clusterName,
           );
+
+          await getLatLong(ClusterManager.LocationList[locName]);
+
           updates.add(locName);
         }
         for (String loc in updates) {
@@ -47,7 +55,42 @@ class ClusterManager {
               clusterCases > 10 ? "High Risk" : "Medium Risk";
         }
       }
+
+      addMarkers(LocationList.keys.toList());
+      keys = ClusterManager.LocationList.keys.toList();
       return ClusterManager.LocationList.keys.toList();
+    }
+  }
+
+  static void addMarkers(List<String> cluster) {
+    for (int i = 0; i < cluster.length; i++) {
+      String place = cluster[i];
+      ClusterLocation loc = LocationList[place];
+      HomeScreen.allMarkers.add(Marker(
+        markerId: MarkerId(loc.location),
+        draggable: false,
+        zIndex: 2,
+        flat: true,
+        anchor: Offset(0.5, 0.5),
+        position:
+            LatLng(loc.coordinates[0].latitude, loc.coordinates[0].longitude),
+        icon: LocationList[place].zone == 'Safe'
+            ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen)
+            : LocationList[place].zone == 'Medium Risk'
+                ? BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueOrange)
+                : BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueRed),
+      ));
+    }
+  }
+
+  static getLatLong(ClusterLocation cluster) async {
+    try {
+      cluster.coordinates =
+          await locationFromAddress(cluster.location + " Singapore");
+    } catch (e) {
+      print(e);
     }
   }
 }

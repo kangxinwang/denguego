@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geocode/geocode.dart';
+import 'package:geocoding/geocoding.dart';
 
 class PopUpLocationCard extends StatelessWidget {
   final String location;
@@ -80,7 +82,7 @@ class PopUpLocationCard extends StatelessWidget {
                   fontFamily: 'Montserrat',
                   fontSize: 12,
                 ),
-              )
+              ),
             ],
           ),
         ),

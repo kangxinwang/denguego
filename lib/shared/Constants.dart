@@ -21,8 +21,16 @@ const textInputDecoration = InputDecoration(
       borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0)),
 );
 
-List<ClusterLocation> savedList =
-    []; /*[
+List<ClusterLocation> savedList = [];
+
+const List<String> DengueFacts = [
+  'Papaya leaf extract can treat dengue fever.',
+  'Fever and muscle pain from dengue lasts about one to two weeks',
+  'Dengue is transmitted by Aedes mosquitoes',
+  'Dengue fever may occur from 3 to 14 days after being bitten',
+];
+
+/*[
   ClusterLocation(location: "Kallang", cases: 12, zone: "Safe",),
   ClusterLocation(location: "Yishun", cases: 30, zone: "Medium Risk"),
   ClusterLocation(location: "Pasir Ris", cases: 50, zone: "High Risk"),

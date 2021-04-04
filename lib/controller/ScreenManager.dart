@@ -1,4 +1,5 @@
 import 'package:denguego/boundary/MainScreen.dart';
+import 'package:denguego/controller/ClusterManager.dart';
 import 'package:denguego/controller/ToggleViewManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
+      // List<String> ClusterList= await ClusterManager.getAllLocations();
       return MainScreen();
     }
   }

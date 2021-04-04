@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:geocode/geocode.dart';
+import 'package:geocoding/geocoding.dart';
 
 class ClusterLocation {
   String _location;
@@ -6,6 +8,7 @@ class ClusterLocation {
   String _zone;
   String _cluster;
   int _clusterCases;
+  List<Location> _coordinates;
 
   ClusterLocation({
     @required String location,
@@ -13,17 +16,20 @@ class ClusterLocation {
     @required String zone,
     @required String cluster,
     int clusterCases,
+    List<Location> coordinates,
   })  : _location = location,
         _cases = cases,
         _zone = zone,
         _clusterCases = clusterCases,
-        _cluster = cluster;
+        _cluster = cluster,
+        _coordinates = coordinates;
 
   String get location => _location;
   int get cases => _cases;
   String get zone => _zone;
   int get clusterCases => _clusterCases;
   String get cluster => _cluster;
+  List<Location> get coordinates => _coordinates;
 
   set location(String location) {
     _location = location;
@@ -43,6 +49,10 @@ class ClusterLocation {
 
   set cluster(String cluster) {
     _cluster = cluster;
+  }
+
+  set coordinates(List<Location> coordinates) {
+    _coordinates = coordinates;
   }
 
   void printDetails() {
