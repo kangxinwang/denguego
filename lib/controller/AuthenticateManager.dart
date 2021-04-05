@@ -1,5 +1,7 @@
+import 'package:denguego/controller/ClusterManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:denguego/controller/DatabaseManager.dart';
 
 class AuthenticateManager {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -15,21 +17,21 @@ class AuthenticateManager {
         user)); // mapping the firebase user to the actual user
   }
 
-  //sign in anonymously
-  Future signInAnon() async {
-    try {
-      UserCredential result = await _auth
-          .signInAnonymously(); // we need to await cause it will take some time to complete. we need to wait and get the result before proceeding to the next thing
-      // also i think in the videos they said about AuthResult as the 'type' of return but it doesnt appear to be an exisiting class.
-      // so ive changed it to UserCredential
-      User user =
-          result.user; // FirebaseUser deprecated and now changed to User
-      return _userFromFirebaseUser(user);
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
+  // //sign in anonymously
+  // Future signInAnon() async {
+  //   try {
+  //     UserCredential result = await _auth
+  //         .signInAnonymously(); // we need to await cause it will take some time to complete. we need to wait and get the result before proceeding to the next thing
+  //     // also i think in the videos they said about AuthResult as the 'type' of return but it doesnt appear to be an exisiting class.
+  //     // so ive changed it to UserCredential
+  //     User user =
+  //         result.user; // FirebaseUser deprecated and now changed to User
+  //     return _userFromFirebaseUser(user);
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return null;
+  //   }
+  // }
 
   // sign in with email and password
   Future signInWithEandP(String email, String password) async {
@@ -37,7 +39,7 @@ class AuthenticateManager {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-
+      await ClusterManager.populateSaved();
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -55,7 +57,9 @@ class AuthenticateManager {
 
       // create a new document for the user with uid
       await updateUserName(name, result.user);
-
+      DatabaseManager DB = DatabaseManager();
+      await DB.updateUserData(name, email);
+      await ClusterManager.populateSaved();
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -86,5 +90,14 @@ class AuthenticateManager {
   Future getCurrentUser() async {
     // ignore: await_only_futures
     return await _auth.currentUser;
+  }
+
+  Future<String> getCurrentUserName() async {
+    // ignore: await_only_futures
+    print('im in auth');
+    if (_auth.currentUser == null)
+      return null;
+    else
+      return _auth.currentUser.displayName;
   }
 }

@@ -1,3 +1,5 @@
+import 'package:denguego/controller/ClusterManager.dart';
+import 'package:denguego/controller/DatabaseManager.dart';
 import 'package:denguego/controller/SavedManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:denguego/shared/Constants.dart';
@@ -14,7 +16,7 @@ class _SavedScreenState extends State<SavedScreen> {
 
   List<Widget> BuildSavedCards() {
     List<Savedwidget> savedCards = [];
-    if (savedList.isEmpty) {
+    if (DatabaseManager.SavedLocations.isEmpty) {
       return [
         SizedBox(
           height: 24,
@@ -26,7 +28,17 @@ class _SavedScreenState extends State<SavedScreen> {
         ),
       ];
     }
-    for (ClusterLocation loc in savedList) {
+    for (String locName in DatabaseManager.SavedLocations) {
+      ClusterLocation loc;
+      try {
+        loc = ClusterManager.LocationList[locName];
+      } catch (e) {
+        loc = ClusterLocation(
+            location: locName,
+            cases: 0,
+            zone: 'Under Surveillance',
+            cluster: '');
+      }
       savedCards.add(Savedwidget(
         location: loc.location,
         cases: loc.cases,
@@ -46,11 +58,6 @@ class _SavedScreenState extends State<SavedScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    /*locationList = [
-      ClusterLocation(location: "Kallang", cases: 12, zone: "Safe"),
-      ClusterLocation(location: "Yishun", cases: 30, zone: "Medium Risk"),
-      ClusterLocation(location: "Pasir Ris", cases: 50, zone: "High Risk"),
-    ];*/
   }
 
   @override

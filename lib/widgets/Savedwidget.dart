@@ -20,11 +20,11 @@ class Savedwidget extends StatelessWidget {
       padding: const EdgeInsets.all(9.0),
       child: Card(
         elevation: 3,
-        color: zone == "Safe"
-            ? Color(0xffBCD49D)
+        color: zone == "High Risk"
+            ? Color(0xffd26666)
             : zone == "Medium Risk"
                 ? Color(0xffdec649)
-                : Color(0xffd26666),
+                : Color(0xffBCD49D),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(

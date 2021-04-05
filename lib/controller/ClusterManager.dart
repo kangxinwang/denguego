@@ -1,4 +1,6 @@
 import 'package:denguego/boundary/HomeScreen.dart';
+import 'package:denguego/controller/AuthenticateManager.dart';
+import 'package:denguego/controller/DatabaseManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -14,6 +16,9 @@ class ClusterManager {
   static Map<String, ClusterLocation> LocationList = {};
   static List<String> nearByClusters = [];
 
+  static AuthenticateManager _auth = AuthenticateManager();
+  static DatabaseManager DB = DatabaseManager();
+
   static Future<List<String>> getAllLocations() async {
     List<String> updates;
     List<String> individualCluster = [];
@@ -28,19 +33,17 @@ class ClusterManager {
           webScraper.getElement('.rte a:not([class^=btn])', ['title']);
       int clusterCases;
       String locName;
-      //print(results[results.length - 1]);
       for (var i = 2; i < results.length; i++) {
         clusterCases = 0;
         updates = [];
         String clusterName = clusterNames[i - 2]['title'];
         //listOfClusters.add(results[i]['title']);
         individualCluster = results[i]['title'].split("    ");
+
         for (var j = 59; j < individualCluster.length; j += 42) {
           locName = individualCluster[j]
               .substring(0, individualCluster[j].length - 1);
 
-          //print(
-          //  "Location:${individualCluster[j]}No.of cases:${individualCluster[j + 11]}");
           clusterCases += int.parse(individualCluster[j + 11]);
 
           ClusterManager.LocationList[locName] = ClusterLocation(
@@ -57,7 +60,8 @@ class ClusterManager {
             currentLocation.latitude,
             currentLocation.longitude,
           );
-          if (_distanceInMeters / 1000 < 2) {
+
+          if (_distanceInMeters / 1000 < 3) {
             if (!nearByClusters
                 .contains(ClusterManager.LocationList[locName].cluster))
               nearByClusters.add(ClusterManager.LocationList[locName].cluster);
@@ -71,11 +75,22 @@ class ClusterManager {
               clusterCases > 10 ? "High Risk" : "Medium Risk";
         }
       }
+      print('im out cluster');
+
+      await populateSaved();
 
       addMarkers(LocationList.keys.toList());
       keys = ClusterManager.LocationList.keys.toList();
       return ClusterManager.LocationList.keys.toList();
     }
+  }
+
+  static Future populateSaved() async {
+    String name = await _auth.getCurrentUserName();
+    if (name == null)
+      return;
+    else
+      await DB.readSavedLocations(name);
   }
 
   static void addMarkers(List<String> cluster) {

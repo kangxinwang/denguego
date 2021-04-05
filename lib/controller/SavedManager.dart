@@ -1,28 +1,38 @@
+import 'package:denguego/controller/AuthenticateManager.dart';
+import 'package:denguego/controller/ClusterManager.dart';
+import 'package:denguego/controller/DatabaseManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:denguego/shared/Constants.dart';
 
 class SavedManager {
+  static AuthenticateManager _auth = AuthenticateManager();
+  static DatabaseManager DB = DatabaseManager();
+
   static bool isSaved(ClusterLocation loc) {
-    for (ClusterLocation savedLoc in savedList) {
-      if (savedLoc.location == loc.location) return true;
+    for (String savedLoc in DatabaseManager.SavedLocations) {
+      if (savedLoc == loc.location) return true;
     }
     return false;
   }
 
   static void removeSaved(ClusterLocation loc) {
-    for (ClusterLocation savedLoc in savedList) {
-      if (savedLoc.location == loc.location) {
-        savedList.remove(savedLoc);
+    for (String savedLoc in DatabaseManager.SavedLocations) {
+      if (savedLoc == loc.location) {
+        DatabaseManager.SavedLocations.remove(savedLoc);
+        return;
       }
     }
     return;
   }
 
   static void editSaved(ClusterLocation loc) async {
+    String name = await _auth.getCurrentUserName();
+
     if (isSaved(loc)) {
       removeSaved(loc);
-      return;
     } else
-      savedList.add(loc);
+      DatabaseManager.SavedLocations.add(loc.location);
+
+    await DB.updateSavedLocations(loc.location, name);
   }
 }

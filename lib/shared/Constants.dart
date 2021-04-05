@@ -21,7 +21,7 @@ const textInputDecoration = InputDecoration(
       borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0)),
 );
 
-List<ClusterLocation> savedList = [];
+// List<ClusterLocation> savedList = [];
 
 const List<String> DengueFacts = [
   'Papaya leaf extract can treat dengue fever.',
