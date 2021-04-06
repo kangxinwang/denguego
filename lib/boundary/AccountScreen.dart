@@ -1,3 +1,4 @@
+import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
@@ -9,17 +10,10 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   final AuthenticateManager _auth = AuthenticateManager();
-  final _formKeyHome = GlobalKey<FormState>();
+
   final _formKeyPassword = GlobalKey<FormState>();
-  String address =
-      '50 Nanyang Ave, Nanyang Technological University, Singapore 639798';
+
   String email = '';
-  String newAddress = '';
-  void changeAddress(String addy) {
-    setState(() {
-      address = addy;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,31 +39,27 @@ class _AccountScreenState extends State<AccountScreen> {
                         padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                         child: Column(
                           children: [
-                            Center(
-                              child: FutureBuilder(
-                                future: _auth.getCurrentUser(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    return Text(
-                                      'Hi, ${snapshot.data.displayName}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 20,
-                                        color: Colors.black,
-                                      ),
-                                    );
-                                  } else {
-                                    return CircularProgressIndicator();
-                                  }
-                                },
-                              ),
+                            Icon(
+                              Icons.account_circle,
+                              size: 100,
+                              color: Colors.grey[700],
                             ),
-                            /*Icon(
-                                Icons.account_box,
-                                size: 70,
-                              ),*/
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Center(
+                                child: Text(
+                              'Hi, ${UserAccountManager.userDetails.name}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat',
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            )),
+                            SizedBox(
+                              height: 18,
+                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -81,23 +71,14 @@ class _AccountScreenState extends State<AccountScreen> {
                                         Icons.email,
                                       ),
                                     ),
-                                    FutureBuilder(
-                                        future: _auth.getCurrentUser(),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.connectionState ==
-                                              ConnectionState.done) {
-                                            return Text(
-                                              "${snapshot.data.email}",
-                                              style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                fontSize: 15,
-                                                color: Colors.black,
-                                              ),
-                                            );
-                                          } else {
-                                            return CircularProgressIndicator();
-                                          }
-                                        }),
+                                    Text(
+                                      "${UserAccountManager.userDetails.email}",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                      ),
+                                    )
                                   ],
                                 ),
                                 Row(
@@ -105,12 +86,15 @@ class _AccountScreenState extends State<AccountScreen> {
                                     Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Icon(
-                                        Icons.room,
+                                        Icons.poll_rounded,
                                       ),
                                     ),
                                     Expanded(
                                       child: Text(
-                                        address,
+                                        UserAccountManager
+                                                .userDetails.SurveyDone
+                                            ? "Survey Score: ${UserAccountManager.userDetails.SurveyScore}"
+                                            : 'Survey not taken',
                                         style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           fontSize: 15,
@@ -174,61 +158,6 @@ class _AccountScreenState extends State<AccountScreen> {
                             onPressed: () async {
                               if (_formKeyPassword.currentState.validate()) {
                                 _auth.resetPassword(email);
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 25,
-                ),
-                Text(
-                  'Change home address',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                ),
-                Form(
-                  key: _formKeyHome,
-                  child: Column(
-                    children: [
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: TextFormField(
-                              decoration: textInputDecoration.copyWith(
-                                  hintText: 'Enter new home address'),
-                              validator: (val) => val.isEmpty
-                                  ? 'Enter a valid home address'
-                                  : null,
-                              onChanged: (val) {
-                                newAddress = val;
-                              }),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Color(0xff5B92C8)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 12.0),
-                              child: Text('Confirm',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15)),
-                            ),
-                            onPressed: () async {
-                              if (_formKeyHome.currentState.validate()) {
-                                changeAddress(newAddress);
-                                print(newAddress);
                               }
                             },
                           ),

@@ -1,5 +1,5 @@
 import 'package:denguego/controller/ClusterManager.dart';
-import 'package:denguego/controller/DatabaseManager.dart';
+import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/controller/SavedManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:denguego/shared/Constants.dart';
@@ -16,7 +16,7 @@ class _SavedScreenState extends State<SavedScreen> {
 
   List<Widget> BuildSavedCards() {
     List<Savedwidget> savedCards = [];
-    if (DatabaseManager.SavedLocations.isEmpty) {
+    if (UserAccountManager.userDetails.SavedLocations.isEmpty) {
       return [
         SizedBox(
           height: 24,
@@ -28,7 +28,7 @@ class _SavedScreenState extends State<SavedScreen> {
         ),
       ];
     }
-    for (String locName in DatabaseManager.SavedLocations) {
+    for (String locName in UserAccountManager.userDetails.SavedLocations) {
       ClusterLocation loc;
       try {
         loc = ClusterManager.LocationList[locName];

@@ -1,24 +1,22 @@
 import 'package:denguego/controller/AuthenticateManager.dart';
-import 'package:denguego/controller/ClusterManager.dart';
-import 'package:denguego/controller/DatabaseManager.dart';
+import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
-import 'package:denguego/shared/Constants.dart';
 
 class SavedManager {
   static AuthenticateManager _auth = AuthenticateManager();
-  static DatabaseManager DB = DatabaseManager();
+  static UserAccountManager UserMgr = UserAccountManager();
 
   static bool isSaved(ClusterLocation loc) {
-    for (String savedLoc in DatabaseManager.SavedLocations) {
+    for (String savedLoc in UserAccountManager.userDetails.SavedLocations) {
       if (savedLoc == loc.location) return true;
     }
     return false;
   }
 
   static void removeSaved(ClusterLocation loc) {
-    for (String savedLoc in DatabaseManager.SavedLocations) {
+    for (String savedLoc in UserAccountManager.userDetails.SavedLocations) {
       if (savedLoc == loc.location) {
-        DatabaseManager.SavedLocations.remove(savedLoc);
+        UserAccountManager.userDetails.SavedLocations.remove(savedLoc);
         return;
       }
     }
@@ -31,8 +29,8 @@ class SavedManager {
     if (isSaved(loc)) {
       removeSaved(loc);
     } else
-      DatabaseManager.SavedLocations.add(loc.location);
+      UserAccountManager.userDetails.SavedLocations.add(loc.location);
 
-    await DB.updateSavedLocations(loc.location, name);
+    await UserMgr.updateSavedLocations(name);
   }
 }

@@ -12,15 +12,15 @@ class Result extends StatelessWidget {
   String get resultPhrase {
     String resultText;
     if (resultScore >= 70) {
-      resultText = 'You are at high-risk!';
+      resultText = 'High-risk!';
       print(resultScore);
     } else if (40 <= resultScore && resultScore < 70) {
-      resultText = 'You are at medium-risk!';
+      resultText = 'Medium-risk!';
       print(resultScore);
     } else if (resultScore <= 39) {
-      resultText = 'You are at low-risk!';
+      resultText = 'Low-risk!';
     } else {
-      resultText = 'This is a poor score!';
+      resultText = 'Incorrect Score. Please try again!';
       print(resultScore);
     }
     return resultText;
@@ -32,26 +32,71 @@ class Result extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            resultPhrase,
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ), //Text
-          Text(
-            'Score ' '$resultScore',
-            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ), //Text
-          TextButton(
+          Padding(
+            padding: const EdgeInsets.all(4.0),
             child: Text(
-              'Restart Survey',
-            ), //Text
-            //textColor: Colors.blue,
-            onPressed: resetHandler,
+              "Thank you for taking this survey!",
+              style: TextStyle(
+                fontSize: 22,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
-          TextButton(
-              child: Text(
-                'View reminders',
+          SizedBox(
+            height: 25,
+          ),
+          //Text
+          Text(
+            'Score: $resultScore / 100',
+            style: TextStyle(
+              fontSize: 32,
+              fontFamily: "Montserrat",
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              resultPhrase.contains('risk')
+                  ? 'You are at $resultPhrase'
+                  : resultPhrase,
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: resultPhrase.contains('High')
+                    ? Color(0xffd26666)
+                    : resultPhrase.contains('Medium')
+                        ? Color(0xffdec649)
+                        : resultPhrase.contains('Low')
+                            ? Color(0xff81aa4c)
+                            : Colors.black,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12.0, 12, 12, 0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Color(0xff5B92C8),
+                padding: EdgeInsets.all(8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  'View Safety Reminders',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               onPressed: () {
                 if (resultScore >= 70) {
@@ -70,7 +115,30 @@ class Result extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => LowRisk()),
                   );
                 }
-              })
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  'Restart Survey',
+                  style: TextStyle(
+                    color: Colors.grey[600], //Color(0xff5B92C8),
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              onPressed: resetHandler,
+            ),
+          ),
         ], //<Widget>[]
       ), //Column
     ); //Center

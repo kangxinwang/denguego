@@ -1,14 +1,18 @@
 import 'package:denguego/controller/ClusterManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:denguego/controller/DatabaseManager.dart';
+import 'package:denguego/controller/UserAccountManager.dart';
 
 class AuthenticateManager {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create user object based on firebase user
   UserAccount _userFromFirebaseUser(User user) {
-    return user != null ? UserAccount(uid: user.uid) : null;
+    if (user != null) {
+      return UserAccount(uid: user.uid);
+    } else {
+      return null;
+    }
   }
 
 // auth change user stream
@@ -39,7 +43,7 @@ class AuthenticateManager {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-      await ClusterManager.populateSaved();
+      await ClusterManager.populateUser();
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -57,9 +61,9 @@ class AuthenticateManager {
 
       // create a new document for the user with uid
       await updateUserName(name, result.user);
-      DatabaseManager DB = DatabaseManager();
+      UserAccountManager DB = UserAccountManager();
       await DB.updateUserData(name, email);
-      await ClusterManager.populateSaved();
+      await ClusterManager.populateUser();
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());

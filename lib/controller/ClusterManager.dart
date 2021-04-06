@@ -1,6 +1,6 @@
 import 'package:denguego/boundary/HomeScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
-import 'package:denguego/controller/DatabaseManager.dart';
+import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -17,7 +17,7 @@ class ClusterManager {
   static List<String> nearByClusters = [];
 
   static AuthenticateManager _auth = AuthenticateManager();
-  static DatabaseManager DB = DatabaseManager();
+  static UserAccountManager UserMgr = UserAccountManager();
 
   static Future<List<String>> getAllLocations() async {
     List<String> updates;
@@ -77,7 +77,7 @@ class ClusterManager {
       }
       print('im out cluster');
 
-      await populateSaved();
+      await populateUser();
 
       addMarkers(LocationList.keys.toList());
       keys = ClusterManager.LocationList.keys.toList();
@@ -85,12 +85,12 @@ class ClusterManager {
     }
   }
 
-  static Future populateSaved() async {
+  static Future populateUser() async {
     String name = await _auth.getCurrentUserName();
     if (name == null)
       return;
     else
-      await DB.readSavedLocations(name);
+      await UserMgr.readUserFromDatabase(name);
   }
 
   static void addMarkers(List<String> cluster) {

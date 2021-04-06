@@ -24,7 +24,7 @@ class Savedwidget extends StatelessWidget {
             ? Color(0xffd26666)
             : zone == "Medium Risk"
                 ? Color(0xffdec649)
-                : Color(0xffBCD49D),
+                : Color(0xff81aa4c),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(
