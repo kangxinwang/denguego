@@ -1,6 +1,7 @@
 import 'package:denguego/boundary/ForgotPasswordScreen.dart';
 import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
+import 'package:denguego/boundary/ReminderScreen.dart';
 import 'package:denguego/boundary/SignupScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:denguego/controller/ScreenManager.dart';
@@ -24,14 +25,15 @@ class MyApp extends StatelessWidget {
       value: AuthenticateManager().user,
       child: MaterialApp(
         title: 'Dengue Go',
-        initialRoute: Wrapper.id,
+        initialRoute: ScreenManager.id,
         routes: {
-          Wrapper.id: (context) => Wrapper(),
+          ScreenManager.id: (context) => ScreenManager(),
           MainScreen.id: (context) => MainScreen(),
           ForgotPasswordScreen.id: (context) => ForgotPasswordScreen(),
           SignupScreen.id: (context) => SignupScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           NotificationScreen.id: (context) => NotificationScreen(),
+          ReminderScreen.id: (context) => ReminderScreen()
         },
       ),
     );

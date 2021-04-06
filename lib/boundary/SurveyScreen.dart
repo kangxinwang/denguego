@@ -1,9 +1,9 @@
 import 'package:denguego/controller/AuthenticateManager.dart';
-import 'package:denguego/controller/SurveyManager.dart';
+import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
-import 'package:denguego/entity/Result.dart';
+import 'package:denguego/widgets/Result.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/entity/Quiz.dart';
+import 'package:denguego/widgets/Quiz.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SurveyScreen extends StatefulWidget {
@@ -47,12 +47,12 @@ class _SurveyScreenState extends State<SurveyScreen> {
       // ),
       body: surveyCompleted
           ? Result(_totalScore, resetQuiz)
-          : _questionIndex < SurveyManager.questions.length
+          : _questionIndex < questions.length
               ? Quiz(
                   answerQuestion: answerQuestion,
                   questionIndex: _questionIndex,
-                  questions: SurveyManager.questions, //Call update surveydone
-                  //surveyUpdate: surveyDone(),
+                  questions: questions,
+                  //surveyUpdate: surveyDone(), //Call update surveydone
                 )
               : Result(_totalScore, resetQuiz), //Padding
       //debugShowCheckedModeBanner: false,

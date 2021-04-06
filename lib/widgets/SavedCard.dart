@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Savedwidget extends StatelessWidget {
+class SavedCard extends StatelessWidget {
   final String location;
   final int cases;
   final String zone;
   final bool isBookmarked;
   final Function savedFunc;
-  Savedwidget({
+  SavedCard({
     this.location,
     this.cases,
     this.zone,
