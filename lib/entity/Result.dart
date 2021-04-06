@@ -1,7 +1,9 @@
 import 'dart:developer';
-
 import 'package:denguego/widgets/question.dart';
 import 'package:flutter/material.dart';
+import 'package:denguego/boundary/ViewReminder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:denguego/controller/UserAccountManager.dart';
 
 class Result extends StatelessWidget {
   final int resultScore;
@@ -49,96 +51,34 @@ class Result extends StatelessWidget {
           ),
           //Text
           Text(
-            'Score: $resultScore / 100',
-            style: TextStyle(
-              fontSize: 32,
-              fontFamily: "Montserrat",
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+            'Score ' '$resultScore',
+            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ), //Text
+          TextButton(
             child: Text(
-              resultPhrase.contains('risk')
-                  ? 'You are at $resultPhrase'
-                  : resultPhrase,
-              style: TextStyle(
-                fontFamily: "Montserrat",
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: resultPhrase.contains('High')
-                    ? Color(0xffd26666)
-                    : resultPhrase.contains('Medium')
-                        ? Color(0xffdec649)
-                        : resultPhrase.contains('Low')
-                            ? Color(0xff81aa4c)
-                            : Colors.black,
-              ),
-              textAlign: TextAlign.center,
-            ),
+              'Restart Survey',
+            ), //Text
+            //textColor: Colors.blue,
+            onPressed: resetHandler,
           ),
-          SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12.0, 12, 12, 0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xff5B92C8),
-                padding: EdgeInsets.all(8),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  'View Safety Reminders',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Montserrat',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+          TextButton(
+              child: Text(
+                'Continue',
               ),
               onPressed: () {
-                if (resultScore >= 70) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HighRisk()),
-                  );
-                } else if (40 <= resultScore && resultScore < 70) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MediumRisk()),
-                  );
-                } else if (resultScore <= 39) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LowRisk()),
-                  );
-                }
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(8),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  'Restart Survey',
-                  style: TextStyle(
-                    color: Colors.grey[600], //Color(0xff5B92C8),
-                    fontFamily: 'Montserrat',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              onPressed: resetHandler,
-            ),
-          ),
+                // FirebaseFirestore.instance
+                //     .collection('Users')
+                //     .add({'SurveyScore': resultScore});
+                // FirebaseFirestore.instance
+                //     .collection('Users')
+                //     .add({'SurveyDone': true});
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ViewReminder(resultScore)),
+                );
+              })
         ], //<Widget>[]
       ), //Column
     ); //Center

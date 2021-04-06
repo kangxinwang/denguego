@@ -4,6 +4,7 @@ import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/entity/Result.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/entity/Quiz.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SurveyScreen extends StatefulWidget {
   @override
