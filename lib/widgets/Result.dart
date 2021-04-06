@@ -1,10 +1,13 @@
 import 'dart:developer';
+import 'package:denguego/boundary/AccountScreen.dart';
+import 'package:denguego/controller/ScreenManager.dart';
 import 'package:denguego/widgets/question.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/boundary/ReminderScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/shared/Constants.dart';
+import 'package:denguego/controller/LocalNotificationManager.dart';
 
 class Result extends StatefulWidget {
   final int resultScore;
@@ -16,6 +19,22 @@ class Result extends StatefulWidget {
 }
 
 class _ResultState extends State<Result> {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    localNotificationManager.setOnNotificationReceive(onNotificationReceive);
+    localNotificationManager.setOnNotificationClick(onNotificationClick);
+  }
+
+  onNotificationReceive(ReceiveNotification notification) {
+    print('Notification recieved: ${notification.id}');
+  }
+
+  onNotificationClick(String payload) {
+    print('Payload $payload');
+    Navigator.pushNamed(context, ReminderScreen.id);
+  }
+
   String get resultPhrase {
     String resultText;
     if (widget.resultScore >= 70) {
@@ -105,13 +124,15 @@ class _ResultState extends State<Result> {
                   ),
                 ),
               ),
-              onPressed: () {
+              onPressed: () async {
                 // FirebaseFirestore.instance
                 //     .collection('Users')
                 //     .add({'SurveyScore': resultScore});
                 // FirebaseFirestore.instance
                 //     .collection('Users')
                 //     .add({'SurveyDone': true});
+                await localNotificationManager.showDailyAtTimeNotification();
+                Navigator.pushNamed(context, ScreenManager.id);
                 Map<String, bool> values = {};
                 if (widget.resultScore >= 70) {
                   values = HighRiskValues;

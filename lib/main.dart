@@ -10,6 +10,7 @@ import 'package:denguego/boundary/MainScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:denguego/entity/UserAccount.dart';
+import 'package:denguego/boundary/AccountScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
           SignupScreen.id: (context) => SignupScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           NotificationScreen.id: (context) => NotificationScreen(),
-          ReminderScreen.id: (context) => ReminderScreen()
+          ReminderScreen.id: (context) => ReminderScreen(),
+          AccountScreen.id: (context) => AccountScreen(),
         },
       ),
     );

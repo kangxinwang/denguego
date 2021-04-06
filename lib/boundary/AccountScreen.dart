@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 
 class AccountScreen extends StatefulWidget {
+  static String id = 'Account';
   @override
   _AccountScreenState createState() => _AccountScreenState();
 }
