@@ -8,7 +8,9 @@ class SavedManager {
 
   static bool isSaved(ClusterLocation loc) {
     for (String savedLoc in UserAccountManager.userDetails.SavedLocations) {
-      if (savedLoc == loc.location) return true;
+      if (savedLoc == loc.location) {
+        return true;
+      }
     }
     return false;
   }

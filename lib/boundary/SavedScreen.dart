@@ -2,7 +2,6 @@ import 'package:denguego/controller/ClusterManager.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/controller/SavedManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
-import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/widgets/SavedCard.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +31,9 @@ class _SavedScreenState extends State<SavedScreen> {
       ClusterLocation loc;
       try {
         loc = ClusterManager.LocationList[locName];
+        if (loc == null) {
+          throw ("Not in location error");
+        }
       } catch (e) {
         loc = ClusterLocation(
             location: locName,

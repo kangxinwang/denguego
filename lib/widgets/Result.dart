@@ -1,11 +1,6 @@
-import 'dart:developer';
-import 'package:denguego/boundary/AccountScreen.dart';
-import 'package:denguego/controller/ScreenManager.dart';
-import 'package:denguego/widgets/question.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/boundary/ReminderScreen.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
-import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/controller/LocalNotificationManager.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 

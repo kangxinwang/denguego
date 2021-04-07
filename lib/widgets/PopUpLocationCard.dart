@@ -27,8 +27,8 @@ class PopUpLocationCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: zone == "Safe"
-              ? Color(0xffBCD49D)
+          color: zone == "Under Surveillance"
+              ? Color(0xff81aa4c)
               : zone == "Medium Risk"
                   ? Color(0xffdec649)
                   : Color(0xffd26666),

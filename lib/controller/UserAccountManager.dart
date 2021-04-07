@@ -6,7 +6,7 @@ class UserAccountManager {
   // DatabaseManager(
   //     {this.uid});
 
-  final CollectionReference userCollection =
+  static final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('Users');
   // userDetails will be the reference we need to use when we want to access that collection
   // static List<String> SavedLocations = [];
@@ -59,26 +59,23 @@ class UserAccountManager {
   }
 
   Future<void> readUserFromDatabase(String name) async {
-    List<String> SavedLocations = [];
     //print('inside read');
     print(name);
     await for (var snapshot in userCollection.snapshots()) {
+      List<String> savedLocations = [];
       var Documents = snapshot.docs;
-      //print('inside snapshot');
       for (var document in Documents) {
-        //print('inside doc');
         if (document.id == name) {
           try {
             for (var locationName in document['SavedLocations']) {
-              SavedLocations.add(locationName);
+              savedLocations.add(locationName);
             }
-            print(document['Email']);
             userDetails.name = name;
             userDetails.email = document['Email'];
             userDetails.RiskZone = document['RiskZone'];
             userDetails.SurveyDone = document['SurveyDone'];
             userDetails.SurveyScore = document['SurveyScore'];
-            userDetails.SavedLocations = SavedLocations;
+            userDetails.SavedLocations = savedLocations;
           } catch (e) {
             print(e);
           }

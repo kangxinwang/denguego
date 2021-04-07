@@ -37,6 +37,19 @@ class AuthenticateManager {
   //   }
   // }
 
+  Future<bool> emailAuthentication(String email) async {
+    await for (var snapshot in UserAccountManager.userCollection.snapshots()) {
+      var documents = snapshot.docs;
+      for (var document in documents) {
+        if (document['Email'] == email) {
+          print(document['Email']);
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+
   // sign in with email and password
   Future signInWithEandP(String email, String password) async {
     try {
@@ -66,8 +79,7 @@ class AuthenticateManager {
       await ClusterManager.populateUser();
       return _userFromFirebaseUser(user);
     } catch (e) {
-      print(e.toString());
-      return null;
+      print(e);
     }
   }
 
@@ -98,7 +110,6 @@ class AuthenticateManager {
 
   Future<String> getCurrentUserName() async {
     // ignore: await_only_futures
-    print('im in auth');
     if (_auth.currentUser == null)
       return null;
     else

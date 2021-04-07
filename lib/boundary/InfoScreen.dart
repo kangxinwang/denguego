@@ -1,4 +1,5 @@
 import 'package:denguego/controller/InformationManager.dart';
+import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,16 +11,18 @@ class InfoScreen extends StatelessWidget {
     return Column(
       children: [
         Center(
-          child: Text(
-            'FAQ',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 28,
-              fontFamily: 'Montserrat',
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              'FAQ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
+                fontFamily: 'Montserrat',
+              ),
             ),
           ),
         ),
-        SizedBox(height: 20.0),
         Text(
           'How do I report dengue in Singapore?',
           style: TextStyle(

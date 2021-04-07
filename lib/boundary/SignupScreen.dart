@@ -1,7 +1,10 @@
+import 'package:denguego/boundary/LoginScreen.dart';
+import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/shared/Constants.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class SignupScreen extends StatefulWidget {
   final Function toggleView;
@@ -17,123 +20,193 @@ class _SignupScreenState extends State<SignupScreen> {
   bool showSpinner = false;
   String email = ' ';
   String password = ' ';
-  String error = ' ';
   String name = ' ';
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        actions: <Widget>[
-          TextButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('Sign in'),
-            onPressed: () {
-              widget
-                  .toggleView(); // property of the stateful widget in register class
-            },
-          )
-        ],
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-              colors: [
-                Color(0xff5B92C8),
-                Color(0xffBCD49D),
-              ],
-            ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xff5B92C8),
+              Color(0xffBCD49D),
+            ],
           ),
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'DengueGo!',
-              style: TextStyle(
-                fontSize: 25.0,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
+        child: SafeArea(
+          child: Stack(children: [
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 35.0),
+                child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        Center(
+                          child: SizedBox(
+                            height: 200,
+                            child: Image.asset(
+                              'images/signUp.png',
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Welcome to DengueGo!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(12.0, 8, 12, 4),
+                          child: Text(
+                            ' Let\'s all help in keeping our city safe!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        TextFormField(
+                            decoration: InputDecoration(
+                              icon: Icon(Icons.person),
+                              labelText: 'Name',
+                            ),
+                            validator: (val) =>
+                                val.isEmpty ? 'Enter your name' : null,
+                            onChanged: (val) {
+                              setState(() => name = val);
+                            }),
+                        SizedBox(height: 20.0),
+                        TextFormField(
+                            decoration: InputDecoration(
+                              icon: Icon(Icons.email_sharp),
+                              labelText: 'Email',
+                            ),
+                            validator: (val) =>
+                                !EmailValidator.validate(val, true)
+                                    ? 'Invalid email.'
+                                    : null,
+                            onChanged: (val) {
+                              setState(() => email = val);
+                            }),
+                        SizedBox(height: 20.0),
+                        TextFormField(
+                            decoration: InputDecoration(
+                              icon: Icon(Icons.vpn_key),
+                              labelText: 'Password',
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                    _obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.grey[800]),
+                                onPressed: () {
+                                  setState(() {
+                                    _obscureText = !_obscureText;
+                                  });
+                                },
+                              ),
+                            ),
+                            validator: (val) => val.length < 6
+                                ? 'Enter a password with 6+ characters'
+                                : null,
+                            obscureText: _obscureText,
+                            onChanged: (val) {
+                              setState(() => password = val);
+                            }),
+                        SizedBox(height: 30.0),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xff5B92C8)),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(50.0, 10, 50, 10),
+                              child: Text('Register',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                setState(() => showSpinner = true);
+                                final bool emailCheck =
+                                    await _auth.emailAuthentication(email);
+                                if (emailCheck) {
+                                  Flushbar(
+                                    flushbarPosition: FlushbarPosition.TOP,
+                                    flushbarStyle: FlushbarStyle.FLOATING,
+                                    backgroundColor: Color(0xffe25757),
+                                    margin: EdgeInsets.all(8),
+                                    borderRadius: 8,
+                                    icon: Icon(
+                                      Icons.warning_amber_rounded,
+                                      size: 35.0,
+                                      color: Colors.black,
+                                    ),
+                                    leftBarIndicatorColor: Colors.black,
+                                    messageText: Text(
+                                        "Email exists!\nTry a different email",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                            fontFamily: 'Montserrat')),
+                                    duration: Duration(seconds: 3),
+                                  )..show(context);
+                                  setState(() => showSpinner = false);
+                                } else {
+                                  await _auth.registerNewUser(
+                                      email, password, name);
+                                  Navigator.pushNamed(context, MainScreen.id);
+                                }
+                                setState(() => showSpinner = false);
+                              }
+                            }),
+                        TextButton(
+                          child: Text(
+                            "Have an account? Login Here",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, LoginScreen.id);
+                          },
+                        ),
+                      ],
+                    )),
               ),
             ),
-            SizedBox(
-              width: 45,
-            ),
-          ],
-        ),
-        centerTitle: true,
-      ),
-      body: ModalProgressHUD(
-        inAsyncCall: showSpinner,
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-            child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    Center(
-                      child: Image.asset('images/signUp.png'),
+            showSpinner
+                ? Center(
+                    child: CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Name'),
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your name' : null,
-                        onChanged: (val) {
-                          setState(() => name = val);
-                        }),
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Email'),
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter a valid email' : null,
-                        onChanged: (val) {
-                          setState(() => email = val);
-                        }),
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Password'),
-                        validator: (val) => val.length < 6
-                            ? 'Enter a password with 6+ characters'
-                            : null,
-                        obscureText: true,
-                        onChanged: (val) {
-                          setState(() => password = val);
-                        }),
-                    SizedBox(height: 20.0),
-                    ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(primary: Color(0xff5B92C8)),
-                      child: Text('Register',
-                          style: TextStyle(color: Colors.white)),
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          setState(() => showSpinner = true);
-                          final result = await _auth.registerNewUser(
-                              email, password, name);
-                          if (result == null) {
-                            setState(
-                                () => error = 'Please enter a valid email!');
-                            showSpinner = false;
-                          }
-                        }
-                      },
-                    ),
-                    SizedBox(height: 12.0),
-                    Text(
-                      error,
-                      style: TextStyle(color: Colors.red, fontSize: 14.0),
-                    ),
-                  ],
-                )),
-          ),
+                  )
+                : SizedBox(),
+          ]),
         ),
       ),
     );

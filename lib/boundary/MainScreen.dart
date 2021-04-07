@@ -53,11 +53,8 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 45,
-              ),
               Text(
                 'DengueGo!',
                 style: TextStyle(

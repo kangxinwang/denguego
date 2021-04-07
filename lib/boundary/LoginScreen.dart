@@ -1,8 +1,9 @@
 import 'package:denguego/boundary/MainScreen.dart';
+import 'package:denguego/boundary/SignupScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:denguego/shared/Constants.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:denguego/boundary/ForgotPasswordScreen.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,155 +19,214 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthenticateManager _auth = AuthenticateManager();
   final _formKey = GlobalKey<FormState>();
   bool showSpinner = false;
-  //text field state
+
+  //Text field state
   String email = ' ';
   String password = ' ';
-  String error = ' ';
+
+  bool _obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        actions: <Widget>[
-          TextButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('Register'),
-            onPressed: () {
-              widget
-                  .toggleView(); // property of the stateful widget of the sign in class
-            },
-          )
-        ],
         automaticallyImplyLeading: false,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-              colors: [
-                Color(0xff5B92C8),
-                Color(0xffBCD49D),
-              ],
-            ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xff5B92C8),
+              Color(0xffBCD49D),
+            ],
           ),
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'DengueGo!',
-              style: TextStyle(
-                fontSize: 25.0,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              width: 45,
-            ),
-          ],
-        ),
-        centerTitle: true,
-      ),
-      body: ModalProgressHUD(
-        inAsyncCall: showSpinner,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: SizedBox(
-                    height: 200,
-                    child: Image.asset(
-                      'images/boy.png',
+        child: SafeArea(
+          child: Stack(children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Center(
+                      child: SizedBox(
+                        height: 225,
+                        child: Image.asset(
+                          'images/boy-yes.png',
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              spacing,
-              Text(
-                'Welcome to DengueGo!'
-                '\n'
-                ' Let\'s all help in keeping our city safe!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(height: 20.0),
-                        TextFormField(
-                            decoration:
-                                textInputDecoration.copyWith(hintText: 'Email'),
-                            validator: (val) =>
-                                val.isEmpty ? 'Enter email' : null,
-                            onChanged: (val) {
-                              setState(() => email = val);
-                            }),
-                        SizedBox(height: 20.0),
-                        TextFormField(
-                            decoration: textInputDecoration.copyWith(
-                                hintText: 'Password'),
-                            obscureText: true,
-                            validator: (val) => val.length < 6
-                                ? 'Incorrect password! Please re-enter'
-                                : null,
-                            onChanged: (val) {
-                              setState(() => password = val);
-                            }),
-                        SizedBox(height: 20.0),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Color(0xff5B92C8)),
-                            child: Text('Sign in',
-                                style: TextStyle(color: Colors.white)),
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                setState(() => showSpinner = true);
-                                final result = await _auth.signInWithEandP(
-                                    email, password);
-                                if (result != null) {
-                                  Navigator.pushNamed(context, MainScreen.id);
-                                }
-                                if (result == null) {
-                                  setState(() {
-                                    error =
-                                        'Invalid Credentials! Could not sign in.';
-                                    showSpinner = false;
-                                  });
-                                }
-                              }
-                            }),
-                        SizedBox(height: 12.0),
-                        Text(
-                          error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                  spacing,
+                  Text(
+                    'Welcome Back to DengueGo!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(12.0, 8, 12, 4),
+                    child: Text(
+                      'Please login to your account!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                  Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 30.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(height: 20.0),
+                            TextFormField(
+                                decoration: InputDecoration(
+                                  icon: Icon(Icons.person),
+                                  labelText: 'Email',
+                                ),
+                                validator: (val) =>
+                                    val.isEmpty ? 'Enter email' : null,
+                                onChanged: (val) {
+                                  setState(() => email = val);
+                                }),
+                            SizedBox(height: 20.0),
+                            TextFormField(
+                                decoration: InputDecoration(
+                                  icon: Icon(Icons.vpn_key),
+                                  labelText: 'Password',
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                        _obscureText
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: Colors.grey[800]),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureText = !_obscureText;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                obscureText: _obscureText,
+                                validator: (val) => val.length < 6
+                                    ? 'Incorrect password! Please re-enter'
+                                    : null,
+                                onChanged: (val) {
+                                  setState(() => password = val);
+                                }),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  child: Text(
+                                    'Forgot password?',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff5B92C8)),
+                                  ),
+                                  onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgotPasswordScreen())),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20.0),
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color(0xff5B92C8)),
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      50.0, 10, 50, 10),
+                                  child: Text(
+                                    'Sign in',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  if (_formKey.currentState.validate()) {
+                                    setState(() => showSpinner = true);
+                                    final result = await _auth.signInWithEandP(
+                                        email, password);
+                                    if (result != null) {
+                                      Navigator.pushNamed(
+                                          context, MainScreen.id);
+                                    }
+                                    if (result == null) {
+                                      Flushbar(
+                                        flushbarPosition: FlushbarPosition.TOP,
+                                        flushbarStyle: FlushbarStyle.FLOATING,
+                                        backgroundColor: Color(0xffe25757),
+                                        margin: EdgeInsets.all(8),
+                                        borderRadius: 8,
+                                        icon: Icon(
+                                          Icons.warning_amber_rounded,
+                                          size: 35.0,
+                                          color: Colors.black,
+                                        ),
+                                        leftBarIndicatorColor: Colors.black,
+                                        messageText: Text(
+                                            "Invalid Email and Password!\nPlease Try Again",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14,
+                                                fontFamily: 'Montserrat')),
+                                        duration: Duration(seconds: 3),
+                                      )..show(context);
+                                      setState(() {
+                                        showSpinner = false;
+                                      });
+                                    }
+                                  }
+                                }),
                             TextButton(
-                              child: Text('Forgot password?'),
-                              onPressed: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ForgotPasswordScreen())),
+                              child: Text("New User? Register Here",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context,
+                                    SignupScreen
+                                        .id); // property of the stateful widget of the sign in class
+                              },
                             ),
                           ],
                         ),
-                      ],
+                      )),
+                ],
+              ),
+            ),
+            showSpinner
+                ? Center(
+                    child: CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
-                  )),
-            ],
-          ),
+                  )
+                : SizedBox(),
+          ]),
         ),
       ),
     );

@@ -9,7 +9,7 @@ const fontTextStyle = TextStyle(
 );
 
 const spacing = SizedBox(
-  height: 50.0,
+  height: 20.0,
 );
 
 const textInputDecoration = InputDecoration(

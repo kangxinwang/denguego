@@ -80,7 +80,8 @@ class ClusterManager {
 
       addMarkers(LocationList.keys.toList());
       keys = ClusterManager.LocationList.keys.toList();
-      return ClusterManager.LocationList.keys.toList();
+      keys.sort();
+      return keys;
     }
   }
 
