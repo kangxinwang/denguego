@@ -4,7 +4,6 @@ import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/widgets/Result.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/widgets/Survey.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SurveyScreen extends StatefulWidget {
   @override
@@ -24,6 +23,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       _questionIndex = 0;
       _totalScore = 0;
       UserAccountManager.userDetails.SurveyDone = false;
+      UserAccountManager.userDetails.SurveyScore = 0;
     });
   }
 

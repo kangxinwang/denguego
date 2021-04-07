@@ -4,7 +4,6 @@ import 'package:denguego/controller/ScreenManager.dart';
 import 'package:denguego/widgets/question.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/boundary/ReminderScreen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/controller/LocalNotificationManager.dart';
@@ -60,7 +59,6 @@ class _ResultState extends State<Result> {
   Widget build(BuildContext context) {
     UserAccountManager.userDetails.RiskZone = resultPhrase;
     UserMgr.updateRiskZone(UserAccountManager.userDetails.name);
-    // UserAccountManager.userDetails.SurveyDone = true;
 
     return Center(
       child: Column(
@@ -135,7 +133,9 @@ class _ResultState extends State<Result> {
               onPressed: () async {
                 String name = await _auth.getCurrentUserName();
                 UserAccountManager.userDetails.SurveyDone = true;
+                UserAccountManager.userDetails.SurveyScore = widget.resultScore;
                 await UserMgr.updateSurveyDone(name);
+                await UserMgr.updateSurveyScore(name);
                 await localNotificationManager.showDailyAtTimeNotification();
                 //Navigator.pushNamed(context, ScreenManager.id);
                 Navigator.pushNamed(context, ReminderScreen.id);
