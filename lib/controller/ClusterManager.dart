@@ -75,7 +75,6 @@ class ClusterManager {
               clusterCases > 10 ? "High Risk" : "Medium Risk";
         }
       }
-      print('im out cluster');
 
       await populateUser();
 
@@ -89,8 +88,9 @@ class ClusterManager {
     String name = await _auth.getCurrentUserName();
     if (name == null)
       return;
-    else
+    else {
       await UserMgr.readUserFromDatabase(name);
+    }
   }
 
   static void addMarkers(List<String> cluster) {
@@ -105,7 +105,7 @@ class ClusterManager {
         anchor: Offset(0.5, 0.5),
         position:
             LatLng(loc.coordinates[0].latitude, loc.coordinates[0].longitude),
-        icon: LocationList[place].zone == 'Safe'
+        icon: LocationList[place].zone == 'Under surveillance'
             ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen)
             : LocationList[place].zone == 'Medium Risk'
                 ? BitmapDescriptor.defaultMarkerWithHue(

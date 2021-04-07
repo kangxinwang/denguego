@@ -1,4 +1,6 @@
+import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:flutter/material.dart';
+import 'package:denguego/shared/Constants.dart';
 
 class ReminderScreen extends StatefulWidget {
   static String id = 'ReminderScreen';
@@ -7,10 +9,20 @@ class ReminderScreen extends StatefulWidget {
 }
 
 class _ReminderScreenState extends State<ReminderScreen> {
+  Map<String, bool> get values {
+    Map<String, bool> reminderValues;
+    if (UserAccountManager.userDetails.RiskZone.contains('High')) {
+      reminderValues = HighRiskValues;
+    } else if (UserAccountManager.userDetails.RiskZone.contains('Medium')) {
+      reminderValues = MediumRiskValues;
+    } else if (UserAccountManager.userDetails.RiskZone.contains('Low')) {
+      reminderValues = LowRiskValues;
+    }
+    return reminderValues;
+  }
+
   @override
   Widget build(BuildContext context) {
-    Map<String, bool> values = ModalRoute.of(context).settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

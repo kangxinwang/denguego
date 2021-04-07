@@ -36,6 +36,7 @@ class UserAccountManager {
   }
 
   Future updateRiskZone(String name) async {
+    print(userDetails.RiskZone);
     return await userCollection.doc(name).update({
       'RiskZone': userDetails.RiskZone,
     });
@@ -59,14 +60,19 @@ class UserAccountManager {
 
   Future<void> readUserFromDatabase(String name) async {
     List<String> SavedLocations = [];
+    //print('inside read');
+    print(name);
     await for (var snapshot in userCollection.snapshots()) {
       var Documents = snapshot.docs;
+      //print('inside snapshot');
       for (var document in Documents) {
+        //print('inside doc');
         if (document.id == name) {
           try {
             for (var locationName in document['SavedLocations']) {
               SavedLocations.add(locationName);
             }
+            print(document['Email']);
             userDetails.name = name;
             userDetails.email = document['Email'];
             userDetails.RiskZone = document['RiskZone'];

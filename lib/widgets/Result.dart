@@ -19,6 +19,8 @@ class Result extends StatefulWidget {
 }
 
 class _ResultState extends State<Result> {
+  static UserAccountManager UserMgr = UserAccountManager();
+
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -38,13 +40,13 @@ class _ResultState extends State<Result> {
   String get resultPhrase {
     String resultText;
     if (widget.resultScore >= 70) {
-      resultText = 'High-risk!';
+      resultText = 'High risk';
       print(widget.resultScore);
     } else if (40 <= widget.resultScore && widget.resultScore < 70) {
-      resultText = 'Medium-risk!';
+      resultText = 'Medium risk';
       print(widget.resultScore);
     } else if (widget.resultScore <= 39) {
-      resultText = 'Low-risk!';
+      resultText = 'Low risk';
     } else {
       resultText = 'Incorrect Score. Please try again!';
       print(widget.resultScore);
@@ -54,6 +56,11 @@ class _ResultState extends State<Result> {
 
   @override
   Widget build(BuildContext context) {
+    UserAccountManager.userDetails.RiskZone = resultPhrase;
+    UserMgr.updateRiskZone(UserAccountManager.userDetails.name);
+
+    UserAccountManager.userDetails.SurveyDone = true;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +92,7 @@ class _ResultState extends State<Result> {
             padding: const EdgeInsets.all(10.0),
             child: Text(
               resultPhrase.contains('risk')
-                  ? 'You are at $resultPhrase'
+                  ? 'You are at $resultPhrase Zone!'
                   : resultPhrase,
               style: TextStyle(
                 fontFamily: "Montserrat",
@@ -131,21 +138,10 @@ class _ResultState extends State<Result> {
                 // FirebaseFirestore.instance
                 //     .collection('Users')
                 //     .add({'SurveyDone': true});
+
                 await localNotificationManager.showDailyAtTimeNotification();
-                Navigator.pushNamed(context, ScreenManager.id);
-                Map<String, bool> values = {};
-                if (widget.resultScore >= 70) {
-                  values = HighRiskValues;
-                  print(widget.resultScore);
-                } else if (40 <= widget.resultScore &&
-                    widget.resultScore < 70) {
-                  values = MediumRiskValues;
-                  print(widget.resultScore);
-                } else if (widget.resultScore <= 39) {
-                  values = LowRiskValues;
-                }
-                Navigator.pushNamed(context, ReminderScreen.id,
-                    arguments: values);
+                //Navigator.pushNamed(context, ScreenManager.id);
+                Navigator.pushNamed(context, ReminderScreen.id);
               },
             ),
           ),

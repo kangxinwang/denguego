@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:denguego/widgets/Answer.dart';
 import 'dart:ui' as ui;
 
-class Quiz extends StatelessWidget {
+//RENAME AS SURVEY
+
+class Survey extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final int questionIndex;
   final Function answerQuestion;
   final Function surveyUpdate;
 
-  Quiz(
+  Survey(
       {@required this.questions,
       @required this.answerQuestion,
       @required this.questionIndex,
