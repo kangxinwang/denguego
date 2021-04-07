@@ -1,6 +1,7 @@
 import 'package:denguego/boundary/LoadingScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
 import 'package:denguego/controller/ClusterManager.dart';
+import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/boundary/HomeScreen.dart';
@@ -47,7 +48,13 @@ class _MainScreenState extends State<MainScreen> {
                 end: Alignment.topRight,
                 colors: [
                   Color(0xff5B92C8),
-                  Color(0xffBCD49D),
+                  UserAccountManager.userDetails.RiskZone.contains('Low') ||
+                          UserAccountManager.userDetails.RiskZone == ''
+                      ? Color(0xffBCD49D)
+                      : UserAccountManager.userDetails.RiskZone
+                              .contains('Medium')
+                          ? Color(0xffd3c598)
+                          : Color(0xffba807f),
                 ],
               ),
             ),

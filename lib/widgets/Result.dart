@@ -54,6 +54,11 @@ class _ResultState extends State<Result> {
   Widget build(BuildContext context) {
     UserAccountManager.userDetails.RiskZone = resultPhrase;
     UserMgr.updateRiskZone(UserAccountManager.userDetails.name);
+    UserAccountManager.userDetails.SurveyDone = true;
+    UserAccountManager.userDetails.SurveyScore = widget.resultScore;
+
+    UserMgr.updateSurveyDone(UserAccountManager.userDetails.name);
+    UserMgr.updateSurveyScore(UserAccountManager.userDetails.name);
 
     return Center(
       child: Column(
@@ -126,11 +131,6 @@ class _ResultState extends State<Result> {
                 ),
               ),
               onPressed: () async {
-                String name = await _auth.getCurrentUserName();
-                UserAccountManager.userDetails.SurveyDone = true;
-                UserAccountManager.userDetails.SurveyScore = widget.resultScore;
-                await UserMgr.updateSurveyDone(name);
-                await UserMgr.updateSurveyScore(name);
                 await localNotificationManager.showDailyAtTimeNotification();
                 //Navigator.pushNamed(context, ScreenManager.id);
                 Navigator.pushNamed(context, ReminderScreen.id);

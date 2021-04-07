@@ -18,15 +18,16 @@ class _SurveyScreenState extends State<SurveyScreen> {
   static UserAccountManager UsrMgr = UserAccountManager();
   static AuthenticateManager _auth = AuthenticateManager();
 
-  void resetQuiz() async {
-    setState(() async {
+  void resetQuiz() {
+    setState(() {
       _questionIndex = 0;
       _totalScore = 0;
-      String name = await _auth.getCurrentUserName();
+      //String name = await _auth.getCurrentUserName();
       UserAccountManager.userDetails.SurveyDone = false;
       UserAccountManager.userDetails.SurveyScore = 0;
-      await UsrMgr.updateSurveyDone(name);
-      await UsrMgr.updateSurveyScore(name);
+      surveyCompleted = false;
+      // await UsrMgr.updateSurveyDone(name);
+      // await UsrMgr.updateSurveyScore(name);
     });
   }
 

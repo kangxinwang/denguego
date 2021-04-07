@@ -105,6 +105,29 @@ class _AccountScreenState extends State<AccountScreen> {
                                     ),
                                   ],
                                 ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Icon(
+                                        Icons.warning_rounded,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        UserAccountManager
+                                                .userDetails.SurveyDone
+                                            ? "Risk Zone: ${UserAccountManager.userDetails.RiskZone}"
+                                            : 'Survey not taken',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 15,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ],
