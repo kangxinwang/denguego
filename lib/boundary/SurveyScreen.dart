@@ -18,12 +18,15 @@ class _SurveyScreenState extends State<SurveyScreen> {
   static UserAccountManager UsrMgr = UserAccountManager();
   static AuthenticateManager _auth = AuthenticateManager();
 
-  void resetQuiz() {
-    setState(() {
+  void resetQuiz() async {
+    setState(() async {
       _questionIndex = 0;
       _totalScore = 0;
+      String name = await _auth.getCurrentUserName();
       UserAccountManager.userDetails.SurveyDone = false;
       UserAccountManager.userDetails.SurveyScore = 0;
+      await UsrMgr.updateSurveyDone(name);
+      await UsrMgr.updateSurveyScore(name);
     });
   }
 
@@ -44,10 +47,6 @@ class _SurveyScreenState extends State<SurveyScreen> {
     print(UserAccountManager.userDetails.SurveyDone);
     print(surveyCompleted);
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Geeks for Geeks'),
-      //   backgroundColor: Color(0xFF00E676),
-      // ),
       body: surveyCompleted
           ? Result(_totalScore, resetQuiz)
           : _questionIndex < questions.length
