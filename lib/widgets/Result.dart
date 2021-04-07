@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/controller/LocalNotificationManager.dart';
+import 'package:denguego/controller/AuthenticateManager.dart';
 
 class Result extends StatefulWidget {
   final int resultScore;
@@ -19,6 +20,7 @@ class Result extends StatefulWidget {
 }
 
 class _ResultState extends State<Result> {
+  static AuthenticateManager _auth = AuthenticateManager();
   static UserAccountManager UserMgr = UserAccountManager();
 
   void initState() {
@@ -58,8 +60,7 @@ class _ResultState extends State<Result> {
   Widget build(BuildContext context) {
     UserAccountManager.userDetails.RiskZone = resultPhrase;
     UserMgr.updateRiskZone(UserAccountManager.userDetails.name);
-
-    UserAccountManager.userDetails.SurveyDone = true;
+    // UserAccountManager.userDetails.SurveyDone = true;
 
     return Center(
       child: Column(
@@ -132,13 +133,9 @@ class _ResultState extends State<Result> {
                 ),
               ),
               onPressed: () async {
-                // FirebaseFirestore.instance
-                //     .collection('Users')
-                //     .add({'SurveyScore': resultScore});
-                // FirebaseFirestore.instance
-                //     .collection('Users')
-                //     .add({'SurveyDone': true});
-
+                String name = await _auth.getCurrentUserName();
+                UserAccountManager.userDetails.SurveyDone = true;
+                await UserMgr.updateSurveyDone(name);
                 await localNotificationManager.showDailyAtTimeNotification();
                 //Navigator.pushNamed(context, ScreenManager.id);
                 Navigator.pushNamed(context, ReminderScreen.id);
