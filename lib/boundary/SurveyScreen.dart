@@ -3,7 +3,7 @@ import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/widgets/Result.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/widgets/Quiz.dart';
+import 'package:denguego/widgets/Survey.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SurveyScreen extends StatefulWidget {
@@ -16,13 +16,14 @@ class _SurveyScreenState extends State<SurveyScreen> {
   int _totalScore = UserAccountManager.userDetails.SurveyScore;
   bool surveyCompleted = UserAccountManager.userDetails.SurveyDone;
 
-  static UserAccountManager DB = UserAccountManager();
+  static UserAccountManager UsrMgr = UserAccountManager();
   static AuthenticateManager _auth = AuthenticateManager();
 
   void resetQuiz() {
     setState(() {
       _questionIndex = 0;
       _totalScore = 0;
+      UserAccountManager.userDetails.SurveyDone = false;
     });
   }
 
@@ -35,11 +36,13 @@ class _SurveyScreenState extends State<SurveyScreen> {
 
   void surveyDone() async {
     String name = await _auth.getCurrentUserName();
-    await DB.updateSurveyDone(name);
+    await UsrMgr.updateSurveyDone(name);
   }
 
   @override
   Widget build(BuildContext context) {
+    print(UserAccountManager.userDetails.SurveyDone);
+    print(surveyCompleted);
     return Scaffold(
       // appBar: AppBar(
       //   title: Text('Geeks for Geeks'),
@@ -48,7 +51,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       body: surveyCompleted
           ? Result(_totalScore, resetQuiz)
           : _questionIndex < questions.length
-              ? Quiz(
+              ? Survey(
                   answerQuestion: answerQuestion,
                   questionIndex: _questionIndex,
                   questions: questions,

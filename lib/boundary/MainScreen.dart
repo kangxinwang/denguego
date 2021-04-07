@@ -66,13 +66,13 @@ class _MainScreenState extends State<MainScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.notifications),
-                iconSize: 35,
-                onPressed: () {
-                  Navigator.pushNamed(context, NotificationScreen.id);
-                },
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.notifications),
+              //   iconSize: 35,
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, NotificationScreen.id);
+              //   },
+              // ),
             ],
           ),
           centerTitle: true,
@@ -121,7 +121,7 @@ class _MainScreenState extends State<MainScreen> {
           selectedItemColor: Colors.grey[800],
           unselectedItemColor: Colors.white,
           showSelectedLabels: true,
-          showUnselectedLabels: false,
+          showUnselectedLabels: true,
           onTap: _onItemTapped,
         ),
         body: Stack(
