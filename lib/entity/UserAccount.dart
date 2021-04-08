@@ -1,3 +1,4 @@
+import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserAccount {
@@ -8,6 +9,7 @@ class UserAccount {
   bool _SurveyDone;
   int _SurveyScore;
   List<String> _SavedLocations;
+  List<String> _Reminders;
 
   UserAccount({
     String name,
@@ -16,6 +18,7 @@ class UserAccount {
     bool SurveyDone,
     int SurveyScore,
     List<String> SavedLocations,
+    List<String> Reminders,
     String uid,
     //String uid,
   })  : _name = name,
@@ -23,6 +26,7 @@ class UserAccount {
         _RiskZone = RiskZone,
         _SurveyDone = SurveyDone,
         _SurveyScore = SurveyScore,
+        _Reminders = Reminders,
         _SavedLocations = SavedLocations;
   //uid = this.uid;
 
@@ -32,7 +36,7 @@ class UserAccount {
   bool get SurveyDone => _SurveyDone;
   int get SurveyScore => _SurveyScore;
   List<String> get SavedLocations => _SavedLocations;
-
+  List<String> get Reminders => _Reminders;
   set name(String name) {
     _name = name;
   }
@@ -55,5 +59,9 @@ class UserAccount {
 
   set SavedLocations(List<String> SavedLocations) {
     _SavedLocations = SavedLocations;
+  }
+
+  set Reminders(List<String> Reminders) {
+    _Reminders = Reminders;
   }
 }

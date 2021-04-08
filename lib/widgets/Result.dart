@@ -1,3 +1,5 @@
+import 'package:denguego/entity/UserAccount.dart';
+import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/boundary/ReminderScreen.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
@@ -30,7 +32,7 @@ class _ResultState extends State<Result> {
 
   onNotificationClick(String payload) {
     print('Payload $payload');
-    Navigator.pushNamed(context, ReminderScreen.id);
+    // Navigator.pushNamed(context, ReminderScreen.id);
   }
 
   String get resultPhrase {
@@ -50,16 +52,28 @@ class _ResultState extends State<Result> {
     return resultText;
   }
 
+  List<String> get values {
+    List<String> reminderValues;
+    if (resultPhrase.contains('High')) {
+      reminderValues = HighRiskValues;
+    } else if (resultPhrase.contains('Medium')) {
+      reminderValues = MediumRiskValues;
+    } else if (resultPhrase.contains('Low')) {
+      reminderValues = LowRiskValues;
+    }
+    return reminderValues;
+  }
+
   @override
   Widget build(BuildContext context) {
     UserAccountManager.userDetails.RiskZone = resultPhrase;
     UserMgr.updateRiskZone(UserAccountManager.userDetails.name);
     UserAccountManager.userDetails.SurveyDone = true;
     UserAccountManager.userDetails.SurveyScore = widget.resultScore;
-
     UserMgr.updateSurveyDone(UserAccountManager.userDetails.name);
     UserMgr.updateSurveyScore(UserAccountManager.userDetails.name);
-
+    UserAccountManager.userDetails.Reminders = values;
+    UserMgr.updateReminders(UserAccountManager.userDetails.name);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -111,32 +125,32 @@ class _ResultState extends State<Result> {
           SizedBox(
             height: 25,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12.0, 12, 12, 0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xff5B92C8),
-                padding: EdgeInsets.all(8),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  'View Safety Reminders',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Montserrat',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              onPressed: () async {
-                await localNotificationManager.showDailyAtTimeNotification();
-                //Navigator.pushNamed(context, ScreenManager.id);
-                Navigator.pushNamed(context, ReminderScreen.id);
-              },
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(12.0, 12, 12, 0),
+          //   child: ElevatedButton(
+          //     style: ElevatedButton.styleFrom(
+          //       primary: Color(0xff5B92C8),
+          //       padding: EdgeInsets.all(8),
+          //     ),
+          //     child: Padding(
+          //       padding: const EdgeInsets.all(5.0),
+          //       child: Text(
+          //         'View Safety Reminders',
+          //         style: TextStyle(
+          //           color: Colors.white,
+          //           fontFamily: 'Montserrat',
+          //           fontSize: 15,
+          //           fontWeight: FontWeight.bold,
+          //         ),
+          //       ),
+          //     ),
+          //     onPressed: () async {
+          //       await localNotificationManager.showDailyAtTimeNotification();
+          //       //Navigator.pushNamed(context, ScreenManager.id);
+          //       // Navigator.pushNamed(context, ReminderScreen.id);
+          //     },
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextButton(

@@ -55,7 +55,7 @@ class Survey extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: Question(
             questions[questionIndex]['questionText'],
           ),

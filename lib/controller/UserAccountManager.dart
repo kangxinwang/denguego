@@ -20,6 +20,7 @@ class UserAccountManager {
       'SavedLocations': [],
       'SurveyScore': 0,
       'RiskZone': '',
+      'Reminders': []
     });
   }
 
@@ -58,6 +59,12 @@ class UserAccountManager {
     });
   }
 
+  Future updateReminders(String name) async {
+    return await userCollection.doc(name).update({
+      'Reminders': userDetails.Reminders,
+    });
+  }
+
   Future<void> readUserFromDatabase(String name) async {
     //print('inside read');
     print(name);
@@ -76,6 +83,7 @@ class UserAccountManager {
             userDetails.SurveyDone = document['SurveyDone'];
             userDetails.SurveyScore = document['SurveyScore'];
             userDetails.SavedLocations = savedLocations;
+            userDetails.Reminders = document['Reminders'];
           } catch (e) {
             print(e);
           }

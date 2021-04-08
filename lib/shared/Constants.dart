@@ -30,32 +30,32 @@ const List<String> DengueFacts = [
   'Dengue fever may occur from 3 to 14 days after being bitten',
 ];
 
-Map<String, bool> HighRiskValues = {
-  'Wash your toilet': false,
-  'Take out the trash': false,
-  'Clear the drains': false,
-  'Apply mosquito repellent': false,
-  'Cover your pole holders': false,
-  'Clear your water from trays': false,
-  'Keep your water containers dry': false,
-  'Use insecticide': false,
-};
+const List<String> HighRiskValues = [
+  'Wash your toilet',
+  'Take out the trash',
+  'Clear the drains',
+  'Apply mosquito repellent',
+  'Cover your pole holders',
+  'Clear your water from trays',
+  'Keep your water containers dry',
+  'Use insecticide',
+];
 
-Map<String, bool> MediumRiskValues = {
-  'Wash your toilet': false,
-  'Clear the drains': false,
-  'Apply mosquito repellent': false,
-  'Cover your pole holders': false,
-  'Clear your water from trays': false,
-  'Keep your water containers dry': false,
-};
+List<String> MediumRiskValues = [
+  'Wash your toilet',
+  'Clear the drains',
+  'Apply mosquito repellent',
+  'Cover your pole holders',
+  'Clear your water from trays',
+  'Keep your water containers dry',
+];
 
-Map<String, bool> LowRiskValues = {
-  'Wash your toilet': false,
-  'Clear the drains': false,
-  'Clear your water from trays': false,
-  'Keep your water containers dry': false,
-};
+List<String> LowRiskValues = [
+  'Wash your toilet',
+  'Clear the drains',
+  'Clear your water from trays',
+  'Keep your water containers dry'
+];
 const List<Map<String, Object>> questions = const [
   {
     'questionText': 'Are you living in a landed property?',

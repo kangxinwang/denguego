@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           SignupScreen.id: (context) => SignupScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           NotificationScreen.id: (context) => NotificationScreen(),
-          ReminderScreen.id: (context) => ReminderScreen(),
+          // ReminderScreen.id: (context) => ReminderScreen(),
           AccountScreen.id: (context) => AccountScreen(),
         },
       ),
