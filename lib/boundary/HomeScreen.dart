@@ -112,6 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
             print("remove popup");
             setState(() {
               locationSelected=false;
+              _controller.animateCamera(
+                  CameraUpdate.newCameraPosition(initialLocation));
             });
           },
           onMapCreated: (GoogleMapController controller) {
@@ -254,9 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: (){
           print(loc.location);
           print("marker tapped");
-          _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-            target: LatLng(ClusterManager.LocationList[clusterloc].coordinates[0].latitude,ClusterManager.LocationList[clusterloc].coordinates[0].longitude),
-            zoom: 20,)));
+          gotoClusterLocation(loc);
           setState(() {
             locationSelected=true;
             place=loc.location;
