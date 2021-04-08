@@ -38,11 +38,6 @@ class _SurveyScreenState extends State<SurveyScreen> {
     });
   }
 
-  void surveyDone() async {
-    String name = await _auth.getCurrentUserName();
-    await UsrMgr.updateSurveyDone(name);
-  }
-
   @override
   Widget build(BuildContext context) {
     print(UserAccountManager.userDetails.SurveyDone);

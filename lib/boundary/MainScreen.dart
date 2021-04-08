@@ -62,6 +62,13 @@ class _MainScreenState extends State<MainScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              IconButton(
+                icon: Icon(Icons.map_outlined),
+                iconSize: 35,
+                onPressed: () {
+                  Navigator.pushNamed(context, NotificationScreen.id);
+                },
+              ),
               Text(
                 'DengueGo!',
                 style: TextStyle(
@@ -70,13 +77,13 @@ class _MainScreenState extends State<MainScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // IconButton(
-              //   icon: Icon(Icons.notifications),
-              //   iconSize: 35,
-              //   onPressed: () {
-              //     Navigator.pushNamed(context, NotificationScreen.id);
-              //   },
-              // ),
+              IconButton(
+                icon: Icon(Icons.notifications),
+                iconSize: 35,
+                onPressed: () {
+                  Navigator.pushNamed(context, NotificationScreen.id);
+                },
+              ),
             ],
           ),
           centerTitle: true,

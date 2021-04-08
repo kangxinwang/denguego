@@ -36,25 +36,10 @@ class UserAccountManager {
     });
   }
 
-  Future updateRiskZone(String name) async {
-    print(userDetails.RiskZone);
+  Future updateSurvey(String name) async {
     return await userCollection.doc(name).update({
       'RiskZone': userDetails.RiskZone,
-    });
-  }
-
-  // code to store the survey done bool in database d=so can check if the user has already done the survey
-  // have to change userDetails.SurveyDone to true when the survey is done
-  Future updateSurveyDone(String name) async {
-    return await userCollection.doc(name).update({
       'SurveyDone': userDetails.SurveyDone,
-    });
-  }
-
-  // code to store the survey score in database
-  // have to change userDetails.SurveyScore when the survey is done
-  Future updateSurveyScore(String name) async {
-    return await userCollection.doc(name).update({
       'SurveyScore': userDetails.SurveyScore,
     });
   }

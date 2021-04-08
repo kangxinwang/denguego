@@ -1,13 +1,15 @@
 import 'package:denguego/boundary/HomeScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
+import 'package:denguego/controller/LocalNotificationManager.dart';
+import 'package:denguego/controller/ScreenManager.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:web_scraper/web_scraper.dart';
-import 'dart:async';
 import 'package:geocoding/geocoding.dart';
+import 'package:denguego/boundary/NotificationScreen.dart';
 
 class ClusterManager {
   static bool loaded = false;
@@ -91,6 +93,10 @@ class ClusterManager {
       return;
     else {
       await UserMgr.readUserFromDatabase(name);
+      // if (UserAccountManager.userDetails.SurveyDone) {
+      //   await localNotificationManager.showDailyAtTimeNotification();
+      //   Navigator.pushNamed(context, ScreenManager.id);
+      // }
     }
   }
 

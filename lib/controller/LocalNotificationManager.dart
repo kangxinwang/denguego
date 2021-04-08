@@ -48,14 +48,16 @@ class LocalNotificationManager {
     //DateTime time = DateTime(20,54,0);
     //var time = DateTime.parse("2021-04-08 21:42:04Z");
     //print(time);
+
+    print('result page called');
     var androidChannel = AndroidNotificationDetails(
         'CHANNEL_ID', 'CHANNEL_NAME', 'CHANNEL_DESCRIPTION',
         importance: Importance.high, playSound: true);
     await flutterLocalNotificationsPlugin.periodicallyShow(
       0,
-      'Daily Reminder!',
+      'DengueGo! Daily Reminder!',
       'This is a reminder',
-      RepeatInterval.daily,
+      RepeatInterval.everyMinute,
       NotificationDetails(android: androidChannel),
       payload: 'New Payload',
       //uiLocalNotificationDateInterpretation: null, androidAllowWhileIdle: null);
