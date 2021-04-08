@@ -1,16 +1,13 @@
-import 'package:denguego/boundary/LoadingScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
 import 'package:denguego/controller/ClusterManager.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
-import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/boundary/HomeScreen.dart';
 import 'package:denguego/boundary/SurveyScreen.dart';
 import 'package:denguego/boundary/SavedScreen.dart';
 import 'package:denguego/boundary/AccountScreen.dart';
 import 'package:denguego/boundary/InfoScreen.dart';
-import 'dart:math';
-import 'package:denguego/controller/ClusterManager.dart';
+import 'package:denguego/boundary/LegendScreen.dart';
 
 class MainScreen extends StatefulWidget {
   static String id = 'homePage';
@@ -48,27 +45,30 @@ class _MainScreenState extends State<MainScreen> {
                 end: Alignment.topRight,
                 colors: [
                   Color(0xff5B92C8),
-                  UserAccountManager.userDetails.RiskZone.contains('Low') ||
-                          UserAccountManager.userDetails.RiskZone == ''
-                      ? Color(0xffBCD49D)
+                  UserAccountManager.userDetails.RiskZone.contains('High')
+                      ? Color(0xffcf7a79)
                       : UserAccountManager.userDetails.RiskZone
                               .contains('Medium')
-                          ? Color(0xffd3c598)
-                          : Color(0xffba807f),
+                          ? Color(0xffe2d182)
+                          : Color(0xffBCD49D),
                 ],
               ),
             ),
           ),
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Icon(Icons.map_outlined),
-                iconSize: 35,
-                onPressed: () {
-                  Navigator.pushNamed(context, NotificationScreen.id);
-                },
-              ),
+                  icon: Icon(Icons.map_outlined),
+                  iconSize: 35,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContext) {
+                        return LegendScreen();
+                      },
+                    );
+                  }),
               Text(
                 'DengueGo!',
                 style: TextStyle(

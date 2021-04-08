@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Circle circle;
   GoogleMapController _controller;
   static final CameraPosition initialLocation =
-      CameraPosition(target: LatLng(1.3521, 103.8198), zoom: 10);
+      CameraPosition(target: LatLng(1.3521, 103.8198), zoom: 10.5);
   Map<String, ClusterLocation> clusterDetails = ClusterManager.LocationList;
 
   @override
@@ -106,12 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
           initialCameraPosition: initialLocation,
           markers: Set.from(HomeScreen.allMarkers),
           circles: Set.of((circle != null) ? [circle] : []),
-
-
-          onTap:(LatLng){
-            print("remove popup");
+          onTap: (LatLng) {
             setState(() {
-              locationSelected=false;
+              locationSelected = false;
               _controller.animateCamera(
                   CameraUpdate.newCameraPosition(initialLocation));
             });
@@ -217,15 +214,6 @@ class _HomeScreenState extends State<HomeScreen> {
         tilt: 0,
         bearing: 0.0,
       )));
-
-      // var _distanceInMeters = await Geolocator.distanceBetween(
-      //   1.2847,
-      //   103.8610,
-      //   location.latitude,
-      //   location.longitude,
-      // );
-      // print(_distanceInMeters / 1000);
-
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION DENIED') {
         debugPrint("Permission Denied");
@@ -243,8 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
     )));
   }
 
-  void addMarkers(List<String> cluster)async {
-
+  void addMarkers(List<String> cluster) async {
     for (int i = 0; i < cluster.length; i++) {
       String clusterloc = cluster[i];
       ClusterLocation loc = ClusterManager.LocationList[clusterloc];
@@ -253,31 +240,26 @@ class _HomeScreenState extends State<HomeScreen> {
         draggable: false,
         zIndex: 2,
         consumeTapEvents: true,
-        onTap: (){
-          print(loc.location);
-          print("marker tapped");
+        onTap: () {
           gotoClusterLocation(loc);
           setState(() {
-            locationSelected=true;
-            place=loc.location;
+            locationSelected = true;
+            place = loc.location;
           });
         },
         flat: true,
         anchor: Offset(0.5, 0.5),
         position:
-        LatLng(loc.coordinates[0].latitude, loc.coordinates[0].longitude),
-        icon: ClusterManager.LocationList[clusterloc].zone == 'Under surveillance'
+            LatLng(loc.coordinates[0].latitude, loc.coordinates[0].longitude),
+        icon: ClusterManager.LocationList[clusterloc].zone ==
+                'Under surveillance'
             ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen)
             : ClusterManager.LocationList[clusterloc].zone == 'Medium Risk'
-            ? BitmapDescriptor.defaultMarkerWithHue(
-            BitmapDescriptor.hueOrange)
-            : BitmapDescriptor.defaultMarkerWithHue(
-            BitmapDescriptor.hueRed),
+                ? BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueOrange)
+                : BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueRed),
       ));
     }
-
   }
-
-
-
 }

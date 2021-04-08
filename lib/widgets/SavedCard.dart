@@ -24,7 +24,7 @@ class SavedCard extends StatelessWidget {
             ? Color(0xffd26666)
             : zone == "Medium Risk"
                 ? Color(0xffdec649)
-                : Color(0xff81aa4c),
+                : Color(0xff97be61),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(

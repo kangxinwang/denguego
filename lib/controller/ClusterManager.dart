@@ -52,6 +52,7 @@ class ClusterManager {
             location: locName,
             cases: int.parse(individualCluster[j + 11]),
             cluster: clusterName,
+            zone: '',
           );
 
           await getLatLong(ClusterManager.LocationList[locName]);
@@ -80,7 +81,6 @@ class ClusterManager {
 
       await populateUser();
 
-
       keys = ClusterManager.LocationList.keys.toList();
       keys.sort();
       return keys;
@@ -93,14 +93,8 @@ class ClusterManager {
       return;
     else {
       await UserMgr.readUserFromDatabase(name);
-      // if (UserAccountManager.userDetails.SurveyDone) {
-      //   await localNotificationManager.showDailyAtTimeNotification();
-      //   Navigator.pushNamed(context, ScreenManager.id);
-      // }
     }
   }
-
-
 
   static getLatLong(ClusterLocation cluster) async {
     try {

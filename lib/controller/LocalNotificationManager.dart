@@ -57,7 +57,7 @@ class LocalNotificationManager {
       0,
       'DengueGo! Daily Reminder!',
       'This is a reminder',
-      RepeatInterval.everyMinute,
+      RepeatInterval.daily,
       NotificationDetails(android: androidChannel),
       payload: 'New Payload',
       //uiLocalNotificationDateInterpretation: null, androidAllowWhileIdle: null);

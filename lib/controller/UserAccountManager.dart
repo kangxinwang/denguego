@@ -19,14 +19,8 @@ class UserAccountManager {
       'SurveyDone': false,
       'SavedLocations': [],
       'SurveyScore': 0,
-      'RiskZone': '',
+      'RiskZone': 'High',
       'Reminders': [],
-    });
-  }
-
-  Future updateUsername(String name) async {
-    return await userCollection.doc(name).update({
-      'Name': userDetails.name,
     });
   }
 
@@ -55,6 +49,7 @@ class UserAccountManager {
     print(name);
     await for (var snapshot in userCollection.snapshots()) {
       List<String> savedLocations = [];
+      List<String> Reminders = [];
       var Documents = snapshot.docs;
       for (var document in Documents) {
         if (document.id == name) {
@@ -62,13 +57,16 @@ class UserAccountManager {
             for (var locationName in document['SavedLocations']) {
               savedLocations.add(locationName);
             }
+            for (var reminders in document['Reminders']) {
+              Reminders.add(reminders);
+            }
             userDetails.name = name;
             userDetails.email = document['Email'];
             userDetails.RiskZone = document['RiskZone'];
             userDetails.SurveyDone = document['SurveyDone'];
             userDetails.SurveyScore = document['SurveyScore'];
             userDetails.SavedLocations = savedLocations;
-            userDetails.Reminders = document['Reminders'];
+            userDetails.Reminders = Reminders;
           } catch (e) {
             print(e);
           }

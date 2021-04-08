@@ -43,18 +43,20 @@ class _SurveyScreenState extends State<SurveyScreen> {
     print(UserAccountManager.userDetails.SurveyDone);
     print(surveyCompleted);
     return SingleChildScrollView(
-      child: Column(children: <Widget>[
-        surveyCompleted
-            ? Result(_totalScore, resetQuiz)
-            : _questionIndex < questions.length
-                ? Survey(
-                    answerQuestion: answerQuestion,
-                    questionIndex: _questionIndex,
-                    questions: questions,
-                    //surveyUpdate: surveyDone(), //Call update surveydone
-                  )
-                : Result(_totalScore, resetQuiz), //Padding
-      ]), //debugShowCheckedModeBanner: false,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          surveyCompleted
+              ? Result(_totalScore, resetQuiz)
+              : _questionIndex < questions.length
+                  ? Survey(
+                      answerQuestion: answerQuestion,
+                      questionIndex: _questionIndex,
+                      questions: questions,
+                    )
+                  : Result(_totalScore, resetQuiz), //Padding
+        ],
+      ),
     );
   }
 }

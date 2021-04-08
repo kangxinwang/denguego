@@ -1,4 +1,5 @@
 import 'package:denguego/boundary/SurveyScreen.dart';
+import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -8,6 +9,7 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  List<String> values = UserAccountManager.userDetails.Reminders;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,34 +22,58 @@ class _NotificationScreenState extends State<NotificationScreen> {
               end: Alignment.topRight,
               colors: [
                 Color(0xff5B92C8),
-                Color(0xffBCD49D),
+                UserAccountManager.userDetails.RiskZone.contains('High')
+                    ? Color(0xffcf7a79)
+                    : UserAccountManager.userDetails.RiskZone.contains('Medium')
+                        ? Color(0xffe2d182)
+                        : Color(0xffBCD49D),
               ],
             ),
           ),
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+        title:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          Text(
+            'Notifications',
+            style: TextStyle(
+              fontSize: 25.0,
+              fontFamily: 'Montserrat',
+              fontWeight: FontWeight.bold,
             ),
-            Text(
-              'Notifications',
-              style: TextStyle(
-                fontSize: 25.0,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
+          ),
+          SizedBox(
+            width: 45,
+          ),
+        ]),
+      ),
+      body: ListView(
+        children: values.map((String key) {
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(5, 3, 5, 3),
+            child: Card(
+              elevation: 2,
+              child: ListTile(
+                title: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    key,
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ),
-            SizedBox(
-              width: 45,
-            ),
-          ],
-        ),
-        centerTitle: true,
+          );
+        }).toList(),
       ),
     );
   }

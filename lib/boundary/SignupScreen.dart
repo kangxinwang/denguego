@@ -6,10 +6,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
-
 class SignupScreen extends StatefulWidget {
-  final String email;
-  SignupScreen(this.email);
   static String id = 'SignUpScreen';
   @override
   _SignupScreenState createState() => _SignupScreenState();
@@ -17,20 +14,19 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final AuthenticateManager _auth = AuthenticateManager();
-  static EmailVerification _emailVerification = EmailVerification();
   final _formKey = GlobalKey<FormState>();
   bool showSpinner = false;
-  String emailsingup =  '';
   String password = ' ';
   String name = ' ';
   bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
+    String email = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -62,8 +58,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               'images/signUp.png',
                             ),
                           ),
-                        ),Text(
-                          widget.email
                         ),
                         Text(
                           'Welcome to DengueGo!',
@@ -98,17 +92,18 @@ class _SignupScreenState extends State<SignupScreen> {
                             }),
                         SizedBox(height: 20.0),
                         TextFormField(
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.email_sharp),
-                              labelText: 'Email',
-                            ),
-                            validator: (val) =>
-                                !EmailValidator.validate(val, true)
-                                    ? 'Invalid email.'
-                                    : null,
-                            onChanged: (val) {
-                              setState(() => emailsingup = val);
-                            }),
+                          initialValue: email,
+                          decoration: InputDecoration(
+                            enabled: false,
+                            icon: Icon(Icons.email_sharp),
+                            labelText: 'Email',
+                          ),
+                          //readOnly: true,
+                          validator: (val) =>
+                              !EmailValidator.validate(val, true)
+                                  ? 'Invalid email.'
+                                  : null,
+                        ),
                         SizedBox(height: 20.0),
                         TextFormField(
                             decoration: InputDecoration(
@@ -151,37 +146,11 @@ class _SignupScreenState extends State<SignupScreen> {
                             onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 setState(() => showSpinner = true);
-                                final bool emailCheck =
-                                    await _auth.emailAuthentication(emailsingup);
-                                if (emailCheck) {
-                                  Flushbar(
-                                    flushbarPosition: FlushbarPosition.TOP,
-                                    flushbarStyle: FlushbarStyle.FLOATING,
-                                    backgroundColor: Color(0xffe25757),
-                                    margin: EdgeInsets.all(8),
-                                    borderRadius: 8,
-                                    icon: Icon(
-                                      Icons.warning_amber_rounded,
-                                      size: 35.0,
-                                      color: Colors.black,
-                                    ),
-                                    leftBarIndicatorColor: Colors.black,
-                                    messageText: Text(
-                                        "Email exists!\nTry a different email",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                            fontFamily: 'Montserrat')),
-                                    duration: Duration(seconds: 3),
-                                  )..show(context);
-                                  setState(() => showSpinner = false);
-                                } else {
-                                  await _auth.registerNewUser(
-                                      emailsingup, password, name);
-                                  Navigator.pushNamed(context, MainScreen.id);
-                                }
-                                setState(() => showSpinner = false);
+                                await _auth.registerNewUser(
+                                    email, password, name);
+                                Navigator.pushNamed(context, MainScreen.id);
                               }
+                              setState(() => showSpinner = false);
                             }),
                         TextButton(
                           child: Text(
