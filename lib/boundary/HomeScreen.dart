@@ -106,6 +106,14 @@ class _HomeScreenState extends State<HomeScreen> {
           initialCameraPosition: initialLocation,
           markers: Set.from(HomeScreen.allMarkers),
           circles: Set.of((circle != null) ? [circle] : []),
+
+
+          onTap:(LatLng){
+            print("remove popup");
+            setState(() {
+              locationSelected=false;
+            });
+          },
           onMapCreated: (GoogleMapController controller) {
             _controller = controller;
           }),
@@ -162,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    addMarkers(ClusterManager.LocationList.keys.toList());
     super.initState();
   }
 
@@ -231,4 +240,44 @@ class _HomeScreenState extends State<HomeScreen> {
       bearing: 0.0,
     )));
   }
+
+  void addMarkers(List<String> cluster)async {
+
+    for (int i = 0; i < cluster.length; i++) {
+      String clusterloc = cluster[i];
+      ClusterLocation loc = ClusterManager.LocationList[clusterloc];
+      HomeScreen.allMarkers.add(Marker(
+        markerId: MarkerId(loc.location),
+        draggable: false,
+        zIndex: 2,
+        consumeTapEvents: true,
+        onTap: (){
+          print(loc.location);
+          print("marker tapped");
+          _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+            target: LatLng(ClusterManager.LocationList[clusterloc].coordinates[0].latitude,ClusterManager.LocationList[clusterloc].coordinates[0].longitude),
+            zoom: 20,)));
+          setState(() {
+            locationSelected=true;
+            place=loc.location;
+          });
+        },
+        flat: true,
+        anchor: Offset(0.5, 0.5),
+        position:
+        LatLng(loc.coordinates[0].latitude, loc.coordinates[0].longitude),
+        icon: ClusterManager.LocationList[clusterloc].zone == 'Under surveillance'
+            ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen)
+            : ClusterManager.LocationList[clusterloc].zone == 'Medium Risk'
+            ? BitmapDescriptor.defaultMarkerWithHue(
+            BitmapDescriptor.hueOrange)
+            : BitmapDescriptor.defaultMarkerWithHue(
+            BitmapDescriptor.hueRed),
+      ));
+    }
+
+  }
+
+
+
 }

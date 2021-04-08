@@ -80,7 +80,7 @@ class ClusterManager {
 
       await populateUser();
 
-      addMarkers(LocationList.keys.toList());
+
       keys = ClusterManager.LocationList.keys.toList();
       keys.sort();
       return keys;
@@ -100,28 +100,7 @@ class ClusterManager {
     }
   }
 
-  static void addMarkers(List<String> cluster) {
-    for (int i = 0; i < cluster.length; i++) {
-      String place = cluster[i];
-      ClusterLocation loc = LocationList[place];
-      HomeScreen.allMarkers.add(Marker(
-        markerId: MarkerId(loc.location),
-        draggable: false,
-        zIndex: 2,
-        flat: true,
-        anchor: Offset(0.5, 0.5),
-        position:
-            LatLng(loc.coordinates[0].latitude, loc.coordinates[0].longitude),
-        icon: LocationList[place].zone == 'Under surveillance'
-            ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen)
-            : LocationList[place].zone == 'Medium Risk'
-                ? BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueOrange)
-                : BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueRed),
-      ));
-    }
-  }
+
 
   static getLatLong(ClusterLocation cluster) async {
     try {
