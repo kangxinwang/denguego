@@ -41,7 +41,7 @@ const List<String> HighRiskValues = [
   'Use insecticide',
 ];
 
-List<String> MediumRiskValues = [
+const List<String> MediumRiskValues = [
   'Wash your toilet',
   'Clear the drains',
   'Apply mosquito repellent',
@@ -50,7 +50,7 @@ List<String> MediumRiskValues = [
   'Keep your water containers dry',
 ];
 
-List<String> LowRiskValues = [
+const List<String> LowRiskValues = [
   'Wash your toilet',
   'Clear the drains',
   'Clear your water from trays',

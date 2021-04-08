@@ -79,7 +79,7 @@ class _ResultState extends State<Result> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.fromLTRB(4.0, 80.0, 4.0, 4.0),
             child: Text(
               "Thank you for taking this survey!",
               style: TextStyle(
@@ -91,7 +91,7 @@ class _ResultState extends State<Result> {
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 40,
           ),
           //Text
           Text(
@@ -102,10 +102,10 @@ class _ResultState extends State<Result> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.fromLTRB(10.0, 40.0, 10.0, 10.0),
             child: Text(
               resultPhrase.contains('risk')
-                  ? 'You are at $resultPhrase Zone!'
+                  ? 'You are at $resultPhrase!'
                   : resultPhrase,
               style: TextStyle(
                 fontFamily: "Montserrat",

@@ -1,4 +1,4 @@
-import 'package:denguego/controller/InformationManager.dart';
+import '../widgets/Information.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

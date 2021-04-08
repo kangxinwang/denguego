@@ -47,18 +47,19 @@ class _SurveyScreenState extends State<SurveyScreen> {
   Widget build(BuildContext context) {
     print(UserAccountManager.userDetails.SurveyDone);
     print(surveyCompleted);
-    return Scaffold(
-      body: surveyCompleted
-          ? Result(_totalScore, resetQuiz)
-          : _questionIndex < questions.length
-              ? Survey(
-                  answerQuestion: answerQuestion,
-                  questionIndex: _questionIndex,
-                  questions: questions,
-                  //surveyUpdate: surveyDone(), //Call update surveydone
-                )
-              : Result(_totalScore, resetQuiz), //Padding
-      //debugShowCheckedModeBanner: false,
+    return SingleChildScrollView(
+      child: Column(children: <Widget>[
+        surveyCompleted
+            ? Result(_totalScore, resetQuiz)
+            : _questionIndex < questions.length
+                ? Survey(
+                    answerQuestion: answerQuestion,
+                    questionIndex: _questionIndex,
+                    questions: questions,
+                    //surveyUpdate: surveyDone(), //Call update surveydone
+                  )
+                : Result(_totalScore, resetQuiz), //Padding
+      ]), //debugShowCheckedModeBanner: false,
     );
   }
 }

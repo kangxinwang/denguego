@@ -20,7 +20,7 @@ class UserAccountManager {
       'SavedLocations': [],
       'SurveyScore': 0,
       'RiskZone': '',
-      'Reminders': []
+      'Reminders': [],
     });
   }
 
