@@ -1,3 +1,4 @@
+import 'package:denguego/boundary/EmailVerificationScreen.dart';
 import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/boundary/SignupScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
@@ -205,11 +206,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
                                   )),
-                              onPressed: () {
+                              /*onPressed: () {
                                 Navigator.pushNamed(
                                     context,
                                     SignupScreen
-                                        .id); // property of the stateful widget of the sign in class
+                                        .id);*/ // property of the stateful widget of the sign in class
+                              onPressed: (){
+                                Navigator.pushNamed(context, EmailVerification.id);
                               },
                             ),
                           ],

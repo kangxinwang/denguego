@@ -1,3 +1,4 @@
+import 'package:denguego/boundary/EmailVerificationScreen.dart';
 import 'package:denguego/boundary/ForgotPasswordScreen.dart';
 import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
@@ -31,11 +32,12 @@ class MyApp extends StatelessWidget {
           ScreenManager.id: (context) => ScreenManager(),
           MainScreen.id: (context) => MainScreen(),
           ForgotPasswordScreen.id: (context) => ForgotPasswordScreen(),
-          SignupScreen.id: (context) => SignupScreen(),
+          //SignupScreen.id: (context) => SignupScreen(email),
           LoginScreen.id: (context) => LoginScreen(),
           NotificationScreen.id: (context) => NotificationScreen(),
           // ReminderScreen.id: (context) => ReminderScreen(),
           AccountScreen.id: (context) => AccountScreen(),
+          EmailVerification.id: (context) => EmailVerification(),
         },
       ),
     );

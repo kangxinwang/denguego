@@ -1,14 +1,15 @@
+import 'package:denguego/boundary/EmailVerificationScreen.dart';
 import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/shared/Constants.dart';
+
 
 class SignupScreen extends StatefulWidget {
-  final Function toggleView;
-  SignupScreen({this.toggleView});
+  final String email;
+  SignupScreen(this.email);
   static String id = 'SignUpScreen';
   @override
   _SignupScreenState createState() => _SignupScreenState();
@@ -16,9 +17,10 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final AuthenticateManager _auth = AuthenticateManager();
+  static EmailVerification _emailVerification = EmailVerification();
   final _formKey = GlobalKey<FormState>();
   bool showSpinner = false;
-  String email = ' ';
+  String emailsingup =  '';
   String password = ' ';
   String name = ' ';
   bool _obscureText = true;
@@ -60,6 +62,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               'images/signUp.png',
                             ),
                           ),
+                        ),Text(
+                          widget.email
                         ),
                         Text(
                           'Welcome to DengueGo!',
@@ -103,7 +107,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ? 'Invalid email.'
                                     : null,
                             onChanged: (val) {
-                              setState(() => email = val);
+                              setState(() => emailsingup = val);
                             }),
                         SizedBox(height: 20.0),
                         TextFormField(
@@ -148,7 +152,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               if (_formKey.currentState.validate()) {
                                 setState(() => showSpinner = true);
                                 final bool emailCheck =
-                                    await _auth.emailAuthentication(email);
+                                    await _auth.emailAuthentication(emailsingup);
                                 if (emailCheck) {
                                   Flushbar(
                                     flushbarPosition: FlushbarPosition.TOP,
@@ -173,7 +177,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   setState(() => showSpinner = false);
                                 } else {
                                   await _auth.registerNewUser(
-                                      email, password, name);
+                                      emailsingup, password, name);
                                   Navigator.pushNamed(context, MainScreen.id);
                                 }
                                 setState(() => showSpinner = false);
