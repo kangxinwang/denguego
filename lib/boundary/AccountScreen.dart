@@ -1,3 +1,5 @@
+import 'package:denguego/boundary/LoginScreen.dart';
+import 'package:denguego/controller/ScreenManager.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/material.dart';
@@ -213,7 +215,8 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                       onPressed: () async {
                         await _auth.signOut();
-                        Navigator.maybePop(context);
+                        Navigator.popUntil(
+                            context, ModalRoute.withName(ScreenManager.id));
                       }),
                 )
               ],

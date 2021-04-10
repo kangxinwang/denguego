@@ -22,9 +22,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
               end: Alignment.topRight,
               colors: [
                 Color(0xff5B92C8),
-                UserAccountManager.userDetails.RiskZone.contains('High')
+                UserAccountManager.userDetails.RiskZone == 'High'
                     ? Color(0xffcf7a79)
-                    : UserAccountManager.userDetails.RiskZone.contains('Medium')
+                    : UserAccountManager.userDetails.RiskZone == 'Medium'
                         ? Color(0xffe2d182)
                         : Color(0xffBCD49D),
               ],
@@ -52,29 +52,44 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ]),
       ),
-      body: ListView(
-        children: values.map((String key) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(5, 3, 5, 3),
-            child: Card(
-              elevation: 2,
-              child: ListTile(
-                title: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    key,
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold,
+      body: (UserAccountManager.userDetails.SurveyDone)
+          ? ListView(
+              children: values.map((String key) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 3, 5, 3),
+                  child: Card(
+                    elevation: 2,
+                    child: ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          key,
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
+                );
+              }).toList(),
+            )
+          : Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'No Notifications yet as survey have not been taken yet',
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
-          );
-        }).toList(),
-      ),
     );
   }
 }

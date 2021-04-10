@@ -49,13 +49,13 @@ class _ResultState extends State<Result> {
   String get resultPhrase {
     String resultText;
     if (widget.resultScore >= 70) {
-      resultText = 'High risk';
+      resultText = 'High';
       print(widget.resultScore);
     } else if (40 <= widget.resultScore && widget.resultScore < 70) {
-      resultText = 'Medium risk';
+      resultText = 'Medium';
       print(widget.resultScore);
     } else if (widget.resultScore <= 39) {
-      resultText = 'Low risk';
+      resultText = 'Low';
     } else {
       resultText = 'Incorrect Score. Please try again!';
       print(widget.resultScore);
@@ -118,9 +118,7 @@ class _ResultState extends State<Result> {
           Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
             child: Text(
-              resultPhrase.contains('risk')
-                  ? 'You are at $resultPhrase!'
-                  : resultPhrase,
+              'You are at $resultPhrase! risk',
               style: TextStyle(
                 fontFamily: "Montserrat",
                 fontSize: 22,

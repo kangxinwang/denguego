@@ -22,12 +22,13 @@ class _SurveyScreenState extends State<SurveyScreen> {
     setState(() {
       _questionIndex = 0;
       _totalScore = 0;
-      //String name = await _auth.getCurrentUserName();
       UserAccountManager.userDetails.SurveyDone = false;
       UserAccountManager.userDetails.SurveyScore = 0;
+      UserAccountManager.userDetails.RiskZone = "High";
+      UserAccountManager.userDetails.Reminders = [];
       surveyCompleted = false;
-      // await UsrMgr.updateSurveyDone(name);
-      // await UsrMgr.updateSurveyScore(name);
+      UsrMgr.updateSurvey(UserAccountManager.userDetails.name);
+      UsrMgr.updateReminders(UserAccountManager.userDetails.name);
     });
   }
 
