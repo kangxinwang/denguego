@@ -27,7 +27,7 @@ class PopUpLocationCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: zone == "Under Surveillance"
+          color: zone == "Under surveillance"
               ? Color(0xff97be61)
               : zone == "Medium Risk"
                   ? Color(0xffdec649)
@@ -71,17 +71,21 @@ class PopUpLocationCard extends StatelessWidget {
               Divider(
                 thickness: 2,
               ),
-              Text(
-                cluster +
-                    " Cluster" +
-                    "\n\nCases since start of cluster: " +
-                    clusterCases.toString(),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                  fontSize: 12,
-                ),
-              ),
+              zone == "Under surveillance"
+                  ? SizedBox(
+                      height: 1,
+                    )
+                  : Text(
+                      cluster +
+                          " Cluster" +
+                          "\n\nCases since start of cluster: " +
+                          clusterCases.toString(),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                        fontSize: 12,
+                      ),
+                    ),
             ],
           ),
         ),

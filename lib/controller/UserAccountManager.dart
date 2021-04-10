@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 
 class UserAccountManager {
@@ -11,6 +12,9 @@ class UserAccountManager {
   // userDetails will be the reference we need to use when we want to access that collection
   // static List<String> SavedLocations = [];
   static UserAccount userDetails = new UserAccount();
+
+  static AuthenticateManager _auth = AuthenticateManager();
+  static UserAccountManager UserMgr = UserAccountManager();
 
   Future updateUserData(String name, String email) async {
     return await userCollection.doc(name).set({
@@ -74,6 +78,15 @@ class UserAccountManager {
         }
       }
       break;
+    }
+  }
+
+  static Future populateUser() async {
+    String name = await _auth.getCurrentUserName();
+    if (name == null)
+      return;
+    else {
+      await UserMgr.readUserFromDatabase(name);
     }
   }
 }

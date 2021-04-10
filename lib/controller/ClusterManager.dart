@@ -1,15 +1,9 @@
 import 'package:denguego/boundary/HomeScreen.dart';
-import 'package:denguego/controller/AuthenticateManager.dart';
-import 'package:denguego/controller/LocalNotificationManager.dart';
-import 'package:denguego/controller/ScreenManager.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:web_scraper/web_scraper.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:denguego/boundary/NotificationScreen.dart';
 
 class ClusterManager {
   static bool loaded = false;
@@ -18,7 +12,6 @@ class ClusterManager {
   static Map<String, ClusterLocation> LocationList = {};
   static List<String> nearByClusters = [];
 
-  static AuthenticateManager _auth = AuthenticateManager();
   static UserAccountManager UserMgr = UserAccountManager();
 
   static Future<List<String>> getAllLocations() async {
@@ -28,6 +21,7 @@ class ClusterManager {
     var currentLocation = await HomeScreen.locationTracker.getLocation();
 
     webScraper = WebScraper('https://www.nea.gov.sg');
+
     if (await webScraper.loadWebPage('/dengue-zika/dengue/dengue-clusters')) {
       List<Map<String, dynamic>> results =
           webScraper.getElement('table', ['title']);
@@ -78,22 +72,36 @@ class ClusterManager {
               clusterCases > 10 ? "High Risk" : "Medium Risk";
         }
       }
-
-      await populateUser();
-
-      keys = ClusterManager.LocationList.keys.toList();
-      keys.sort();
-      return keys;
     }
-  }
 
-  static Future populateUser() async {
-    String name = await _auth.getCurrentUserName();
-    if (name == null)
-      return;
-    else {
-      await UserMgr.readUserFromDatabase(name);
+    if (await webScraper.loadWebPage(
+        '/dengue-zika/dengue/dengue-clusters-under-surveillance')) {
+      List<Map<String, dynamic>> results =
+          webScraper.getElement('table', ['title']);
+      String locName;
+
+      individualCluster = results[0]['title'].split("              ");
+
+      for (var j = 14; j < individualCluster.length; j += 10) {
+        locName =
+            individualCluster[j].substring(0, individualCluster[j].length - 1);
+
+        ClusterManager.LocationList[locName] = ClusterLocation(
+          location: locName,
+          cases: int.parse(individualCluster[j + 2]),
+          cluster: 'Not applicable',
+          zone: 'Under surveillance',
+        );
+
+        await getLatLong(ClusterManager.LocationList[locName]);
+      }
     }
+
+    await UserAccountManager.populateUser();
+
+    keys = ClusterManager.LocationList.keys.toList();
+    keys.sort();
+    return keys;
   }
 
   static getLatLong(ClusterLocation cluster) async {

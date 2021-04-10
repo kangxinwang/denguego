@@ -56,7 +56,7 @@ class AuthenticateManager {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-      await ClusterManager.populateUser();
+      await UserAccountManager.populateUser();
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -76,7 +76,7 @@ class AuthenticateManager {
       await updateUserName(name, result.user);
       UserAccountManager DB = UserAccountManager();
       await DB.updateUserData(name, email);
-      await ClusterManager.populateUser();
+      await UserAccountManager.populateUser();
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);

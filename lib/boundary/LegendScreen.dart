@@ -52,12 +52,15 @@ class LegendScreen extends StatelessWidget {
                   Icon(
                     Icons.arrow_forward_sharp,
                   ),
-                  Text(
-                    "High Risk",
-                    style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      "High Risk area with 10 or more cases",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontStyle: FontStyle.italic,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -74,12 +77,15 @@ class LegendScreen extends StatelessWidget {
                   Icon(
                     Icons.arrow_forward_sharp,
                   ),
-                  Text(
-                    "Medium Risk",
-                    style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      "High Risk area with less than 10 cases",
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 14,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -96,12 +102,15 @@ class LegendScreen extends StatelessWidget {
                   Icon(
                     Icons.arrow_forward_sharp,
                   ),
-                  Text(
-                    "Low Risk",
-                    style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      "No new cases, under surveillance for next 21 days",
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 14,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),

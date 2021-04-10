@@ -251,14 +251,14 @@ class _HomeScreenState extends State<HomeScreen> {
         anchor: Offset(0.5, 0.5),
         position:
             LatLng(loc.coordinates[0].latitude, loc.coordinates[0].longitude),
-        icon: ClusterManager.LocationList[clusterloc].zone ==
-                'Under surveillance'
-            ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen)
-            : ClusterManager.LocationList[clusterloc].zone == 'Medium Risk'
-                ? BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueOrange)
-                : BitmapDescriptor.defaultMarkerWithHue(
-                    BitmapDescriptor.hueRed),
+        icon:
+            ClusterManager.LocationList[clusterloc].zone == 'Under surveillance'
+                ? BitmapDescriptor.defaultMarkerWithHue(130)
+                : ClusterManager.LocationList[clusterloc].zone == 'Medium Risk'
+                    ? BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueOrange)
+                    : BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueRed),
       ));
     }
   }
