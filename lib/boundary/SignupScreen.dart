@@ -1,9 +1,7 @@
-import 'package:denguego/boundary/EmailVerificationScreen.dart';
 import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {

@@ -1,6 +1,3 @@
-import 'package:denguego/controller/UserAccountManager.dart';
-import 'package:flutter/cupertino.dart';
-
 class UserAccount {
   String uid;
   String _name;

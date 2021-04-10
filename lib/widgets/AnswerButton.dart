@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
-class Answer extends StatelessWidget {
+class AnswerButton extends StatelessWidget {
   final Function selectHandler;
   final String answerText;
 
-  Answer(this.selectHandler, this.answerText);
+  AnswerButton(this.selectHandler, this.answerText);
 
   @override
   Widget build(BuildContext context) {

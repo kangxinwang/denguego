@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 
 class PopUpLocationCard extends StatelessWidget {
   final String location;

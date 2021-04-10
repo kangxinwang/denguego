@@ -53,8 +53,4 @@ class ClusterLocation {
   set coordinates(List<Location> coordinates) {
     _coordinates = coordinates;
   }
-
-  void printDetails() {
-    print("Cluster cases : " + _clusterCases.toString());
-  }
 }

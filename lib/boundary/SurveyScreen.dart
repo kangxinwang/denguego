@@ -1,9 +1,9 @@
-import 'package:denguego/controller/AuthenticateManager.dart';
+import 'package:denguego/controller/SystemManager.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
-import 'package:denguego/widgets/Result.dart';
+import 'package:denguego/boundary/ResultScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/widgets/Survey.dart';
+import 'package:denguego/boundary/QuestionScreen.dart';
 
 class SurveyScreen extends StatefulWidget {
   @override
@@ -15,9 +15,6 @@ class _SurveyScreenState extends State<SurveyScreen> {
   int _totalScore = UserAccountManager.userDetails.SurveyScore;
   bool surveyCompleted = UserAccountManager.userDetails.SurveyDone;
 
-  static UserAccountManager UsrMgr = UserAccountManager();
-  static AuthenticateManager _auth = AuthenticateManager();
-
   void resetQuiz() {
     setState(() {
       _questionIndex = 0;
@@ -27,8 +24,9 @@ class _SurveyScreenState extends State<SurveyScreen> {
       UserAccountManager.userDetails.RiskZone = "High";
       UserAccountManager.userDetails.Reminders = [];
       surveyCompleted = false;
-      UsrMgr.updateSurvey(UserAccountManager.userDetails.name);
-      UsrMgr.updateReminders(UserAccountManager.userDetails.name);
+      SystemManager.UserMgr.updateSurvey(UserAccountManager.userDetails.name);
+      SystemManager.UserMgr.updateReminders(
+          UserAccountManager.userDetails.name);
     });
   }
 
@@ -41,21 +39,19 @@ class _SurveyScreenState extends State<SurveyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(UserAccountManager.userDetails.SurveyDone);
-    print(surveyCompleted);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           surveyCompleted
-              ? Result(_totalScore, resetQuiz)
+              ? ResultScreen(_totalScore, resetQuiz)
               : _questionIndex < questions.length
-                  ? Survey(
+                  ? QuestionScreen(
                       answerQuestion: answerQuestion,
                       questionIndex: _questionIndex,
                       questions: questions,
                     )
-                  : Result(_totalScore, resetQuiz), //Padding
+                  : ResultScreen(_totalScore, resetQuiz), //Padding
         ],
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:flutter/material.dart';
 
 const fontTextStyle = TextStyle(
@@ -150,9 +149,3 @@ const List<Map<String, Object>> questions = const [
     ],
   },
 ];
-
-/*[
-  ClusterLocation(location: "Kallang", cases: 12, zone: "Safe",),
-  ClusterLocation(location: "Yishun", cases: 30, zone: "Medium Risk"),
-  ClusterLocation(location: "Pasir Ris", cases: 50, zone: "High Risk"),
-];*/

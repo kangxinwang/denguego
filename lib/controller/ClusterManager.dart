@@ -1,5 +1,4 @@
 import 'package:denguego/boundary/HomeScreen.dart';
-import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:web_scraper/web_scraper.dart';
@@ -11,8 +10,6 @@ class ClusterManager {
   static List<String> keys = [];
   static Map<String, ClusterLocation> LocationList = {};
   static List<String> nearByClusters = [];
-
-  static UserAccountManager UserMgr = UserAccountManager();
 
   static Future<List<String>> getAllLocations() async {
     List<String> updates;
@@ -96,8 +93,6 @@ class ClusterManager {
         await getLatLong(ClusterManager.LocationList[locName]);
       }
     }
-
-    await UserAccountManager.populateUser();
 
     keys = ClusterManager.LocationList.keys.toList();
     keys.sort();

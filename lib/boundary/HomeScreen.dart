@@ -10,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
 import 'package:denguego/entity/ClusterLocation.dart';
 import 'package:custom_searchable_dropdown/custom_searchable_dropdown.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomeScreen extends StatefulWidget {
   static Location locationTracker = Location();

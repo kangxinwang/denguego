@@ -1,6 +1,5 @@
 import 'package:denguego/boundary/EmailVerificationScreen.dart';
 import 'package:denguego/boundary/ForgotPasswordScreen.dart';
-import 'package:denguego/boundary/LegendScreen.dart';
 import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
 import 'package:denguego/boundary/SignupScreen.dart';

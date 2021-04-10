@@ -1,4 +1,3 @@
-import 'package:denguego/boundary/LoginScreen.dart';
 import 'package:denguego/controller/ScreenManager.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/shared/Constants.dart';

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
+import 'package:denguego/controller/SystemManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 
 class UserAccountManager {
@@ -14,7 +15,6 @@ class UserAccountManager {
   static UserAccount userDetails = new UserAccount();
 
   static AuthenticateManager _auth = AuthenticateManager();
-  static UserAccountManager UserMgr = UserAccountManager();
 
   Future updateUserData(String name, String email) async {
     return await userCollection.doc(name).set({
@@ -49,8 +49,6 @@ class UserAccountManager {
   }
 
   Future<void> readUserFromDatabase(String name) async {
-    //print('inside read');
-    print(name);
     await for (var snapshot in userCollection.snapshots()) {
       List<String> savedLocations = [];
       List<String> Reminders = [];
@@ -86,7 +84,7 @@ class UserAccountManager {
     if (name == null)
       return;
     else {
-      await UserMgr.readUserFromDatabase(name);
+      await SystemManager.UserMgr.readUserFromDatabase(name);
     }
   }
 }

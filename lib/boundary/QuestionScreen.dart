@@ -1,17 +1,15 @@
 import 'package:denguego/widgets/Question.dart';
 import 'package:flutter/material.dart';
-import 'package:denguego/widgets/Answer.dart';
+import 'package:denguego/widgets/AnswerButton.dart';
 import 'dart:ui' as ui;
 
-//RENAME AS SURVEY
-
-class Survey extends StatelessWidget {
+class QuestionScreen extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final int questionIndex;
   final Function answerQuestion;
   final Function surveyUpdate;
 
-  Survey(
+  QuestionScreen(
       {@required this.questions,
       @required this.answerQuestion,
       @required this.questionIndex,
@@ -64,8 +62,8 @@ class Survey extends StatelessWidget {
             .map((answer) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child:
-                Answer(() => answerQuestion(answer['score']), answer['text']),
+            child: AnswerButton(
+                () => answerQuestion(answer['score']), answer['text']),
           );
         }).toList(),
       ],

@@ -1,4 +1,4 @@
-import 'package:denguego/boundary/SurveyScreen.dart';
+import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, MainScreen.id);
             },
           ),
           Text(

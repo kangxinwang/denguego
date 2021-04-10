@@ -1,4 +1,3 @@
-import 'package:denguego/controller/ClusterManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
@@ -42,7 +41,6 @@ class AuthenticateManager {
       var documents = snapshot.docs;
       for (var document in documents) {
         if (document['Email'] == email) {
-          print(document['Email']);
           return true;
         }
       }

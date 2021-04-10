@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'dart:io' show Platform;
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/timezone.dart' as TZ;
 
@@ -47,17 +45,15 @@ class LocalNotificationManager {
   Future<void> showDailyAtTimeNotification() async {
     //DateTime time = DateTime(20,54,0);
     //var time = DateTime.parse("2021-04-08 21:42:04Z");
-    //print(time);
 
-    print('result page called');
     var androidChannel = AndroidNotificationDetails(
         'CHANNEL_ID', 'CHANNEL_NAME', 'CHANNEL_DESCRIPTION',
         importance: Importance.high, playSound: true);
     await flutterLocalNotificationsPlugin.periodicallyShow(
       0,
-      'DengueGo! Daily Reminder!',
-      'This is a reminder',
-      RepeatInterval.daily,
+      'DengueGo! Reminder',
+      'Complete all your tasks in the Notification Page!',
+      RepeatInterval.everyMinute,
       NotificationDetails(android: androidChannel),
       payload: 'New Payload',
       //uiLocalNotificationDateInterpretation: null, androidAllowWhileIdle: null);

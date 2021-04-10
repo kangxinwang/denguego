@@ -1,29 +1,24 @@
-import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
 import 'package:denguego/controller/ScreenManager.dart';
-import 'package:denguego/entity/UserAccount.dart';
+import 'package:denguego/controller/SystemManager.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:denguego/controller/UserAccountManager.dart';
 import 'package:denguego/controller/LocalNotificationManager.dart';
-import 'package:denguego/controller/AuthenticateManager.dart';
 
-class Result extends StatefulWidget {
+class ResultScreen extends StatefulWidget {
   final int resultScore;
   final Function resetHandler;
-  Result(this.resultScore, this.resetHandler);
+  ResultScreen(this.resultScore, this.resetHandler);
 
   @override
-  _ResultState createState() => _ResultState();
+  _ResultScreenState createState() => _ResultScreenState();
 }
 
-class _ResultState extends State<Result> {
-  static UserAccountManager UserMgr = UserAccountManager();
-
+class _ResultScreenState extends State<ResultScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    localNotificationManager.setOnNotificationReceive(onNotificationReceive);
     localNotificationManager.setOnNotificationClick(onNotificationClick);
 
     if (!UserAccountManager.userDetails.SurveyDone) {
@@ -37,12 +32,9 @@ class _ResultState extends State<Result> {
     Navigator.pop(context);
   }
 
-  onNotificationReceive(ReceiveNotification notification) {
-    print('Notification recieved: ${notification.id}');
-  }
-
   onNotificationClick(String payload) {
-    print('Payload $payload');
+    //Resolve onCLickNotifications
+    Navigator.pushNamed(context, ScreenManager.id);
     Navigator.pushNamed(context, NotificationScreen.id);
   }
 
@@ -50,15 +42,12 @@ class _ResultState extends State<Result> {
     String resultText;
     if (widget.resultScore >= 70) {
       resultText = 'High';
-      print(widget.resultScore);
     } else if (40 <= widget.resultScore && widget.resultScore < 70) {
       resultText = 'Medium';
-      print(widget.resultScore);
     } else if (widget.resultScore <= 39) {
       resultText = 'Low';
     } else {
       resultText = 'Incorrect Score. Please try again!';
-      print(widget.resultScore);
     }
     return resultText;
   }
@@ -80,10 +69,10 @@ class _ResultState extends State<Result> {
     UserAccountManager.userDetails.RiskZone = resultPhrase;
     UserAccountManager.userDetails.SurveyDone = true;
     UserAccountManager.userDetails.SurveyScore = widget.resultScore;
-    UserMgr.updateSurvey(UserAccountManager.userDetails.name);
+    SystemManager.UserMgr.updateSurvey(UserAccountManager.userDetails.name);
 
     UserAccountManager.userDetails.Reminders = values;
-    UserMgr.updateReminders(UserAccountManager.userDetails.name);
+    SystemManager.UserMgr.updateReminders(UserAccountManager.userDetails.name);
 
     return Center(
       child: Column(
@@ -149,7 +138,7 @@ class _ResultState extends State<Result> {
                 child: Text(
                   'Restart Survey',
                   style: TextStyle(
-                    color: Colors.white, //Color(0xff5B92C8),
+                    color: Colors.white,
                     fontFamily: 'Montserrat',
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
