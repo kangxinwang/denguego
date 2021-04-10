@@ -117,13 +117,17 @@ class LegendScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text(
-                'Changes in Appbar color indicates your Risk Zone based on Survey result',
-                style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                    fontFamily: 'Montserrat',
-                    fontSize: 14),
-                textAlign: TextAlign.center,
+              Center(
+                child: Text(
+                  'Changes in appbar color indicates your Risk Level based on survey result.'
+                  '\n'
+                  'Default: red',
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontFamily: 'Montserrat',
+                      fontSize: 14),
+                  textAlign: TextAlign.center,
+                ),
               ),
               SizedBox(
                 height: 20,

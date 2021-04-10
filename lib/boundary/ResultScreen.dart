@@ -78,11 +78,9 @@ class _ResultScreenState extends State<ResultScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            height: 100,
-          ),
+          Center(child: Image.asset('images/thank-you.png')),
           Padding(
-            padding: const EdgeInsets.fromLTRB(4.0, 80.0, 4.0, 4.0),
+            padding: const EdgeInsets.fromLTRB(4.0, 40.0, 4.0, 4.0),
             child: Text(
               "Thank you for taking this survey!",
               style: TextStyle(
@@ -94,20 +92,20 @@ class _ResultScreenState extends State<ResultScreen> {
             ),
           ),
           SizedBox(
-            height: 40,
+            height: 30,
           ),
           //Text
           Text(
             'Risk Score: ${widget.resultScore} / 100',
             style: TextStyle(
-              fontSize: 32,
+              fontSize: 30,
               fontFamily: "Montserrat",
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+            padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
             child: Text(
-              'You are at $resultPhrase! risk',
+              'You are at $resultPhrase risk!',
               style: TextStyle(
                 fontFamily: "Montserrat",
                 fontSize: 22,

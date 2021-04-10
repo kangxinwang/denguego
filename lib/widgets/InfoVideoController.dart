@@ -37,7 +37,6 @@ class _InfoVideoControllerState extends State<InfoVideoController> {
       aspectRatio: 16 / 9,
       // Prepare the video to be played and display the first frame
       autoInitialize: true,
-      autoPlay: true,
       showControls: true,
       looping: widget.looping,
       // Errors can occur for example when trying to play a video
