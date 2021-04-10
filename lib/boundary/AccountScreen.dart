@@ -94,7 +94,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                       child: Text(
                                         UserAccountManager
                                                 .userDetails.SurveyDone
-                                            ? "Survey Score: ${UserAccountManager.userDetails.SurveyScore}"
+                                            ? "Survey Risk Score: ${UserAccountManager.userDetails.SurveyScore}"
                                             : 'Survey not taken',
                                         style: TextStyle(
                                           fontFamily: 'Montserrat',
@@ -117,7 +117,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                       child: Text(
                                         UserAccountManager
                                                 .userDetails.SurveyDone
-                                            ? "Risk Zone: ${UserAccountManager.userDetails.RiskZone}"
+                                            ? "Risk Level: ${UserAccountManager.userDetails.RiskZone}"
                                             : 'Survey not taken',
                                         style: TextStyle(
                                           fontFamily: 'Montserrat',

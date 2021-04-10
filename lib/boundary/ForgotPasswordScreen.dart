@@ -59,7 +59,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(35, 8, 35, 0),
                   child: Text(
-                    'We just need your registered email address to send your password reset',
+                    'Please enter your registered email address so that we can send over a password for reset',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Montserrat',

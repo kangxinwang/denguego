@@ -109,7 +109,7 @@ class _ResultState extends State<Result> {
           ),
           //Text
           Text(
-            'Score: ${widget.resultScore} / 100',
+            'Risk Score: ${widget.resultScore} / 100',
             style: TextStyle(
               fontSize: 32,
               fontFamily: "Montserrat",

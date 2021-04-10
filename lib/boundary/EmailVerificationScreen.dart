@@ -90,7 +90,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(12.0, 8, 12, 4),
                       child: Text(
-                        ' Enter your email and We will send you an OTP Message',
+                        ' Enter your email to receive an OTP.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Montserrat',
