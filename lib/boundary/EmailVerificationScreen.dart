@@ -194,7 +194,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       setState(() {
                                         enableOTP = false;
                                       });
-                                      return 'Invalid email format\nTryAgain';
+                                      return 'Invalid email format';
                                     } else if (val.isEmpty)
                                       return 'Enter email';
                                     else
