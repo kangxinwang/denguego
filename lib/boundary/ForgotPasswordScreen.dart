@@ -1,3 +1,5 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'LoginScreen.dart';
 import 'package:flutter/material.dart';
@@ -80,8 +82,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               ),
                               labelText: 'Email',
                             ),
-                            validator: (val) =>
-                                val.isEmpty ? 'Enter email' : null,
+                            validator: (val) => val.isNotEmpty
+                                ? !EmailValidator.validate(val, true)
+                                    ? 'Invalid email format.'
+                                    : null
+                                : 'Enter email',
                             onChanged: (val) {
                               setState(() => email = val);
                             }),
@@ -102,10 +107,55 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       _auth.resetPassword(email);
-                      Navigator.pushNamed(context, LoginScreen.id);
+                      final bool emailCheck =
+                          await _auth.emailAuthentication(email);
+                      if (!emailCheck) {
+                        Flushbar(
+                          flushbarPosition: FlushbarPosition.TOP,
+                          flushbarStyle: FlushbarStyle.FLOATING,
+                          backgroundColor: Color(0xffe25757),
+                          margin: EdgeInsets.all(8),
+                          borderRadius: 8,
+                          icon: Icon(
+                            Icons.warning_amber_rounded,
+                            size: 35.0,
+                            color: Colors.black,
+                          ),
+                          leftBarIndicatorColor: Colors.black,
+                          messageText: Text(
+                              "Email does not exist in the system!\nTry a different email",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  fontFamily: 'Montserrat')),
+                          duration: Duration(seconds: 3),
+                        )..show(context);
+                      } else {
+                        Flushbar(
+                          flushbarPosition: FlushbarPosition.TOP,
+                          flushbarStyle: FlushbarStyle.FLOATING,
+                          backgroundColor: Color(0xffaae257),
+                          margin: EdgeInsets.all(8),
+                          borderRadius: 8,
+                          icon: Icon(
+                            Icons.notifications,
+                            size: 35.0,
+                            color: Colors.black,
+                          ),
+                          leftBarIndicatorColor: Colors.black,
+                          messageText: Text(
+                              "Sent reset password link\nCheck your email",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  fontFamily: 'Montserrat')),
+                          duration: Duration(seconds: 3),
+                        )..show(context);
+                        Navigator.pushNamed(context, LoginScreen.id);
+                      }
                     }
                   },
                 ),

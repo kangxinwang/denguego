@@ -5,6 +5,8 @@ import 'package:denguego/controller/SystemManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:location_permissions/location_permissions.dart' as lp;
 
 class ScreenManager extends StatelessWidget {
   static String id = 'ScreenManager';
@@ -12,8 +14,9 @@ class ScreenManager extends StatelessWidget {
   Widget build(BuildContext context) {
     // return either home or authenticate widget
     final user = Provider.of<UserAccount>(context);
+
     return FutureBuilder(
-        future: SystemManager.loadInformation(),
+        future: SystemManager.loadInformation(context),
         builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
           if (snapshot.hasData) {
             if (user == null) {

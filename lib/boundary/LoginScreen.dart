@@ -3,6 +3,7 @@ import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
 import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/boundary/ForgotPasswordScreen.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -97,8 +98,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   icon: Icon(Icons.person),
                                   labelText: 'Email',
                                 ),
-                                validator: (val) =>
-                                    val.isEmpty ? 'Enter email' : null,
+                                validator: (val) => val.isNotEmpty
+                                    ? !EmailValidator.validate(val, true)
+                                        ? 'Invalid email format.'
+                                        : null
+                                    : 'Enter email',
                                 onChanged: (val) {
                                   setState(() => email = val);
                                 }),
@@ -121,9 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 obscureText: _obscureText,
-                                validator: (val) => val.length < 6
-                                    ? 'Incorrect password! Please re-enter'
-                                    : null,
+                                validator: (val) =>
+                                    val.isEmpty ? 'Enter password' : null,
                                 onChanged: (val) {
                                   setState(() => password = val);
                                 }),
@@ -164,13 +167,42 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () async {
                                   if (_formKey.currentState.validate()) {
                                     setState(() => showSpinner = true);
+                                    final bool emailCheck =
+                                        await _auth.emailAuthentication(email);
                                     final result = await _auth.signInWithEandP(
                                         email, password);
-                                    if (result != null) {
-                                      Navigator.pushNamed(
-                                          context, MainScreen.id);
-                                    }
-                                    if (result == null) {
+                                    if (emailCheck) {
+                                      if (result != null) {
+                                        Navigator.pushNamed(
+                                            context, MainScreen.id);
+                                      }
+                                      if (result == null) {
+                                        Flushbar(
+                                          flushbarPosition:
+                                              FlushbarPosition.TOP,
+                                          flushbarStyle: FlushbarStyle.FLOATING,
+                                          backgroundColor: Color(0xffe25757),
+                                          margin: EdgeInsets.all(8),
+                                          borderRadius: 8,
+                                          icon: Icon(
+                                            Icons.warning_amber_rounded,
+                                            size: 35.0,
+                                            color: Colors.black,
+                                          ),
+                                          leftBarIndicatorColor: Colors.black,
+                                          messageText: Text(
+                                              "Invalid Email and Password!\nPlease Try Again",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                  fontFamily: 'Montserrat')),
+                                          duration: Duration(seconds: 3),
+                                        )..show(context);
+                                        setState(() {
+                                          showSpinner = false;
+                                        });
+                                      }
+                                    } else {
                                       Flushbar(
                                         flushbarPosition: FlushbarPosition.TOP,
                                         flushbarStyle: FlushbarStyle.FLOATING,
@@ -184,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                         leftBarIndicatorColor: Colors.black,
                                         messageText: Text(
-                                            "Invalid Email and Password!\nPlease Try Again",
+                                            "This account does not exist!\nEnter a different account or register!",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 14,

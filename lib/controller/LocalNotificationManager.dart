@@ -32,15 +32,6 @@ class LocalNotificationManager {
     });
   }
 
-  Future<void> showNotification() async {
-    var androidChannel = AndroidNotificationDetails(
-        'CHANNEL_ID', 'CHANNEL_NAME', 'CHANNEL_DESCRIPTION',
-        importance: Importance.high, playSound: true);
-    await flutterLocalNotificationsPlugin.show(0, 'Reminder!',
-        'This is a reminder', NotificationDetails(android: androidChannel),
-        payload: 'New Payload');
-  }
-
   Future<void> showDailyAtTimeNotification() async {
     var androidChannel = AndroidNotificationDetails(
         'CHANNEL_ID', 'CHANNEL_NAME', 'CHANNEL_DESCRIPTION',

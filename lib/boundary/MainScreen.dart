@@ -157,7 +157,7 @@ class _MainScreenState extends State<MainScreen> {
                         for (var item in ClusterManager.nearByClusters)
                           Center(
                             child: Text(
-                              item + '\n',
+                              '${item.cluster}: ${item.zone}' + '\n',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Montserrat',

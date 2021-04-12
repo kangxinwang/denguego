@@ -97,10 +97,11 @@ class _SignupScreenState extends State<SignupScreen> {
                             labelText: 'Email',
                           ),
                           //readOnly: true,
-                          validator: (val) =>
-                              !EmailValidator.validate(val, true)
-                                  ? 'Invalid email.'
-                                  : null,
+                          validator: (val) => val.isEmpty
+                              ? !EmailValidator.validate(val, true)
+                                  ? 'Invalid email format.'
+                                  : null
+                              : 'Enter email',
                         ),
                         SizedBox(height: 20.0),
                         TextFormField(
@@ -120,9 +121,11 @@ class _SignupScreenState extends State<SignupScreen> {
                                 },
                               ),
                             ),
-                            validator: (val) => val.length < 6
-                                ? 'Enter a password with 6+ characters'
-                                : null,
+                            validator: (val) => val.isNotEmpty
+                                ? val.length < 6
+                                    ? 'Enter a password with 6+ characters'
+                                    : null
+                                : 'Enter password',
                             obscureText: _obscureText,
                             onChanged: (val) {
                               setState(() => password = val);

@@ -9,13 +9,11 @@ class ClusterManager {
   static WebScraper webScraper;
   static List<String> keys = [];
   static Map<String, ClusterLocation> LocationList = {};
-  static List<String> nearByClusters = [];
+  static List<ClusterLocation> nearByClusters = [];
 
   static Future<List<String>> getAllLocations() async {
     List<String> updates;
     List<String> individualCluster = [];
-
-    var currentLocation = await HomeScreen.locationTracker.getLocation();
 
     webScraper = WebScraper('https://www.nea.gov.sg');
 
@@ -30,7 +28,6 @@ class ClusterManager {
         clusterCases = 0;
         updates = [];
         String clusterName = clusterNames[i - 2]['title'];
-        //listOfClusters.add(results[i]['title']);
         individualCluster = results[i]['title'].split("    ");
 
         for (var j = 59; j < individualCluster.length; j += 42) {
@@ -47,19 +44,8 @@ class ClusterManager {
           );
 
           await getLatLong(ClusterManager.LocationList[locName]);
+          await calculateDistance(ClusterManager.LocationList[locName], 3);
 
-          var _distanceInMeters = await Geolocator.distanceBetween(
-            ClusterManager.LocationList[locName].coordinates[0].latitude,
-            ClusterManager.LocationList[locName].coordinates[0].longitude,
-            currentLocation.latitude,
-            currentLocation.longitude,
-          );
-
-          if (_distanceInMeters / 1000 < 3) {
-            if (!nearByClusters
-                .contains(ClusterManager.LocationList[locName].cluster))
-              nearByClusters.add(ClusterManager.LocationList[locName].cluster);
-          }
           updates.add(locName);
         }
 
@@ -70,7 +56,7 @@ class ClusterManager {
         }
       }
     }
-
+//WebScaping for Under surveillance NEA website
     if (await webScraper.loadWebPage(
         '/dengue-zika/dengue/dengue-clusters-under-surveillance')) {
       List<Map<String, dynamic>> results =
@@ -91,6 +77,7 @@ class ClusterManager {
         );
 
         await getLatLong(ClusterManager.LocationList[locName]);
+        await calculateDistance(ClusterManager.LocationList[locName], 3);
       }
     }
 
@@ -99,12 +86,29 @@ class ClusterManager {
     return keys;
   }
 
+//Finding Longitude and latitude and saving in cluster coordinates attribute
   static getLatLong(ClusterLocation cluster) async {
     try {
       cluster.coordinates =
           await locationFromAddress(cluster.location + " Singapore");
     } catch (e) {
       print(e);
+    }
+  }
+
+//Finding nearby clusters by calculating distance based on minDistance
+  static calculateDistance(ClusterLocation cluster, int minDistance) async {
+    var currentLocation = await HomeScreen.locationTracker.getLocation();
+
+    var _distanceInMeters = await Geolocator.distanceBetween(
+      cluster.coordinates[0].latitude,
+      cluster.coordinates[0].longitude,
+      currentLocation.latitude,
+      currentLocation.longitude,
+    );
+
+    if (_distanceInMeters / 1000 < minDistance) {
+      if (!nearByClusters.contains(cluster)) nearByClusters.add(cluster);
     }
   }
 }
