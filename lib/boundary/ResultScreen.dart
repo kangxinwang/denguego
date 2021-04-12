@@ -1,3 +1,4 @@
+import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/boundary/NotificationScreen.dart';
 import 'package:denguego/controller/ScreenManager.dart';
 import 'package:denguego/controller/SystemManager.dart';
@@ -21,15 +22,15 @@ class _ResultScreenState extends State<ResultScreen> {
     super.initState();
     localNotificationManager.setOnNotificationClick(onNotificationClick);
 
-    if (!UserAccountManager.userDetails.SurveyDone) {
-      sendNotification();
-    }
+    //if (!UserAccountManager.userDetails.SurveyDone) {
+      //sendNotification();
+    //}
   }
 
   void sendNotification() async {
     await localNotificationManager.showDailyAtTimeNotification();
     Navigator.pushNamed(context, ScreenManager.id);
-    Navigator.pop(context);
+    Navigator.pushNamed(context, MainScreen.id);
   }
 
   onNotificationClick(String payload) {
@@ -144,6 +145,28 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
               ),
               onPressed: widget.resetHandler,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Color(0xff5B92C8),
+                padding: EdgeInsets.all(8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  'Enable daily reminders!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              onPressed: () => sendNotification(),
             ),
           ),
         ], //<Widget>[]

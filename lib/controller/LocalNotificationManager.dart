@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:timezone/timezone.dart' as TZ;
 
 class LocalNotificationManager {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -43,9 +42,6 @@ class LocalNotificationManager {
   }
 
   Future<void> showDailyAtTimeNotification() async {
-    //DateTime time = DateTime(20,54,0);
-    //var time = DateTime.parse("2021-04-08 21:42:04Z");
-
     var androidChannel = AndroidNotificationDetails(
         'CHANNEL_ID', 'CHANNEL_NAME', 'CHANNEL_DESCRIPTION',
         importance: Importance.high, playSound: true);
@@ -56,7 +52,6 @@ class LocalNotificationManager {
       RepeatInterval.everyMinute,
       NotificationDetails(android: androidChannel),
       payload: 'New Payload',
-      //uiLocalNotificationDateInterpretation: null, androidAllowWhileIdle: null);
     );
   }
 }
