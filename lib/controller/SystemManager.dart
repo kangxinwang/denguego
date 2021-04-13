@@ -11,7 +11,8 @@ class SystemManager {
   static Future<List<String>> loadInformation(BuildContext context) async {
     bool locationService = true;
 
-    while (locationService) {
+    do {
+      locationService = true;
       ServiceStatus serviceStatus = await PermissionHandler()
           .checkServiceStatus(PermissionGroup.location);
       if (serviceStatus != ServiceStatus.enabled) {
@@ -34,10 +35,15 @@ class SystemManager {
                   fontFamily: 'Montserrat')),
           duration: Duration(seconds: 7),
         )..show(context);
-        locationService = true;
+        await Future.delayed(Duration(seconds: 15));
+        //print('i am here alr');
       } else {
         locationService = false;
+        //print('i am here too tooo');
       }
+    } while (locationService);
+    do {
+      locationService = true;
       lp.PermissionStatus permission =
           await lp.LocationPermissions().checkPermissionStatus();
       if (permission == lp.PermissionStatus.denied) {
@@ -60,11 +66,15 @@ class SystemManager {
                   fontFamily: 'Montserrat')),
           duration: Duration(seconds: 7),
         )..show(context);
-        locationService = true;
+
+        await Future.delayed(Duration(seconds: 15));
+        // print('i am here now');
       } else {
         locationService = false;
+
+        //print('i am here too');
       }
-    }
+    } while (locationService);
     print('done');
     List<String> clusterInformation = await ClusterManager.getAllLocations();
     print('done al loc');

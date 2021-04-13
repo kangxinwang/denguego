@@ -9,7 +9,7 @@ class ClusterManager {
   static WebScraper webScraper;
   static List<String> keys = [];
   static Map<String, ClusterLocation> LocationList = {};
-  static List<ClusterLocation> nearByClusters = [];
+  static List<String> nearByClusters = [];
 
   static Future<List<String>> getAllLocations() async {
     List<String> updates;
@@ -77,7 +77,6 @@ class ClusterManager {
         );
 
         await getLatLong(ClusterManager.LocationList[locName]);
-        await calculateDistance(ClusterManager.LocationList[locName], 3);
       }
     }
 
@@ -108,7 +107,8 @@ class ClusterManager {
     );
 
     if (_distanceInMeters / 1000 < minDistance) {
-      if (!nearByClusters.contains(cluster)) nearByClusters.add(cluster);
+      if (!nearByClusters.contains(cluster.cluster))
+        nearByClusters.add(cluster.cluster);
     }
   }
 }
