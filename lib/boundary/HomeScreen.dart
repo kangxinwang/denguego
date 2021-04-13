@@ -224,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: LatLng(
           cluster.coordinates[0].latitude, cluster.coordinates[0].longitude),
-      zoom: 22,
+      zoom: 16,
       tilt: 0,
       bearing: 0.0,
     )));
