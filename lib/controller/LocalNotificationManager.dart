@@ -40,7 +40,7 @@ class LocalNotificationManager {
       0,
       'DengueGo! Reminder',
       'Complete all your tasks in the Notification Page!',
-      RepeatInterval.everyMinute,
+      RepeatInterval.daily,
       NotificationDetails(android: androidChannel),
       payload: 'New Payload',
     );

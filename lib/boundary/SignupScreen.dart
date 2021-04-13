@@ -97,11 +97,6 @@ class _SignupScreenState extends State<SignupScreen> {
                             labelText: 'Email',
                           ),
                           //readOnly: true,
-                          validator: (val) => val.isEmpty
-                              ? !EmailValidator.validate(val, true)
-                                  ? 'Invalid email format.'
-                                  : null
-                              : 'Enter email',
                         ),
                         SizedBox(height: 20.0),
                         TextFormField(

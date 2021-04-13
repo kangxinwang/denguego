@@ -56,7 +56,7 @@ class ClusterManager {
         }
       }
     }
-//WebScaping for Under surveillance NEA website
+//WebScraping for Under surveillance NEA website
     if (await webScraper.loadWebPage(
         '/dengue-zika/dengue/dengue-clusters-under-surveillance')) {
       List<Map<String, dynamic>> results =
