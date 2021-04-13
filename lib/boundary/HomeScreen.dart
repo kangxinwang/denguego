@@ -221,13 +221,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> gotoClusterLocation(ClusterLocation cluster) async {
-    _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-      target: LatLng(
-          cluster.coordinates[0].latitude, cluster.coordinates[0].longitude),
-      zoom: 16,
-      tilt: 0,
-      bearing: 0.0,
-    )));
+    _controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(cluster.coordinates[0].latitude,
+              cluster.coordinates[0].longitude),
+          zoom: 16,
+          tilt: 0,
+          bearing: 0.0,
+        ),
+      ),
+    );
   }
 
   void addMarkers(List<String> cluster) async {

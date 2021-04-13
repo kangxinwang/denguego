@@ -21,10 +21,6 @@ class _ResultScreenState extends State<ResultScreen> {
     // TODO: implement initState
     super.initState();
     localNotificationManager.setOnNotificationClick(onNotificationClick);
-
-    //if (!UserAccountManager.userDetails.SurveyDone) {
-      //sendNotification();
-    //}
   }
 
   void sendNotification() async {
@@ -34,7 +30,6 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   onNotificationClick(String payload) {
-    //Resolve onCLickNotifications
     Navigator.pushNamed(context, ScreenManager.id);
     Navigator.pushNamed(context, NotificationScreen.id);
   }

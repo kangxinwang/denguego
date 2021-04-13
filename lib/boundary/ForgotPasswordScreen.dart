@@ -109,7 +109,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      _auth.resetPassword(email);
                       final bool emailCheck =
                           await _auth.emailAuthentication(email);
                       if (!emailCheck) {
@@ -154,6 +153,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   fontFamily: 'Montserrat')),
                           duration: Duration(seconds: 3),
                         )..show(context);
+                        _auth.resetPassword(email);
                         Navigator.pushNamed(context, LoginScreen.id);
                       }
                     }
