@@ -4,10 +4,6 @@ import 'package:denguego/controller/SystemManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 
 class UserAccountManager {
-  // final String uid;
-  // DatabaseManager(
-  //     {this.uid});
-
   static final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('Users');
   // userDetails will be the reference we need to use when we want to access that collection

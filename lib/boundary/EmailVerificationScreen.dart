@@ -18,8 +18,8 @@ class _EmailVerificationState extends State<EmailVerification> {
   final AuthenticateManager _auth = AuthenticateManager();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _otpController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  final _formKeyOTP = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyOTP = GlobalKey<FormState>();
   String email = '';
   bool showSpinner = false;
   void sendOtp() async {

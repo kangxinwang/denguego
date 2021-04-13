@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildSearch(List<String> cluster) {
+  Widget _buildSearch(List<String> clusters) {
     return Container(
       margin: EdgeInsets.fromLTRB(15, 25, 15, 15),
       alignment: Alignment.topCenter,
@@ -134,11 +134,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 showClearButton: true,
                 hideSearch: false,
                 menuMode: false,
-                dropDownMenuItems: cluster?.map((item) {
+                dropDownMenuItems: clusters?.map((item) {
                       return item;
                     })?.toList() ??
                     [],
-                items: cluster,
+                items: clusters,
                 label: 'Search for clusters',
                 //decoration: BoxDecoration(border: Border.all(color: Colors.blue)),
                 prefixIcon: Padding(
@@ -234,9 +234,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void addMarkers(List<String> cluster) async {
-    for (int i = 0; i < cluster.length; i++) {
-      String clusterloc = cluster[i];
+  void addMarkers(List<String> clusters) async {
+    for (int i = 0; i < clusters.length; i++) {
+      String clusterloc = clusters[i];
       ClusterLocation loc = ClusterManager.LocationList[clusterloc];
       HomeScreen.allMarkers.add(Marker(
         markerId: MarkerId(loc.location),

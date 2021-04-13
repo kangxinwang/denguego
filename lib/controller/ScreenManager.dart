@@ -5,8 +5,6 @@ import 'package:denguego/controller/SystemManager.dart';
 import 'package:denguego/entity/UserAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:location_permissions/location_permissions.dart' as lp;
 
 class ScreenManager extends StatelessWidget {
   static String id = 'ScreenManager';
