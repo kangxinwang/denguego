@@ -1,16 +1,5 @@
 import 'package:flutter/material.dart';
 
-const fontTextStyle = TextStyle(
-  fontWeight: FontWeight.bold,
-  fontFamily: 'Montserrat',
-  fontSize: 24,
-  color: Colors.white,
-);
-
-const spacing = SizedBox(
-  height: 20.0,
-);
-
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
   filled: true,
@@ -22,14 +11,14 @@ const textInputDecoration = InputDecoration(
 
 // List<ClusterLocation> savedList = [];
 
-const List<String> DengueFacts = [
+const List<String> dengueFacts = [
   'Papaya leaf extract can treat dengue fever.',
   'Fever and muscle pain from dengue lasts about one to two weeks',
   'Dengue is transmitted by Aedes mosquitoes',
   'Dengue fever may occur from 3 to 14 days after being bitten',
 ];
 
-const List<String> HighRiskValues = [
+const List<String> highRiskValues = [
   'Wash your toilet',
   'Take out the trash',
   'Clear the drains',
@@ -40,7 +29,7 @@ const List<String> HighRiskValues = [
   'Use insecticide',
 ];
 
-const List<String> MediumRiskValues = [
+const List<String> mediumRiskValues = [
   'Wash your toilet',
   'Clear the drains',
   'Apply mosquito repellent',
@@ -49,7 +38,7 @@ const List<String> MediumRiskValues = [
   'Keep your water containers dry',
 ];
 
-const List<String> LowRiskValues = [
+const List<String> lowRiskValues = [
   'Wash your toilet',
   'Clear the drains',
   'Clear your water from trays',

@@ -51,11 +51,11 @@ class _ResultScreenState extends State<ResultScreen> {
   List<String> get values {
     List<String> reminderValues;
     if (resultPhrase.contains('High')) {
-      reminderValues = HighRiskValues;
+      reminderValues = highRiskValues;
     } else if (resultPhrase.contains('Medium')) {
-      reminderValues = MediumRiskValues;
+      reminderValues = mediumRiskValues;
     } else if (resultPhrase.contains('Low')) {
-      reminderValues = LowRiskValues;
+      reminderValues = lowRiskValues;
     }
     return reminderValues;
   }
@@ -65,10 +65,10 @@ class _ResultScreenState extends State<ResultScreen> {
     UserAccountManager.userDetails.RiskZone = resultPhrase;
     UserAccountManager.userDetails.SurveyDone = true;
     UserAccountManager.userDetails.SurveyScore = widget.resultScore;
-    SystemManager.UserMgr.updateSurvey(UserAccountManager.userDetails.name);
+    SystemManager.userMgr.updateSurvey(UserAccountManager.userDetails.name);
 
     UserAccountManager.userDetails.Reminders = values;
-    SystemManager.UserMgr.updateReminders(UserAccountManager.userDetails.name);
+    SystemManager.userMgr.updateReminders(UserAccountManager.userDetails.name);
 
     return Center(
       child: Column(

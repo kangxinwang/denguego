@@ -6,7 +6,7 @@ import 'package:location_permissions/location_permissions.dart' as lp;
 import 'package:permission_handler/permission_handler.dart';
 
 class SystemManager {
-  static UserAccountManager UserMgr = UserAccountManager();
+  static UserAccountManager userMgr = UserAccountManager();
 
   static Future<List<String>> loadInformation(BuildContext context) async {
     bool locationService = true;

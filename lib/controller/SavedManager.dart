@@ -28,7 +28,7 @@ class SavedManager {
     } else
       UserAccountManager.userDetails.SavedLocations.add(loc.location);
 
-    await SystemManager.UserMgr.updateSavedLocations(
-        UserAccountManager.userDetails.name);
+    await SystemManager.userMgr
+        .updateSavedLocations(UserAccountManager.userDetails.name);
   }
 }

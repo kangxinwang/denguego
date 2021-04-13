@@ -80,7 +80,7 @@ class UserAccountManager {
     if (name == null)
       return;
     else {
-      await SystemManager.UserMgr.readUserFromDatabase(name);
+      await SystemManager.userMgr.readUserFromDatabase(name);
     }
   }
 }

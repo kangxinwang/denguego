@@ -6,7 +6,7 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Random random = new Random();
-    int randomNumber = random.nextInt(DengueFacts.length);
+    int randomNumber = random.nextInt(dengueFacts.length);
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
@@ -44,7 +44,7 @@ class LoadingScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Fun Fact! \n' + DengueFacts[randomNumber].toString(),
+                      'Fun Fact! \n' + dengueFacts[randomNumber].toString(),
                       style: TextStyle(
                         fontSize: 20,
                         fontFamily: 'Montserrat',

@@ -1,7 +1,6 @@
 import 'package:denguego/boundary/EmailVerificationScreen.dart';
 import 'package:denguego/boundary/MainScreen.dart';
 import 'package:denguego/controller/AuthenticateManager.dart';
-import 'package:denguego/shared/Constants.dart';
 import 'package:denguego/boundary/ForgotPasswordScreen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flushbar/flushbar.dart';
@@ -64,7 +63,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  spacing,
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   Text(
                     'Welcome Back to DengueGo!',
                     textAlign: TextAlign.center,

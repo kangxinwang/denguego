@@ -24,9 +24,9 @@ class _SurveyScreenState extends State<SurveyScreen> {
       UserAccountManager.userDetails.RiskZone = "High";
       UserAccountManager.userDetails.Reminders = [];
       surveyCompleted = false;
-      SystemManager.UserMgr.updateSurvey(UserAccountManager.userDetails.name);
-      SystemManager.UserMgr.updateReminders(
-          UserAccountManager.userDetails.name);
+      SystemManager.userMgr.updateSurvey(UserAccountManager.userDetails.name);
+      SystemManager.userMgr
+          .updateReminders(UserAccountManager.userDetails.name);
     });
   }
 
