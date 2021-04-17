@@ -7,7 +7,6 @@ class UserAccountManager {
   static final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('Users');
   // userDetails will be the reference we need to use when we want to access that collection
-  // static List<String> SavedLocations = [];
   static UserAccount userDetails = new UserAccount();
 
   static AuthenticateManager _auth = AuthenticateManager();

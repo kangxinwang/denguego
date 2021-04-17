@@ -68,11 +68,8 @@ class SystemManager {
         )..show(context);
 
         await Future.delayed(Duration(seconds: 15));
-        // print('i am here now');
       } else {
         locationService = false;
-
-        //print('i am here too');
       }
     } while (locationService);
     print('done');

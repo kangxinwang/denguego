@@ -20,22 +20,6 @@ class AuthenticateManager {
         user)); // mapping the firebase user to the actual user
   }
 
-  // //sign in anonymously
-  // Future signInAnon() async {
-  //   try {
-  //     UserCredential result = await _auth
-  //         .signInAnonymously(); // we need to await cause it will take some time to complete. we need to wait and get the result before proceeding to the next thing
-  //     // also i think in the videos they said about AuthResult as the 'type' of return but it doesnt appear to be an exisiting class.
-  //     // so ive changed it to UserCredential
-  //     User user =
-  //         result.user; // FirebaseUser deprecated and now changed to User
-  //     return _userFromFirebaseUser(user);
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
-
   Future<bool> emailAuthentication(String email) async {
     await for (var snapshot in UserAccountManager.userCollection.snapshots()) {
       var documents = snapshot.docs;

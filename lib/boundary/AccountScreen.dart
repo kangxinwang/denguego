@@ -29,9 +29,6 @@ class _AccountScreenState extends State<AccountScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                /*Image.asset(
-                  'images/profile.png',
-                ),*/
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 15, 8, 15),
                   child: Center(

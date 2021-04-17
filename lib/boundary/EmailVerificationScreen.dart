@@ -38,7 +38,6 @@ class _EmailVerificationState extends State<EmailVerification> {
     if (res) {
       print("OTP verified");
       return true;
-      //Navigator.pushNamed(context, SignupScreen.id);
     } else {
       return false;
     }
